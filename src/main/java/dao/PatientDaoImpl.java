@@ -1,5 +1,6 @@
 package dao;
 
+import entities.Patient;
 import org.springframework.stereotype.Repository;
 
 @Repository

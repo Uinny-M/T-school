@@ -19,6 +19,20 @@ public class PatientController {
     @Autowired
     PatientService patientService;
 
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView test(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("patientJSP", patientService.getPatient(1));
+        modelAndView.setViewName("patient");
+        return modelAndView;
+    }
+
+
+
+
+
+
     //Return Patient bi ID
     @RequestMapping(value = "/{patientId}", method = RequestMethod.GET)
     @ResponseBody
