@@ -1,43 +1,36 @@
 create table employee
 (
-    id       int auto_increment
+    id          int auto_increment
         primary key,
-    name     varchar(255) not null,
-    position varchar(255) not null
+    second_name varchar(20)                                      not null,
+    first_name  varchar(20)                                      not null,
+    middle_name varchar(20)                                      null,
+    position    varchar(255)                                     not null,
+    login       varchar(20)                                      not null,
+    password    varchar(50) default 'password'                   not null,
+    deleted     int         default 0                            not null,
+    role        enum ('ROLE_ADMIN', 'ROLE_DOCTOR', 'ROLE_NURSE') not null
 );
 
 create table manipulation
 (
-    id    tinyint auto_increment
+    id      tinyint auto_increment
         primary key,
-    title varchar(225)                     not null,
-    type  enum ('PROCEDURE', 'MEDICAMENT') not null
+    title   varchar(225)                     not null,
+    type    enum ('PROCEDURE', 'MEDICAMENT') not null,
+    deleted int default 0                    not null
 );
 
 create table patient
 (
-    id        int auto_increment
+    id          int auto_increment
         primary key,
-    name      varchar(50) not null,
-    insurance bigint      not null
-);
-
-create table appointment
-(
-    id              bigint auto_increment
-        primary key,
-    patient_id      int                                                                                                                                                                   not null,
-    manipulation_id tinyint                                                                                                                                                               not null,
-    duration        tinyint                                                                                                                                                               not null,
-    start_date      date                                                                                                                                                                  not null,
-    dosage          varchar(255)                                                                                                                                                          null,
-    weekday         set ('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY') default (_utf8mb4'MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY') null,
-    daily_chart     tinyint                                                                            default 1                                                                          not null,
-    drug            varchar(40)                                                                                                                                                           null,
-    constraint appointment_manipulation_id_fk
-        foreign key (manipulation_id) references manipulation (id),
-    constraint appointment_patient_fk
-        foreign key (patient_id) references patient (id)
+    insurance   varchar(20)             not null,
+    first_name  varchar(20)             not null,
+    middle_name varchar(20)             null,
+    second_name varchar(20)             not null,
+    birthdate   date                    not null,
+    gender      enum ('MALE', 'FEMALE') not null
 );
 
 create table `case`
@@ -47,10 +40,31 @@ create table `case`
     patient_id int                                   not null,
     doctor_id  int                                   not null,
     diagnosis  varchar(255) default 'is not defined' null,
-    open       int          default 1                not null,
+    open       tinyint(1)   default 1                not null,
+    start_date date                                  not null,
+    end_date   date                                  null,
     constraint case_employee_id_fk
         foreign key (doctor_id) references employee (id),
     constraint case_patient_id_fk
+        foreign key (patient_id) references patient (id)
+);
+
+create table prescription
+(
+    id              bigint auto_increment
+        primary key,
+    patient_id      int               not null,
+    manipulation_id tinyint           not null,
+    duration        tinyint           not null,
+    start_date      date              not null,
+    dosage          varchar(255)      null,
+    daily_chart     tinyint default 1 not null,
+    drug            varchar(40)       null,
+    deleted         int     default 0 not null,
+    case_id         bigint            not null,
+    constraint appointment_manipulation_id_fk
+        foreign key (manipulation_id) references manipulation (id),
+    constraint appointment_patient_fk
         foreign key (patient_id) references patient (id)
 );
 
@@ -59,31 +73,26 @@ create table event
     id              bigint auto_increment
         primary key,
     patient_id      int                                                                   not null,
-    date            datetime                                                              not null,
+    date            date                                                                  not null,
     manipulation_id tinyint                                                               not null,
     status          enum ('PLANNED', 'COMPLETED', 'CANCELED', 'FAILED') default 'PLANNED' not null,
     comment         text                                                                  null,
+    prescription_id bigint                                                                not null,
+    time            time                                                                  not null,
+    constraint event_prescription_id_fk
+        foreign key (prescription_id) references prescription (id),
     constraint manipulation_fk
         foreign key (manipulation_id) references manipulation (id),
     constraint patient_fk
         foreign key (patient_id) references patient (id)
 );
 
-create table role
+create table time_pattern
 (
-    id    int auto_increment
+    id              bigint auto_increment
         primary key,
-    title varchar(20)                                      not null,
-    code  enum ('ROLE_ADMIN', 'ROLE_DOCTOR', 'ROLE_NURSE') not null
-);
-
-create table employee_role
-(
-    employee_id int not null
-        primary key,
-    role_id     int not null,
-    constraint employee_fk
-        foreign key (employee_id) references employee (id),
-    constraint role_fk
-        foreign key (role_id) references role (id)
+    prescription_id bigint                                                                             not null,
+    weekday         set ('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY') not null,
+    constraint time_pattern_prescription_id_fk
+        foreign key (prescription_id) references prescription (id)
 );
