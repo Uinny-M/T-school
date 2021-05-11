@@ -26,5 +26,11 @@ public class RootWebAppInitializer implements WebApplicationInitializer {
                 servletContext.addServlet("mvc", new DispatcherServlet(root));
         appServlet.setLoadOnStartup(1);
         appServlet.addMapping("/");
+
+        AnnotationConfigWebApplicationContext security =
+                new AnnotationConfigWebApplicationContext();
+        security.register(SecurityConfig.class);
+        servletContext.addListener(new ContextLoaderListener(security));
+
     }
 }

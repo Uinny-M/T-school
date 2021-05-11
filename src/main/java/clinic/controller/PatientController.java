@@ -72,23 +72,4 @@ public class PatientController {
         patientService.createOrUpdatePatient(patientDto);
         return new RedirectView("/T_school_war_exploded/patient/");
     }
-
-//    //Return patients by secondName
-//    @GetMapping(value = "/search/{name}")
-//    public ModelAndView getPatientsByName(@PathVariable(required = false) String name) {
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("name", name);
-//        modelAndView.addObject("patients", patientService.getPatientsByName(name));
-//        modelAndView.setViewName("patients");
-//        return modelAndView;
-//    }
-
-//    //Return patients by secondName
-//    @GetMapping(value = "/search/{name}")
-//    public String getPatientsByName(@PathVariable(required = false) String name) {
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("name", patientService.getPatientsByName(name));
-//        modelAndView.setViewName("patients");
-//        return "p";
-//    }
 }

@@ -3,6 +3,7 @@ package clinic.controller;
 import clinic.dto.CaseDTO;
 import clinic.service.api.CaseService;
 import clinic.service.api.PrescriptionService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -65,7 +66,4 @@ public class CaseController {
         ModelAndView modelAndView = new ModelAndView(new RedirectView());
         return modelAndView;
     }
-
-
-
 }

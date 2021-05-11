@@ -3,7 +3,7 @@
 <header class="header">
     <div class="row-logo">
         <div class="col-lg-1">
-            <a href="http://localhost:8080/T_school_war_exploded/">
+            <a href="${pageContext.request.contextPath}/">
                 <img src="${pageContext.request.contextPath}/assets/logo-mini.jpg" width="200" height="160"
                      alt="logo-mini.jpg">
             </a>
@@ -15,8 +15,13 @@
         </div>
         <div class="col-lg-3">
             <h4>ИМЯ ПОСЕТИТЕЛЯ</h4>
-            <img src="${pageContext.request.contextPath}/assets/admin.jpg" width="140" height="88" alt="admin.jpg">
-            <button type="submit" class="btn">ВЫЙТИ</button>
+            <img src="${pageContext.request.contextPath}/assets/admin.jpg" width="140" height="88"  alt="admin.jpg">
+            <button type="button" class="btn" style="padding-top: 20px">
+                <a href="${pageContext.request.contextPath}/login" class="menu-index">Войти</a>
+            </button>
+            <button type="button" class="btn" style="padding-top: 20px">
+                <a href="${pageContext.request.contextPath}/logout" class="menu-index">Выйти</a>
+            </button>
         </div>
     </div>
 </header>
