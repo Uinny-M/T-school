@@ -2,14 +2,14 @@ create table employee
 (
     id          int auto_increment
         primary key,
-    second_name varchar(20)                                      not null,
-    first_name  varchar(20)                                      not null,
-    middle_name varchar(20)                                      null,
-    position    varchar(255)                                     not null,
-    login       varchar(20)                                      not null,
-    password    varchar(50) default 'password'                   not null,
-    deleted     int         default 0                            not null,
-    role        enum ('ROLE_ADMIN', 'ROLE_DOCTOR', 'ROLE_NURSE') not null
+    second_name varchar(20)                            not null,
+    first_name  varchar(20)                            not null,
+    middle_name varchar(20)                            null,
+    position    varchar(255)                           not null,
+    username    varchar(20)                            not null,
+    password    varchar(50) default 'password'         not null,
+    enabled     tinyint(1)  default 0                  not null,
+    role        enum ('ADMIN', 'DOCTOR', 'NURSE') not null
 );
 
 create table manipulation
@@ -30,10 +30,12 @@ create table patient
     middle_name varchar(20)             null,
     second_name varchar(20)             not null,
     birthdate   date                    not null,
-    gender      enum ('MALE', 'FEMALE') not null
+    gender      enum ('MALE', 'FEMALE') not null,
+    constraint patient_insurance_uindex
+        unique (insurance)
 );
 
-create table `case`
+create table patient_case
 (
     id         bigint auto_increment
         primary key,

@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-05-11T10:46:37+0300",
+    date = "2021-05-12T01:46:52+0300",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 13.0.2 (AdoptOpenJDK)"
 )
 @Component
@@ -152,7 +152,6 @@ public class EventMapperImpl implements EventMapper {
         employeeDTO.setPosition( employee.getPosition() );
         employeeDTO.setLogin( employee.getLogin() );
         employeeDTO.setPassword( employee.getPassword() );
-        employeeDTO.setDeleted( employee.isDeleted() );
         if ( employee.getRole() != null ) {
             employeeDTO.setRole( employee.getRole().name() );
         }
@@ -250,7 +249,6 @@ public class EventMapperImpl implements EventMapper {
         employee.setPosition( employeeDTO.getPosition() );
         employee.setLogin( employeeDTO.getLogin() );
         employee.setPassword( employeeDTO.getPassword() );
-        employee.setDeleted( employeeDTO.isDeleted() );
         if ( employeeDTO.getRole() != null ) {
             employee.setRole( Enum.valueOf( Role.class, employeeDTO.getRole() ) );
         }

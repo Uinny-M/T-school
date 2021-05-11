@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-05-11T10:46:37+0300",
+    date = "2021-05-12T01:46:52+0300",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 13.0.2 (AdoptOpenJDK)"
 )
 @Component
@@ -59,7 +59,6 @@ public class EmployeeMapperImpl implements EmployeeMapper {
         employeeDTO.setPosition( entity.getPosition() );
         employeeDTO.setLogin( entity.getLogin() );
         employeeDTO.setPassword( entity.getPassword() );
-        employeeDTO.setDeleted( entity.isDeleted() );
         if ( entity.getRole() != null ) {
             employeeDTO.setRole( entity.getRole().name() );
         }
@@ -82,7 +81,6 @@ public class EmployeeMapperImpl implements EmployeeMapper {
         employee.setPosition( dto.getPosition() );
         employee.setLogin( dto.getLogin() );
         employee.setPassword( dto.getPassword() );
-        employee.setDeleted( dto.isDeleted() );
         if ( dto.getRole() != null ) {
             employee.setRole( Enum.valueOf( Role.class, dto.getRole() ) );
         }

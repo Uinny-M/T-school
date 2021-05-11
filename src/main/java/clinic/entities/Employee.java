@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 /**
  * Entity medical employee (doctor or nurse)
@@ -42,7 +41,7 @@ public class Employee {
     private String position;
 
     //login for auth
-    @Column(name = "login", nullable = false, length = 20)
+    @Column(name = "username", nullable = false, length = 20)
     private String login;
 
     //password for auth
@@ -50,8 +49,8 @@ public class Employee {
     private String password;
 
     //is the employee deleted
-    @Column(name = "deleted", nullable = false, columnDefinition = "false")
-    private boolean isDeleted;
+    @Column(name = "enabled", nullable = false, columnDefinition = "false")
+    private boolean enabled;
 
     //employee's role
     @Column(name = "role", nullable = false)
@@ -114,12 +113,12 @@ public class Employee {
         this.password = password;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Role getRole() {
