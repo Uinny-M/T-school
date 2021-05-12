@@ -17,7 +17,7 @@
             <h4>ИМЯ ПОСЕТИТЕЛЯ</h4>
             <img src="${pageContext.request.contextPath}/assets/admin.jpg" width="140" height="88"  alt="admin.jpg">
             <button type="button" class="btn" style="padding-top: 20px">
-                <a href="${pageContext.request.contextPath}/auth" class="menu-index">Войти</a>
+                <a href="${pageContext.request.contextPath}/login" class="menu-index">Войти</a>
             </button>
             <button type="button" class="btn" style="padding-top: 20px">
                 <a href="${pageContext.request.contextPath}/logout" class="menu-index">Выйти</a>

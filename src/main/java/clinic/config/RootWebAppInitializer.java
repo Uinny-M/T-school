@@ -19,17 +19,11 @@ public class RootWebAppInitializer implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext root =
                 new AnnotationConfigWebApplicationContext();
         root.setConfigLocation("clinic.config");
-
-
-//        servletContext.addListener(new ContextLoaderListener(root));
-
         ServletRegistration.Dynamic appServlet =
                 servletContext.addServlet("mvc", new DispatcherServlet(root));
         appServlet.setLoadOnStartup(1);
         appServlet.addMapping("/");
 
-//        AnnotationConfigWebApplicationContext security =
-//                new AnnotationConfigWebApplicationContext();
         root.register(SecurityConfig.class);
         servletContext.addListener(new ContextLoaderListener(root));
 
