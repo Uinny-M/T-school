@@ -45,11 +45,11 @@ public class Employee {
     private String login;
 
     //password for auth
-    @Column(name = "password", nullable = false, length = 20, columnDefinition = "password")
+    @Column(name = "password", nullable = false, length = 200, columnDefinition = "password")
     private String password;
 
     //is the employee deleted
-    @Column(name = "enabled", nullable = false, columnDefinition = "false")
+    @Column(name = "enabled", nullable = false, columnDefinition = "true")
     private boolean enabled;
 
     //employee's role

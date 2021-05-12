@@ -6,9 +6,9 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum Role {
-    ADMIN,
-    DOCTOR,
-    NURSE
+    ROLE_ADMIN,
+    ROLE_DOCTOR,
+    ROLE_NURSE
 
 
 //    ROLE_ADMIN ("Администратор"),
