@@ -6,6 +6,10 @@ import clinic.entities.Employee;
 
 import java.util.List;
 
-
+/**
+ * Employee's service
+ *
+ * CRUD for employee from AbstractService
+ */
 public interface EmployeeService extends AbstractService<Employee, EmployeeDTO> {
 }
