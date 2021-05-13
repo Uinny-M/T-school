@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="help/header.jsp" %>
@@ -14,17 +15,21 @@
 <jsp:include page="help/header.jsp"></jsp:include>
 
 <div class="container">
+<%-- <c:if test="${not empty errormessage}">--%>
+  <h2>${errormessage}</h2>
+<%-- </c:if>--%>
+
  <div class="row">
 
  <div class="col-md-offset-3 col-md-6">
  <form class="form-horizontal">
  <span class="heading">АВТОРИЗАЦИЯ</span>
  <div class="form-group">
- <input type="username" class="form-control" id="inputEmail" placeholder="Username">
+ <input type="username" class="form-control" id="username" placeholder="Username">
  <i class="fa fa-user"></i>
  </div>
  <div class="form-group help">
- <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+ <input type="password" class="form-control" id="password" placeholder="Password">
  <i class="fa fa-lock"></i>
  <a href="#" class="fa fa-question-circle"></a>
  </div>
@@ -51,6 +56,10 @@
  /*body{background:url(/images/bg/bg-6.png)}*/
 
  /* Form Style */
+ .container {
+  margin-top: 220px;
+ }
+
  .form-horizontal{
   background: #fcfff6;
   padding-bottom: 40px;

@@ -47,16 +47,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/auth**", "/assets/**", "/employee/*").anonymous()
-                .antMatchers("/cases/*",  "/event/*", "/patient/*", "/prescription/*")
-                .hasAnyRole("ADMIN", "DOCTOR", "NURSE")
-//                .antMatchers("/auth*").permitAll()
+                .antMatchers("/", "/login**", "/logout**", "/assets/**", "/employee/*").anonymous()
+//                .antMatchers("/cases/*",  "/event/*", "/patient/*", "/prescription/*")
+//                .hasAnyRole("ADMIN", "DOCTOR", "NURSE")
+                .antMatchers("/login*").permitAll()
                 .anyRequest().authenticated()
-
 
                 .and()
                 .formLogin().permitAll()
-                .loginPage("/auth")
+                .loginPage("/login")
                 .failureUrl("/login?error=true")
                 .usernameParameter("username")
                 .passwordParameter("password")
