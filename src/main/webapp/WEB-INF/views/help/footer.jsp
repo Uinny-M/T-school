@@ -20,4 +20,11 @@
         background-color: #efffe9;
         border-top: 3px solid #28a347;
     }
+    a{
+        color: #28a347;
+    }
+
+    button a{
+        color: #efffe9;
+    }
 </style>

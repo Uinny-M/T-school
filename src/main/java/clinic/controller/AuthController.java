@@ -13,7 +13,7 @@ import java.util.Locale;
 import java.util.logging.Logger;
 
 @Controller
-@RequestMapping(value = "/")
+//@RequestMapping(value = "/")
 public class AuthController {
 //    private Logger logger = Logger.getLogger(AuthController.class);
 //    @GetMapping("/login")
@@ -42,11 +42,11 @@ public class AuthController {
     @GetMapping(value = "/login")
     public String login(HttpServletRequest request,
                         @RequestParam(required = false) boolean error) {
-                Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth.isAuthenticated()&&!error) {
-            return "index";
-        }
-        else
+//                Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        if (auth.isAuthenticated()&&!error) {
+//            return "index";
+//        }
+//        else
         return "login";
     }
 

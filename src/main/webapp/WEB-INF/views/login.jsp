@@ -22,14 +22,14 @@
  <div class="row">
 
  <div class="col-md-offset-3 col-md-6">
- <form class="form-horizontal">
+ <form action="${pageContext.request.contextPath}/login" class="form-horizontal">
  <span class="heading">АВТОРИЗАЦИЯ</span>
  <div class="form-group">
- <input type="username" class="form-control" id="username" placeholder="Username">
+ <input type="text" class="form-control" name="username"  placeholder="Username">
  <i class="fa fa-user"></i>
  </div>
  <div class="form-group help">
- <input type="password" class="form-control" id="password" placeholder="Password">
+ <input type="password" class="form-control" name="password"  placeholder="Password">
  <i class="fa fa-lock"></i>
  <a href="#" class="fa fa-question-circle"></a>
  </div>
