@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="help/header.jsp" %>
@@ -20,26 +21,28 @@
 <%-- </c:if>--%>
 
  <div class="row">
-
+  <sec:authorize access="isAuthenticated()">
+   <% response.sendRedirect("/"); %>
+  </sec:authorize>
  <div class="col-md-offset-3 col-md-6">
  <form action="${pageContext.request.contextPath}/login" class="form-horizontal">
  <span class="heading">АВТОРИЗАЦИЯ</span>
  <div class="form-group">
- <input type="text" class="form-control" name="username"  placeholder="Username">
+ <input type="text" class="form-control" name="username"  placeholder="Введите логин">
  <i class="fa fa-user"></i>
  </div>
  <div class="form-group help">
- <input type="password" class="form-control" name="password"  placeholder="Password">
+ <input type="password" class="form-control" name="password"  placeholder="Введите пароль">
  <i class="fa fa-lock"></i>
- <a href="#" class="fa fa-question-circle"></a>
+<%-- <a href="#" class="fa fa-question-circle"></a>--%>
  </div>
  <div class="form-group">
- <div class="main-checkbox">
- <input type="checkbox" value="none" id="checkbox1" name="check"/>
- <label for="checkbox1"></label>
- </div>
- <span class="text">Запомнить</span>
- <button type="submit" class="btn btn-default">ВХОД</button>
+<%-- <div class="main-checkbox">--%>
+<%-- <input type="checkbox" value="none" id="checkbox1" name="check"/>--%>
+<%-- <label for="checkbox1"></label>--%>
+<%-- </div>--%>
+<%-- <span class="text">Запомнить</span>--%>
+ <button type="submit" class="btn btn-default" style="margin-left: 40px">ВХОД</button>
  </div>
  </form>
  </div>
