@@ -48,18 +48,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/login**", "/logout**", "/assets/**", "/employee/*").anonymous()
-//                .antMatchers("/cases/*",  "/event/*", "/patient/*", "/prescription/*")
-//                .hasAnyRole("ADMIN", "DOCTOR", "NURSE")
-                .antMatchers("/login*").permitAll()
+                .antMatchers("/cases/*",  "/event/*", "/patient/*", "/prescription/*")
+                .hasAnyRole("ADMIN", "DOCTOR", "NURSE")
+                .antMatchers("/login**", "/logout**").permitAll()
                 .anyRequest().authenticated()
 
                 .and()
                 .formLogin().permitAll()
                 .loginPage("/login")
+                .loginProcessingUrl("/login")
                 .failureUrl("/login?error=true")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .loginProcessingUrl("/")
                 .defaultSuccessUrl("/", true)
 
                 .and()
@@ -75,6 +75,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
 }

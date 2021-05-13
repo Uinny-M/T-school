@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 import java.util.logging.Logger;
 
@@ -38,21 +39,18 @@ public class AuthController {
 //            return "login";
 //        }
 //    }
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String init(Model model) {
+    @GetMapping(value = "/login")
+    public String login(HttpServletRequest request,
+                        @RequestParam(required = false) boolean error) {
                 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (!auth.isAuthenticated()) {
-            model.addAttribute("errormessage", "error");
+        if (auth.isAuthenticated()&&!error) {
+            return "index";
         }
+        else
         return "login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute EmployeeDTO dto, Model model) {
-        return "index";
-    }
-
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    @GetMapping(value = "/logout")
     public String performLogout() {
         return "index";
     }
