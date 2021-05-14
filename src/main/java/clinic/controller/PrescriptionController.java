@@ -1,22 +1,24 @@
 package clinic.controller;
 
-import clinic.dto.ManipulationDTO;
 import clinic.dto.PrescriptionDTO;
 import clinic.service.api.ManipulationService;
 import clinic.service.api.PrescriptionService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.List;
-
+@Log4j2
 @Controller
 @RequestMapping(value = "/prescription")
 public class PrescriptionController {
     private final PrescriptionService prescriptionService;
     private final PrescriptionService caseService;
     private final ManipulationService manipulationService;
+
     public PrescriptionController(PrescriptionService prescriptionService, PrescriptionService caseService, ManipulationService manipulationService) {
         this.prescriptionService = prescriptionService;
         this.caseService = caseService;
@@ -41,17 +43,17 @@ public class PrescriptionController {
         return modelAndView;
     }
 
-    //Add new prescription
-    @PostMapping(value = "/case/{caseId}/add")
-    public RedirectView addPrescription(@ModelAttribute PrescriptionDTO prescriptionDTO,
-                                        @PathVariable Long caseId) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("prescription", new PrescriptionDTO());
-        modelAndView.addObject("caseId", caseId);
-        modelAndView.setViewName("prescription");
-        prescriptionService.create(prescriptionDTO);
-        return new RedirectView("/T_school_war_exploded/patient/");
-    }
+//    //Add new prescription
+//    @PostMapping(value = "/case/{caseId}/add")
+//    public RedirectView addPrescription(@ModelAttribute PrescriptionDTO prescriptionDTO,
+//                                        @PathVariable Long caseId) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.addObject("prescription", new PrescriptionDTO());
+//        modelAndView.addObject("caseId", caseId);
+//        modelAndView.setViewName("prescription");
+//        prescriptionService.create(prescriptionDTO);
+//        return new RedirectView("/T_school_war_exploded/patient/");
+//    }
 
     //Return Patient by ID
     @GetMapping(value = "/case/{caseId}/add/{prescriptionId}")
@@ -64,7 +66,7 @@ public class PrescriptionController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/case/{caseId}/add", method =  RequestMethod.POST)
+    @RequestMapping(value = "/case/{caseId}/add", method = RequestMethod.POST)
     public ModelAndView getPrescription(@PathVariable("caseId") Long caseId) {
         ModelAndView modelAndView = new ModelAndView();
         String[] week = new String[]{"Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"};

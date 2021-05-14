@@ -6,13 +6,12 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum EventStatus {
-    PLANNED,
-    COMPLETED,
-    CANCELED,
-    FAILED
-//    PLANNED ("Запланировано"),
-//    COMPLETED("Выполнено"),
-//    CANCELED("Отменено"),
-//    FAILED("Пропущено");
-//    private final String description;
+    PLANNED ("Запланировано"),
+    COMPLETED("Выполнено"),
+    CANCELED("Отменено"),
+    FAILED("Пропущено");
+    private final String description;
+    public String getDescription() {
+        return description;
+    }
 }

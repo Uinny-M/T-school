@@ -1,5 +1,6 @@
 package clinic.config;
 
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,22 +24,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-//    @Override
-//    @Autowired
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.jdbcAuthentication().dataSource(dataSource)
-//                .usersByUsernameQuery("SELECT username, password, enabled "
-//                        + " FROM employee WHERE username = ?")
-//                .authoritiesByUsernameQuery("SELECT username, role "
-//                        + " FROM employee WHERE username = ?")
-//                .passwordEncoder(passwordEncoder());
-//    } //todo
+    @Override
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth)
-            throws Exception {
-        auth.inMemoryAuthentication().passwordEncoder(passwordEncoder()).withUser("user")
-                .password(passwordEncoder().encode("123456")).roles("ADMIN");
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery("SELECT username, password, enabled "
+                        + " FROM employee WHERE username = ?")
+                .authoritiesByUsernameQuery("SELECT username, role "
+                        + " FROM employee WHERE username = ?")
+                .passwordEncoder(passwordEncoder());
     }
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth)
+//            throws Exception {
+//        auth.inMemoryAuthentication().passwordEncoder(passwordEncoder()).withUser("user")
+//                .password(passwordEncoder().encode("123456")).roles("ADMIN");
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

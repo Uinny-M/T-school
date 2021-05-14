@@ -12,22 +12,25 @@ import clinic.entities.Event;
 import clinic.entities.Manipulation;
 import clinic.entities.Patient;
 import clinic.entities.Prescription;
-import clinic.entities.enums.EventStatus;
 import clinic.entities.enums.Gender;
 import clinic.entities.enums.ManipulationType;
 import clinic.entities.enums.Role;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-05-14T14:40:44+0300",
+    date = "2021-05-14T23:50:15+0300",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 13.0.2 (AdoptOpenJDK)"
 )
 @Component
 public class EventMapperImpl implements EventMapper {
+
+    @Autowired
+    private EventStatusMapper eventStatusMapper;
 
     @Override
     public List<Event> mapDtoToEntity(List<EventDTO> dto) {
@@ -71,9 +74,7 @@ public class EventMapperImpl implements EventMapper {
         eventDTO.setTime( entity.getTime() );
         eventDTO.setManipulation( manipulationToManipulationDTO( entity.getManipulation() ) );
         eventDTO.setPrescription( prescriptionToPrescriptionDTO( entity.getPrescription() ) );
-        if ( entity.getStatus() != null ) {
-            eventDTO.setStatus( entity.getStatus().name() );
-        }
+        eventDTO.setStatus( eventStatusMapper.mapEnumToString( entity.getStatus() ) );
         eventDTO.setComment( entity.getComment() );
 
         return eventDTO;
@@ -93,9 +94,7 @@ public class EventMapperImpl implements EventMapper {
         event.setTime( dto.getTime() );
         event.setManipulation( manipulationDTOToManipulation( dto.getManipulation() ) );
         event.setPrescription( prescriptionDTOToPrescription( dto.getPrescription() ) );
-        if ( dto.getStatus() != null ) {
-            event.setStatus( Enum.valueOf( EventStatus.class, dto.getStatus() ) );
-        }
+        event.setStatus( eventStatusMapper.mapStringToEnum( dto.getStatus() ) );
         event.setComment( dto.getComment() );
 
         return event;

@@ -2,19 +2,22 @@ package clinic.mappers;
 
 import clinic.dto.ManipulationDTO;
 import clinic.entities.Manipulation;
-import clinic.entities.enums.ManipulationType;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-05-14T14:40:44+0300",
+    date = "2021-05-14T23:50:14+0300",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 13.0.2 (AdoptOpenJDK)"
 )
 @Component
 public class ManipulationMapperImpl implements ManipulationMapper {
+
+    @Autowired
+    private ManipulationTypeMapper manipulationTypeMapper;
 
     @Override
     public List<Manipulation> mapDtoToEntity(List<ManipulationDTO> dto) {
@@ -54,9 +57,7 @@ public class ManipulationMapperImpl implements ManipulationMapper {
 
         manipulationDTO.setId( entity.getId() );
         manipulationDTO.setTitle( entity.getTitle() );
-        if ( entity.getType() != null ) {
-            manipulationDTO.setType( entity.getType().name() );
-        }
+        manipulationDTO.setType( manipulationTypeMapper.mapEnumToString( entity.getType() ) );
         manipulationDTO.setDeleted( entity.isDeleted() );
 
         return manipulationDTO;
@@ -72,9 +73,7 @@ public class ManipulationMapperImpl implements ManipulationMapper {
 
         manipulation.setId( dto.getId() );
         manipulation.setTitle( dto.getTitle() );
-        if ( dto.getType() != null ) {
-            manipulation.setType( Enum.valueOf( ManipulationType.class, dto.getType() ) );
-        }
+        manipulation.setType( manipulationTypeMapper.mapStringToEnum( dto.getType() ) );
         manipulation.setDeleted( dto.isDeleted() );
 
         return manipulation;

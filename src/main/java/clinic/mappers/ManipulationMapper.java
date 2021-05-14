@@ -7,7 +7,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        uses = {ManipulationTypeMapper.class})
 public interface ManipulationMapper extends AbstractMapper<Manipulation, ManipulationDTO> {
     ManipulationDTO mapEntityToDto(Manipulation entity);
     Manipulation mapDtoToEntity(ManipulationDTO dto);

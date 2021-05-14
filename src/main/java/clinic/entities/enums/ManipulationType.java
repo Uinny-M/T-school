@@ -6,13 +6,11 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum ManipulationType {
-    PROCEDURE,
-    MEDICAMENT
-//    PROCEDURE("Процедура"),
-//    MEDICAMENT("Лекарство");
-//    private final String description;
-//
-//    public String getDescription() {
-//        return description;
-//    }
+    PROCEDURE("Процедура"),
+    MEDICAMENT("Лекарство");
+    private final String description;
+
+    public String getDescription() {
+        return description;
+    }
 }

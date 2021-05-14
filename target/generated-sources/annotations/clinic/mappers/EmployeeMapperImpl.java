@@ -2,19 +2,22 @@ package clinic.mappers;
 
 import clinic.dto.EmployeeDTO;
 import clinic.entities.Employee;
-import clinic.entities.enums.Role;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-05-14T14:40:44+0300",
+    date = "2021-05-14T23:50:14+0300",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 13.0.2 (AdoptOpenJDK)"
 )
 @Component
 public class EmployeeMapperImpl implements EmployeeMapper {
+
+    @Autowired
+    private RoleMapper roleMapper;
 
     @Override
     public List<Employee> mapDtoToEntity(List<EmployeeDTO> dto) {
@@ -59,9 +62,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
         employeeDTO.setPosition( entity.getPosition() );
         employeeDTO.setLogin( entity.getLogin() );
         employeeDTO.setPassword( entity.getPassword() );
-        if ( entity.getRole() != null ) {
-            employeeDTO.setRole( entity.getRole().name() );
-        }
+        employeeDTO.setRole( roleMapper.mapEnumToString( entity.getRole() ) );
 
         return employeeDTO;
     }
@@ -81,9 +82,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
         employee.setPosition( dto.getPosition() );
         employee.setLogin( dto.getLogin() );
         employee.setPassword( dto.getPassword() );
-        if ( dto.getRole() != null ) {
-            employee.setRole( Enum.valueOf( Role.class, dto.getRole() ) );
-        }
+        employee.setRole( roleMapper.mapStringToEnum( dto.getRole() ) );
 
         return employee;
     }
