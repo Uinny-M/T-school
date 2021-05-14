@@ -7,7 +7,7 @@
     <a href="${pageContext.request.contextPath}/event/" class="menu-events">Процедуры</a>
     <a href="${pageContext.request.contextPath}/employee/" class="menu-employees">Сотрудники</a>
     <a href="${pageContext.request.contextPath}/employee/manipulation" class="menu-staff">Приемная</a>
-    <a href="${pageContext.request.contextPath}/auth/" class="menu-staff">Личный кабинет</a>
+<%--    <a href="${pageContext.request.contextPath}/auth/" class="menu-staff">Личный кабинет</a>--%>
 </div>
 
 <style>

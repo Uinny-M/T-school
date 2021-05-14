@@ -22,13 +22,14 @@
         <h3>Подробное назначение</h3>
 
         <form:form action="${pageContext.request.contextPath}/prescription/add" method="post"
-                   modelAttribute="prescription">
-
-
+                   modelAttribute="prescription" cssClass="form">
             <div class="form-group-create row">
                 <b class="col-xs-3">Вид манипуляции</b>
-<%--                Мужской <form:radiobutton cssClass="form-s" value="MALE" path="manipulation"/><br>--%>
-<%--                Женский <form:radiobutton cssClass="form-s" value="FEMALE" path="manipulation"/>--%>
+                <select name="manipulation" size="${manipulations.size()}" Class="form-s">
+                    <c:forEach var="manipulation" items="${manipulations}">
+                        <option value="${manipulation}">${manipulation.title}</option>
+                    </c:forEach>
+                </select>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Лекарство</b>
@@ -40,40 +41,45 @@
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Начало</b>
-                <form:input cssClass="form-s" type="data" path="startDate"/>
+                <form:input cssClass="form-s" type="date" path="startDate"/>
             </div>
             <div class="form-group-create row">
-                <b class="col-xs-3">Длительность</b>
+                <b class="col-xs-3">Длительность, дней</b>
                 <form:input cssClass="form-s" type="number" path="duration"/>
             </div>
+            <%--        <div class="form-group-create row">--%>
+            <%--            <b class="col-xs-3">Кол-во приемов в день</b>--%>
+            <%--            <form:input cssClass="form-s" type="number" path="dailyChart"/>--%>
+            <%--                &lt;%&ndash;            </div>&ndash;%&gt;--%>
+            <%--                &lt;%&ndash;            <div class="form-group-create row">&ndash;%&gt;--%>
+            <%--                &lt;%&ndash;                <b class="col-xs-3">Дни недели</b>&ndash;%&gt;--%>
+            <%--                &lt;%&ndash;                <select name="week" size="7" Class="form-s" multiple="multiple">&ndash;%&gt;--%>
+            <%--                &lt;%&ndash;                    <option value="MONDAY">Понедельник</option>&ndash;%&gt;--%>
+            <%--                &lt;%&ndash;                    <option value="TUESDAY">Вторник</option>&ndash;%&gt;--%>
+            <%--                &lt;%&ndash;                    <option value="WEDNESDAY">Среда</option>&ndash;%&gt;--%>
+            <%--                &lt;%&ndash;                    <option value="THURSDAY">Четверг</option>&ndash;%&gt;--%>
+            <%--                &lt;%&ndash;                    <option value="FRIDAY">Пятница</option>&ndash;%&gt;--%>
+            <%--                &lt;%&ndash;                    <option value="SATURDAY">Суббота</option>&ndash;%&gt;--%>
+            <%--                &lt;%&ndash;                    <option value="SUNDAY">Воскресенье</option>&ndash;%&gt;--%>
+            <%--                &lt;%&ndash;                </select>&ndash;%&gt;--%>
+            <%--                &lt;%&ndash;            </div>&ndash;%&gt;--%>
             <div class="form-group-create row">
-                <b class="col-xs-3">Кол-во приемов в день</b>
-                <form:input cssClass="form-s" type="number" path="dailyChart"/>
+                <b class="col-xs-3">Дни недели</b>
+                <select name="weekdays" size="7" Class="form-s" multiple="multiple">
+                    <c:forEach var="weekday" items="${week}">
+                        <option value="${weekday}">${weekday}</option>
+                    </c:forEach>
+                </select>
             </div>
-<%--            <div class="form-group-create row">--%>
-<%--                <b class="col-xs-3">Дни недели</b>--%>
-<%--                <form:input cssClass="form-s" type="number" path=""/>--%>
-<%--            </div>--%>
-            <select name="multiSelect" size="7" multiple="multiple">
-                <c:forEach var="item" items="${param['multiSelect']}">
-                    <option ><c:if test="${item.selected}">selected</c:if>>${item.value}</option>
-                </c:forEach>
-            </select>
-
-
-
-
-
-
-<%--                <form:select path="prescr"></form:select>--%>
-<%--                <select multiple name="weekday">--%>
-<%--                    <c:forEach items="${weekday}" var="weekday">--%>
-<%--                        <option value="${weekday}">${weekday}</option>--%>
-<%--                    </c:forEach>--%>
-<%--                </select>--%>
-
+            <div class="form-group-create row">
+                <b class="col-xs-3">Время пприема</b>
+                <select name="week" size="7" Class="form-s" multiple="multiple">
+                    <c:forEach var="time" items="${times}">
+                        <option value="${time}">${time}</option>
+                    </c:forEach>
+                </select>
+            </div>
             <br><br>
-
             <button type="submit" class="btn">Сохранить изменения</button>
         </form:form>
 
@@ -84,7 +90,8 @@
                 пациента</a>
         </botton>
         <botton class="btn">
-            <a href="http://localhost:8080/T_school_war_exploded/prescriptiones/${patient.id}" style="color: #efffe9">Процедурный
+            <a href="http://localhost:8080/T_school_war_exploded/prescriptiones/${patient.id}"
+               style="color: #efffe9">Процедурный
                 лист</a>
         </botton>
     </div>
@@ -141,11 +148,6 @@
         margin: 10px;
     }
 
-    .form-hidding {
-        margin-top: 30px;
-        border-bottom: 1px solid #28a347;
-        border-top: 1px solid #28a347;
-    }
 
     .form-group-search {
         float: left;

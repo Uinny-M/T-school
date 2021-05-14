@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="help/header.jsp" %>
 <%@ include file="help/footer.jsp" %>
 <%@include file="help/menu.jsp" %>
@@ -20,53 +19,58 @@
 <div class="container">
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
-        <h3>Список пациентов</h3>
-        <form:form action="/T_school_war_exploded/patient/" cssClass="form" method="get">
-            <input type="text" class="form-s" name="name" style="float: left" placeholder="Фамилия" value="${search}"/>
-            <button type="submit" class="btn" style="margin-left: 20px;">Найти</button>
+        <h3>Данные пациента</h3>
+        <form:form action="/T_school_war_exploded/patient/add" method="post" modelAttribute="patient"
+                   cssClass="form">
+            <div class="form-group-create row">
+                <b class="col-xs-3">Фамилия</b>
+                <form:input cssClass="form-s" path="secondName"/>
+            </div>
+            <div class="form-group-create row">
+                <b class="col-xs-3">Имя</b>
+                <form:input cssClass="form-s" path="firstName"/>
+            </div>
+            <div class="form-group-create row">
+                <b class="col-xs-3">Отчество</b>
+                <form:input cssClass="form-s" path="middleName"/>
+            </div>
+            <div class="form-group row">
+                <b class="col-xs-3">Дата рождения</b>
+                <form:input cssClass="form-s" type="date" path="birthdate"/>
+            </div>
+            <div class="form-group-create row">
+                <b class="col-xs-3">Пол</b>
+                Мужской <form:radiobutton cssClass="form-s" value="MALE" path="gender"/><br>
+                Женский <form:radiobutton cssClass="form-s" value="FEMALE" path="gender"/>
+            </div>
+            <div class="form-group-create row">
+                <b class="col-xs-3">№ страховки</b>
+                <form:input cssClass="form-s" path="insurance"/>
+            </div>
+            <br>
+            <button type="submit" class="btn">Сохранить изменения</button>
         </form:form>
-
-        <button class="btn">
-            <a href="http://localhost:8080/T_school_war_exploded/patient/add" style="color: #efffe9">Новый пациент</a>
-        </button>
         <br>
+        <botton class="btn" style="margin: 10px">
+            <a href="http://localhost:8080/T_school_war_exploded/cases/${patient.id}" style="color: #efffe9">Карточка пациента</a>
+        </botton>
+        <botton class="btn">
+            <a href="http://localhost:8080/T_school_war_exploded/event/${patient.id}" style="color: #efffe9">Процедурный лист</a>
+        </botton>
 
-        <table class="table table-striped table-bordered table-hover" style="margin-top: 20px;">
-            <thead>
-            <tr>
-                <th colspan="3">Список пациентов</th>
-            </tr>
-            <tr>
-                <th width="50%">ФИО</th>
-                <th width="25%">Дата рождения</th>
-                <th width="25%">Номер страховки</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${patients}" var="p">
-                <tr>
-                    <td>
-                        <a href="http://localhost:8080/T_school_war_exploded/patient/${p.id}">${p.secondName} ${p.firstName} ${p.middleName}</a>
-                    </td>
-                    <td>${p.birthdate}</td>
-                    <td>${p.insurance}</td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-        <br>
-    </div><!--/.content-->
-</div><!-- /.container -->
+
+    </div>
+</div>
 <jsp:include page="help/footer.jsp"></jsp:include>
 </body>
 </html>
 
 <style>
     /*Menu*/
-    .vertical-menu a.menu-patient {
-        background-color: #28a347;
-        color: #efffe9;
-    }
+  .vertical-menu a.menu-patient{
+      background-color: #28a347;
+      color: #efffe9;
+  }
     /*Content*/
     .content {
         background-color: #fff;
@@ -100,7 +104,10 @@
         height: auto;
         display: block;
         margin: 10px;
+        text-transform: capitalize;
     }
+
+
     .form-group-search {
         float: left;
         margin-left: 10px;

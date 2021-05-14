@@ -1,7 +1,5 @@
 package clinic.entities;
 
-import clinic.entities.enums.Times;
-import clinic.entities.enums.Weekday;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
 
 /**
  * Entity prescription
@@ -73,8 +70,8 @@ public class Prescription {
     private String dosage;
 
     //is the prescription deleted
-    @Column(name = "deleted", nullable = false, columnDefinition = "false")
-    private boolean isDeleted;
+    @Column(name = "closed", nullable = false, columnDefinition = "false")
+    private boolean isClosed;
 
 
     public Long getId() {
@@ -150,10 +147,10 @@ public class Prescription {
     }
 
     public boolean isDeleted() {
-        return isDeleted;
+        return isClosed;
     }
 
     public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+        isClosed = deleted;
     }
 }

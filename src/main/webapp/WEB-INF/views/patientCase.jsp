@@ -24,7 +24,7 @@
                    cssClass="form">
             <div class="form-group-create row">
                 <b class="col-xs-3">Пациент</b>
-                <form:input cssClass="form-s" path="patient"/>
+                <form:input cssClass="form-s" path="patient.secondName"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Диагноз</b>
@@ -40,7 +40,7 @@
             </div>
             <div class="form-group row">
                 <b class="col-xs-3">Врач</b>
-                <form:input cssClass="form-s" path="doctor"/>
+                <form:input cssClass="form-s" path="doctor.secondName"/>
             </div>
             <br>
             <button type="submit" class="btn">Сохранить изменения</button>
@@ -48,16 +48,16 @@
         <br>
         <br>
         <button type="button" class="btn">
-            <a href="${pageContext.request.contextPath}/cases/close/${prescription.get(0).patientCase.id}" style="color: #efffe9">Закрыть
-                больничный</a></button>
+            <a href="${pageContext.request.contextPath}/cases/close/${prescription.get(0).patientCase.id}"
+               style="color: #efffe9">Закрыть больничный</a></button>
         <button class="btn" style="margin: 10px">
-            <a href="${pageContext.request.contextPath}/cases/${prescription.get(0).patient.id}" style="color: #efffe9">Карточка
-                пациента</a>
+            <a href="${pageContext.request.contextPath}/cases/${prescription.get(0).patient.id}" style="color: #efffe9">
+                Карточка пациента</a>
         </button>
-                <button class="btn">
-                    <a href="${pageContext.request.contextPath}/prescription/${prescription.get(0).patient.id}"
-                       style="color: #efffe9">Лист назначений</a>
-                </button>
+        <button class="btn">
+            <a href="${pageContext.request.contextPath}/prescription/case/${prescription.get(0).patientCase.id}/add"
+               style="color: #efffe9">Новое назначение</a>
+        </button>
         <h3>Назначения в страховом случае</h3>
         <table class="table table-striped table-bordered">
             <thead>

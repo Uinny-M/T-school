@@ -1,7 +1,6 @@
 package clinic.controller;
 
 import clinic.dto.CaseDTO;
-import clinic.entities.enums.Role;
 import clinic.service.api.CaseService;
 import clinic.service.api.PrescriptionService;
 import org.springframework.security.access.annotation.Secured;

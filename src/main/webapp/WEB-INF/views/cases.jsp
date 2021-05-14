@@ -26,8 +26,9 @@
         <button class="btn">
             <a href="${pageContext.request.contextPath}/cases/update" style="color: #efffe9">Новый страховой случай</a>
         </button>
+        <br><br>
 
-     <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered">
         <thead>
         <tr>
             <th colspan="5">Список страховых случаев</th>
@@ -47,7 +48,7 @@
                     <a href="${pageContext.request.contextPath}/cases/update/${c.id}">${c.patient.secondName} ${c.patient.firstName} ${c.patient.middleName}</a>
 
                 </td>
-                <td>${c.doctor.secondName}</td>
+                <td>${c.doctor.secondName} ${c.doctor.firstName}</td>
                 <td>${c.diagnosis}</td>
                 <td>${c.startDate}</td>
                 <td>${c.endDate}</td>
@@ -74,8 +75,8 @@
         width: auto;
         right: 0;
         display: block;
-        margin: 0px;
-        padding: 0px;
+        padding: 20px;
+
         list-style: none;
         position: absolute;
         left: 200px;

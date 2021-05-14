@@ -14,16 +14,6 @@
             <h4>Адрес клиники: г.Санкт-Петерубрг, наб.Обводного канала, д.9</h4>
             <h4>Телефон: 8-800-800-80-80</h4>
         </div>
-<%--        <div class="col-lg-3">--%>
-<%--            <h4>имя</h4>--%>
-<%--            <img src="${pageContext.request.contextPath}/assets/admin.jpg" width="140" height="88"  alt="admin.jpg">--%>
-<%--            <button type="button" class="btn" style="padding-top: 20px">--%>
-<%--                <a href="${pageContext.request.contextPath}/login" class="menu-index">Войти</a>--%>
-<%--            </button>--%>
-<%--            <button type="button" class="btn" style="padding-top: 20px">--%>
-<%--                <a href="${pageContext.request.contextPath}/logout" class="menu-index">Выйти</a>--%>
-<%--            </button>--%>
-<%--        </div>--%>
         <div class="col-lg-3">
             <h4>
                 <sec:authorize access="isAuthenticated()">
@@ -34,20 +24,20 @@
                 </sec:authorize>
             </h4>
             <img src="${pageContext.request.contextPath}/assets/admin.jpg" width="140" height="88"  alt="admin.jpg">
-            <button type="button" class="btn" style="padding-top: 20px">
-                <a href="${pageContext.request.contextPath}/login" class="menu-index">
+            <button type="button" class="btn" style="margin-top: 1px">
+
                     <sec:authorize access="!isAuthenticated()">
-                        Вход
+                        <a href="${pageContext.request.contextPath}/login" class="menu-index">
+                            Вход</a>
                     </sec:authorize>
                     <sec:authorize access="isAuthenticated()">
-                        Выход
+                        <a href="${pageContext.request.contextPath}/logout" class="menu-index">
+                            Выход</a>
                     </sec:authorize>
-                </a>
+
             </button>
 
         </div>
-
-
 
     </div>
 </header>
@@ -99,6 +89,6 @@
         border: none;
         text-transform: capitalize;
         transition: all 0.5s ease 0s;
-        margin-top: -20px;
+        margin-top: -30px;
     }
 </style>

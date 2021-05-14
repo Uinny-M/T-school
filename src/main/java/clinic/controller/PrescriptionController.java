@@ -1,25 +1,26 @@
 package clinic.controller;
 
-import clinic.dto.EventDTO;
-import clinic.dto.PatientDTO;
+import clinic.dto.ManipulationDTO;
 import clinic.dto.PrescriptionDTO;
-import clinic.entities.Prescription;
-import clinic.entities.enums.Times;
-import clinic.entities.enums.Weekday;
+import clinic.service.api.ManipulationService;
 import clinic.service.api.PrescriptionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.HashSet;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/prescription")
 public class PrescriptionController {
     private final PrescriptionService prescriptionService;
-    public PrescriptionController(PrescriptionService prescriptionService) {
+    private final PrescriptionService caseService;
+    private final ManipulationService manipulationService;
+    public PrescriptionController(PrescriptionService prescriptionService, PrescriptionService caseService, ManipulationService manipulationService) {
         this.prescriptionService = prescriptionService;
+        this.caseService = caseService;
+        this.manipulationService = manipulationService;
     }
 
     //Return all prescriptions by PatientId
@@ -47,14 +48,8 @@ public class PrescriptionController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("prescription", new PrescriptionDTO());
         modelAndView.addObject("caseId", caseId);
-
-//        modelAndView.addObject("days", new HashSet<String>());
-//        modelAndView.addObject("times", new HashSet<String>());
-//        modelAndView.addObject("weekday", Weekday.values());
-//        modelAndView.addObject("time", Times.values());
         modelAndView.setViewName("prescription");
         prescriptionService.create(prescriptionDTO);
-//        prescriptionService.create(prescriptionDTO, caseId);
         return new RedirectView("/T_school_war_exploded/patient/");
     }
 
@@ -69,10 +64,16 @@ public class PrescriptionController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/case/{caseId}/add")
+    @RequestMapping(value = "/case/{caseId}/add", method =  RequestMethod.GET)
     public ModelAndView getPrescription(@PathVariable("caseId") Long caseId) {
         ModelAndView modelAndView = new ModelAndView();
+        List<ManipulationDTO> manipulationDTOS = manipulationService.getAllManipulation();
+        String[] week = new String[]{"Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"};
+        String[] times = new String[]{"09:00", "10:00", "11:00", "12:00"};
         modelAndView.addObject("prescription", new PrescriptionDTO());
+        modelAndView.addObject("week", week);
+        modelAndView.addObject("times", times);
+        modelAndView.addObject("manipulations", manipulationDTOS);
         modelAndView.setViewName("prescription");
         return modelAndView;
     }

@@ -36,7 +36,7 @@ public class PrescriptionDTO {
 
     //select time for manipulation
     @DateTimeFormat(pattern="HH:mm:ss")
-    private Set<Times> times;
+    private Set<String> times;
 
     // manipulation's schedule
     private String schedule;
@@ -51,7 +51,7 @@ public class PrescriptionDTO {
     private String dosage;
 
     //is the prescription deleted
-    private boolean isDeleted;
+    private boolean isClosed;
 
     public Long getId() {
         return id;
@@ -93,11 +93,11 @@ public class PrescriptionDTO {
         this.weekdays = weekdays;
     }
 
-    public Set<Times> getTimes() {
+    public Set<String> getTimes() {
         return times;
     }
 
-    public void setTimes(Set<Times> times) {
+    public void setTimes(Set<String> times) {
         this.times = times;
     }
 
@@ -150,10 +150,10 @@ public class PrescriptionDTO {
     }
 
     public boolean isDeleted() {
-        return isDeleted;
+        return isClosed;
     }
 
     public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+        isClosed = deleted;
     }
 }
