@@ -54,12 +54,11 @@ public class CaseController {
         //Add new case
     @PostMapping(value = "/update")
     public RedirectView addPatientCase(@ModelAttribute CaseDTO caseDTO) {
-        caseService.createOrUpdate(caseDTO); //todo сделать отдельный метод
-//        ModelAndView modelAndView = new ModelAndView(new RedirectView());
+        caseService.createOrUpdate(caseDTO);
         return new RedirectView("/T_school_war_exploded/cases/");
     }
 
-   // Add new case
+   // Close case by Case's id
     @PostMapping(value = "/close/{caseId}")
     public ModelAndView closeCase(@PathVariable Long caseId) {
         caseService.closeCase(caseId);

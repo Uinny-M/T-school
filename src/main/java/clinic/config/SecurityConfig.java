@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .authoritiesByUsernameQuery("SELECT username, role "
 //                        + " FROM employee WHERE username = ?")
 //                .passwordEncoder(passwordEncoder());
-//    }
+//    } //todo
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth)
             throws Exception {

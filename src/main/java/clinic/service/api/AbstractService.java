@@ -43,7 +43,7 @@ public interface AbstractService <T, DTO>{
      * Delete the DTO by DTO's data
      * @param dto DTO's data
      */
-    void delete(DTO dto); //todo изменить на софт
+    void delete(DTO dto);
 
     /**
      * Delete the DTO by DTO's id

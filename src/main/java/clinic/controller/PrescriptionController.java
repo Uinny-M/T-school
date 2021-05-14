@@ -64,17 +64,16 @@ public class PrescriptionController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/case/{caseId}/add", method =  RequestMethod.GET)
+    @RequestMapping(value = "/case/{caseId}/add", method =  RequestMethod.POST)
     public ModelAndView getPrescription(@PathVariable("caseId") Long caseId) {
         ModelAndView modelAndView = new ModelAndView();
-        List<ManipulationDTO> manipulationDTOS = manipulationService.getAllManipulation();
         String[] week = new String[]{"Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"};
         String[] times = new String[]{"09:00", "10:00", "11:00", "12:00"};
         modelAndView.addObject("prescription", new PrescriptionDTO());
         modelAndView.addObject("week", week);
         modelAndView.addObject("times", times);
-        modelAndView.addObject("manipulations", manipulationDTOS);
+        modelAndView.addObject("manipulations", manipulationService.getAll());
         modelAndView.setViewName("prescription");
-        return modelAndView;
+        return modelAndView; //todo
     }
 }

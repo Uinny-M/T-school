@@ -10,6 +10,4 @@ import java.util.List;
  * CRUD for manipulation from AbstractService
  */
 public interface ManipulationService extends AbstractService<Manipulation, ManipulationDTO> {
-
-    List<ManipulationDTO> getAllManipulation(); //todo убрать
 }

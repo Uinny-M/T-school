@@ -40,6 +40,6 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
 
     @Transactional
     public void closeCase(Long caseId) {
-        eventService.getAllByCaseId(caseId); //todo
+        eventService.getAllByCaseId(caseId);
     }
 }

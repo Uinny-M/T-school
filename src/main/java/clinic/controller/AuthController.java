@@ -15,18 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class AuthController {
-
-//    @RequestMapping(value = "/login", method = {RequestMethod.POST, RequestMethod.GET})
-//    public String login(HttpServletRequest request,
-//                        @RequestParam(required = false) boolean error) {
-////                Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-////        if (auth.isAuthenticated()&&!error) {
-////            return "index";
-////        }
-////        else
-//        return "login";
-//    }
-
     @RequestMapping(value = "/login", method = {RequestMethod.POST, RequestMethod.GET})
     public String login(@RequestParam(value = "error", required = false)String error,
                         Model model) {

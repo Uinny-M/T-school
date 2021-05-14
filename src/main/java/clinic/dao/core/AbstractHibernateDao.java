@@ -43,7 +43,6 @@ public abstract class AbstractHibernateDao<T> implements AbstractDao<T> {
 
     @Override
     public void delete(T entity) {
-        //todo softDelete or remove method
         em.remove(em.contains(entity) ? entity : em.merge(entity));
     }
 
