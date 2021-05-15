@@ -24,9 +24,12 @@
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
         <h3>Карточка пациента</h3>
-        <button class="btn">
-            <a href="${pageContext.request.contextPath}/cases/update" style="color: #efffe9">Новый страховой случай</a>
-        </button>
+        <sec:authorize access="hasRole('ROLE_DOCTOR')">
+            <button class="btn">
+                <a href="${pageContext.request.contextPath}/cases/update" style="color: #efffe9">Новый страховой случай</a>
+            </button>
+        </sec:authorize>
+
         <br><br>
 
         <table class="table table-striped table-bordered">

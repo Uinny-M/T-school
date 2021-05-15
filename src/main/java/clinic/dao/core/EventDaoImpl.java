@@ -26,7 +26,7 @@ public class EventDaoImpl extends AbstractHibernateDao<Event> implements EventDa
     @Override
     public List<Event> findAllByPatientId(Integer patientId) {
         return em.createQuery(
-                "SELECT e FROM Event e WHERE e.patient.id = :patientId AND e.status = 1" +
+                "SELECT e FROM Event e WHERE e.patient.id = :patientId " +
                         " ORDER BY date")
                 .setParameter("patientId", patientId)
                 .getResultList();

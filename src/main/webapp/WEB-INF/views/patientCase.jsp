@@ -43,21 +43,27 @@
                 <form:input cssClass="form-s" path="doctor.secondName"/>
             </div>
             <br>
+            <sec:authorize access="hasRole('ROLE_DOCTOR')">
             <button type="submit" class="btn">Сохранить изменения</button>
+            </sec:authorize>
         </form:form>
         <br>
         <br>
-        <button type="button" class="btn">
-            <a href="${pageContext.request.contextPath}/cases/close/${prescription.get(0).patientCase.id}"
-               style="color: #efffe9">Закрыть больничный</a></button>
         <button class="btn" style="margin: 10px">
             <a href="${pageContext.request.contextPath}/cases/${prescription.get(0).patient.id}" style="color: #efffe9">
                 Карточка пациента</a>
         </button>
-        <button class="btn">
-            <a href="${pageContext.request.contextPath}/prescription/case/${prescription.get(0).patientCase.id}/add"
-               style="color: #efffe9">Новое назначение</a>
-        </button>
+        <sec:authorize access="hasRole('ROLE_DOCTOR')">
+            <button type="button" class="btn">
+                <a href="${pageContext.request.contextPath}/cases/close/${prescription.get(0).patientCase.id}"
+                   style="color: #efffe9">Закрыть больничный</a></button>
+
+            <button class="btn">
+                <a href="${pageContext.request.contextPath}/prescription/case/${prescription.get(0).patientCase.id}/add"
+                   style="color: #efffe9">Новое назначение</a>
+            </button>
+        </sec:authorize>
+
         <h3>Назначения в страховом случае</h3>
         <table class="table table-striped table-bordered">
             <thead>

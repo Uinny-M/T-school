@@ -22,10 +22,6 @@
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
         <h3>Список процедур</h3>
-        <%--        <form:form action="/T_school_war_exploded/event/" cssClass="form" method="get">--%>
-        <%--            <input type="date" class="form-s" name="date" style="float: left" value="${date}"/>--%>
-        <%--            <button type="submit" class="btn" style="margin-left: 20px;">Найти</button>--%>
-        <%--        </form:form>--%>
         <button class="btn">
             <a href="${pageContext.request.contextPath}/event/" style="color: #efffe9">На ближайший день</a>
         </button>
@@ -58,26 +54,37 @@
                     <td>${e.manipulation.title}</td>
                     <td>${e.prescription.dosage} ${e.prescription.drug}</td>
 
-                        <%--                    <td>${e.status}</td>--%>
+                    <sec:authorize access="hasRole('ROLE_DOCTOR')">
+                        <td>${e.status} ${e.comment}</td>
+                    </sec:authorize>
+                    <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')">
 
-                    <td>
-<%--                        <button class="btn">--%>
-<%--                            <a href="${pageContext.request.contextPath}/event/${e.id}/done" style="color: #efffe9">Выполнено</a>--%>
-<%--                        </button>--%>
-                        <form:form action="/T_school_war_exploded/event/${e.id}/done" cssClass="form" method="get">
-                            <button type="submit" class="btn" style="margin-left: 20px;">Выполнено</button>
-                        </form:form>
-                        <form:form action="/T_school_war_exploded/event/${e.id}/cancel" cssClass="form" method="get">
-                            <input type="text" class="form-s" name="comment" style="float: left"
-                                   placeholder="Причина отмены"/>
-                            <button type="submit" class="btn" style="margin-left: 20px;">Отменено</button>
-                        </form:form>
-                            <%--                        <button class="btn">--%>
-                            <%--                            <a href="${pageContext.request.contextPath}/event/${e.id}/cancel" style="color: #efffe9">Отменено</a>--%>
-                            <%--                        </button>--%>
-                            <%--                        <input name="comment" type="text" Class="form-s" placeholder="Причина отмены">--%>
-                    </td>
+<%--                        <c:if test="${e.status eq 'Запланировано'}">--%>
 
+<%--                        </c:if>--%>
+                        <c:choose>
+                            <c:when test="${e.status eq 'Запланировано'}">
+                                <td>
+                                    <form:form action="/T_school_war_exploded/event/${e.id}/done" cssClass="form" method="get">
+                                        <button type="submit" class="btn" style="margin-left: 20px;">Выполнено</button>
+                                    </form:form>
+                                    <form:form action="/T_school_war_exploded/event/${e.id}/cancel" cssClass="form" method="get">
+                                        <input type="text" class="form-s" name="comment" style="float: left"
+                                               placeholder="Причина отмены"/>
+                                        <button type="submit" class="btn" style="margin-left: 20px;">Отменено</button>
+                                    </form:form>
+                                </td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>${e.status} ${e.comment}</td>
+                            </c:otherwise>
+                        </c:choose>
+
+<%--                        <c:if test="${e.status eq 'Запланировано'}">--%>
+<%--                            <td>${e.status} ${e.comment}</td>--%>
+<%--                        </c:if>--%>
+
+                    </sec:authorize>
                 </tr>
             </c:forEach>
             </tbody>

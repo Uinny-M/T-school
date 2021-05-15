@@ -23,7 +23,18 @@
                     ГОСТЬ
                 </sec:authorize>
             </h4>
-            <img src="${pageContext.request.contextPath}/assets/admin.jpg" width="140" height="88"  alt="admin.jpg">
+            <sec:authorize access="!isAuthenticated()">
+                <img src="${pageContext.request.contextPath}/assets/logo-mini.jpg" width="120" height="88"  alt="logo-mini.jpg">
+            </sec:authorize>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <img src="${pageContext.request.contextPath}/assets/admin.jpg" width="120" height="88"  alt="admin.jpg">
+            </sec:authorize>
+            <sec:authorize access="hasRole('ROLE_DOCTOR')">
+                <img src="${pageContext.request.contextPath}/assets/doctor.jpg" width="120" height="88"  alt="doctor.jpg">
+            </sec:authorize>
+            <sec:authorize access="hasRole('ROLE_NURSE')">
+                <img src="${pageContext.request.contextPath}/assets/nurse.jpg" width="120" height="88"  alt="nurse.jpg">
+            </sec:authorize>
             <button type="button" class="btn" style="margin-top: 1px">
 
                     <sec:authorize access="!isAuthenticated()">
