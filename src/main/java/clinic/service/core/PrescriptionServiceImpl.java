@@ -4,6 +4,7 @@ import clinic.dao.api.PrescriptionDao;
 import clinic.dto.PrescriptionDTO;
 import clinic.entities.Prescription;
 import clinic.mappers.PrescriptionMapper;
+import clinic.service.api.CaseService;
 import clinic.service.api.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,11 @@ import java.util.List;
 public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, PrescriptionDTO,
         PrescriptionDao, PrescriptionMapper> implements PrescriptionService {
     @Autowired
-    public PrescriptionServiceImpl(PrescriptionDao dao, PrescriptionMapper mapper) {
+    private final CaseService caseService;
+    @Autowired
+    public PrescriptionServiceImpl(PrescriptionDao dao, PrescriptionMapper mapper, CaseService caseService) {
         super(dao,mapper);
+        this.caseService = caseService;
     }
 
     @Transactional
@@ -28,5 +32,13 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
     @Override
     public List<PrescriptionDTO> getAllByCaseId(Long caseId) {
         return mapToDTO(dao.findAllByCaseId(caseId));
+    }
+    @Transactional
+    @Override
+    public PrescriptionDTO createPrescription(PrescriptionDTO prescriptionDTO, Long caseId){
+        prescriptionDTO.setPatientCase(caseService.getOneById(caseId));
+        prescriptionDTO.setPatient(caseService.getOneById(caseId).getPatient());
+        dao.save(mapToEntity(prescriptionDTO));
+        return prescriptionDTO;
     }
 }

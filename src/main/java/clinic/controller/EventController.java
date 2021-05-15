@@ -3,13 +3,9 @@ package clinic.controller;
 import clinic.service.api.EventService;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.time.LocalDate;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Log
 @Controller
@@ -34,8 +30,9 @@ public class EventController {
     @GetMapping(value = "/")
     public ModelAndView getEventsForToday() {
         ModelAndView modelAndView = new ModelAndView();
-       // modelAndView.addObject("events", eventService.getAllEventsToday());
+        // modelAndView.addObject("events", eventService.getAllEventsToday());
         modelAndView.addObject("events", eventService.getAllEventsToday());
+        modelAndView.addObject("comment", new String());
         modelAndView.setViewName("events");
         return modelAndView;
     }
@@ -48,5 +45,20 @@ public class EventController {
         modelAndView.addObject("events", eventService.getAllEventsNow());
         modelAndView.setViewName("events");
         return modelAndView;
+    }
+
+    //change eventStatus to Done
+    @RequestMapping(value = "/{eventId}/done", method = {RequestMethod.GET, RequestMethod.POST})
+    public RedirectView eventDone(@PathVariable("eventId") Long eventId) {
+        eventService.eventDone(eventId);
+        return new RedirectView("/T_school_war_exploded/event/");
+    }
+
+    //change eventStatus to Cancel
+    @RequestMapping(value = "/{eventId}/cancel", method = {RequestMethod.GET, RequestMethod.POST})
+    public RedirectView eventCancel(@PathVariable("eventId") Long eventId,
+                                    @RequestParam(required = false, value = "comment") String comment) {
+        eventService.eventCancel(eventId, comment);
+        return new RedirectView("/T_school_war_exploded/event/");
     }
 }

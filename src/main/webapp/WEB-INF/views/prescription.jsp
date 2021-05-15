@@ -20,8 +20,7 @@
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
         <h3>Подробное назначение</h3>
-
-        <form:form action="${pageContext.request.contextPath}/prescription/add" method="post"
+        <form:form action="${pageContext.request.contextPath}/prescription/case/${caseId}/add" method="post"
                    modelAttribute="prescription" cssClass="form">
             <div class="form-group-create row">
                 <b class="col-xs-3">Вид манипуляции</b>
@@ -47,22 +46,6 @@
                 <b class="col-xs-3">Длительность, дней</b>
                 <form:input cssClass="form-s" type="number" path="duration"/>
             </div>
-            <%--        <div class="form-group-create row">--%>
-            <%--            <b class="col-xs-3">Кол-во приемов в день</b>--%>
-            <%--            <form:input cssClass="form-s" type="number" path="dailyChart"/>--%>
-            <%--                &lt;%&ndash;            </div>&ndash;%&gt;--%>
-            <%--                &lt;%&ndash;            <div class="form-group-create row">&ndash;%&gt;--%>
-            <%--                &lt;%&ndash;                <b class="col-xs-3">Дни недели</b>&ndash;%&gt;--%>
-            <%--                &lt;%&ndash;                <select name="week" size="7" Class="form-s" multiple="multiple">&ndash;%&gt;--%>
-            <%--                &lt;%&ndash;                    <option value="MONDAY">Понедельник</option>&ndash;%&gt;--%>
-            <%--                &lt;%&ndash;                    <option value="TUESDAY">Вторник</option>&ndash;%&gt;--%>
-            <%--                &lt;%&ndash;                    <option value="WEDNESDAY">Среда</option>&ndash;%&gt;--%>
-            <%--                &lt;%&ndash;                    <option value="THURSDAY">Четверг</option>&ndash;%&gt;--%>
-            <%--                &lt;%&ndash;                    <option value="FRIDAY">Пятница</option>&ndash;%&gt;--%>
-            <%--                &lt;%&ndash;                    <option value="SATURDAY">Суббота</option>&ndash;%&gt;--%>
-            <%--                &lt;%&ndash;                    <option value="SUNDAY">Воскресенье</option>&ndash;%&gt;--%>
-            <%--                &lt;%&ndash;                </select>&ndash;%&gt;--%>
-            <%--                &lt;%&ndash;            </div>&ndash;%&gt;--%>
             <div class="form-group-create row">
                 <b class="col-xs-3">Дни недели</b>
                 <select name="weekdays" size="7" Class="form-s" multiple="multiple">
@@ -82,18 +65,11 @@
             <br><br>
             <button type="submit" class="btn">Сохранить изменения</button>
         </form:form>
-
         <br>
-        <button type="submit" class="btn">Закрыть больничный</button>
-        <botton class="btn" style="margin: 10px">
-            <a href="http://localhost:8080/T_school_war_exploded/cases/${patient.id}" style="color: #efffe9">Карточка
-                пациента</a>
-        </botton>
         <botton class="btn">
-            <a href="http://localhost:8080/T_school_war_exploded/prescriptiones/${patient.id}"
-               style="color: #efffe9">Процедурный
-                лист</a>
-        </botton>
+        <a href="http://localhost:8080/T_school_war_exploded/cases/update/${caseId}"
+           style="color: #efffe9">Назад</a>
+    </botton>
     </div>
 </div>
 <jsp:include page="help/footer.jsp"></jsp:include>

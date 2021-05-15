@@ -3,6 +3,7 @@ package clinic.service.core;
 import clinic.dao.api.EventDao;
 import clinic.dto.EventDTO;
 import clinic.entities.Event;
+import clinic.entities.enums.EventStatus;
 import clinic.mappers.EventMapper;
 import clinic.service.api.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,5 +51,20 @@ public class EventServiceImpl extends AbstractServiceImpl<Event, EventDTO, Event
         return getAllByCaseId(caseId).stream()
                 .filter(eventDTO -> eventDTO.getStatus().equals("planned"))
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void eventDone(Long eventId) {
+        EventDTO eventDTO = getOneById(eventId);
+        eventDTO.setStatus(EventStatus.COMPLETED.getDescription());
+        dao.update(mapToEntity(eventDTO));
+    }
+
+    @Transactional
+    public void eventCancel(Long eventId, String comment) {
+        EventDTO eventDTO = getOneById(eventId);
+        eventDTO.setStatus(EventStatus.CANCELED.getDescription());
+        eventDTO.setComment(comment);
+        dao.update(mapToEntity(eventDTO));
     }
 }

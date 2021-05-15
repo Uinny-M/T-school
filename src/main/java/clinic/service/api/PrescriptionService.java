@@ -23,4 +23,11 @@ public interface PrescriptionService extends AbstractService<Prescription, Presc
      * @param caseId case's id
      */
     List<PrescriptionDTO> getAllByCaseId(Long caseId);
+
+    /**
+     * Create new prescription
+     * @param prescriptionDTO prescription's data //todo
+     * @param caseId case's id
+     */
+    PrescriptionDTO createPrescription(PrescriptionDTO prescriptionDTO, Long caseId);
 }

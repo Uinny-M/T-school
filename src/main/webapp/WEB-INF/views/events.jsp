@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="help/header.jsp" %>
@@ -21,10 +22,10 @@
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
         <h3>Список процедур</h3>
-<%--        <form:form action="/T_school_war_exploded/event/" cssClass="form" method="get">--%>
-<%--            <input type="date" class="form-s" name="date" style="float: left" value="${date}"/>--%>
-<%--            <button type="submit" class="btn" style="margin-left: 20px;">Найти</button>--%>
-<%--        </form:form>--%>
+        <%--        <form:form action="/T_school_war_exploded/event/" cssClass="form" method="get">--%>
+        <%--            <input type="date" class="form-s" name="date" style="float: left" value="${date}"/>--%>
+        <%--            <button type="submit" class="btn" style="margin-left: 20px;">Найти</button>--%>
+        <%--        </form:form>--%>
         <button class="btn">
             <a href="${pageContext.request.contextPath}/event/" style="color: #efffe9">На ближайший день</a>
         </button>
@@ -52,14 +53,31 @@
             <tbody>
             <c:forEach items="${events}" var="e">
                 <tr>
-                        <%--                    <td>--%>
-                        <%--                        <a href="http://localhost:8080/T_school_war_exploded/patient/${e.id}">${p.secondName} ${p.firstName} ${p.middleName}</a>--%>
-                        <%--                    </td>--%>
                     <td>${e.date} ${e.time}</td>
                     <td>${e.patient.secondName} ${e.patient.firstName} ${e.patient.middleName}</td>
                     <td>${e.manipulation.title}</td>
                     <td>${e.prescription.dosage} ${e.prescription.drug}</td>
-                    <td>${e.status}</td>
+
+                        <%--                    <td>${e.status}</td>--%>
+
+                    <td>
+<%--                        <button class="btn">--%>
+<%--                            <a href="${pageContext.request.contextPath}/event/${e.id}/done" style="color: #efffe9">Выполнено</a>--%>
+<%--                        </button>--%>
+                        <form:form action="/T_school_war_exploded/event/${e.id}/done" cssClass="form" method="get">
+                            <button type="submit" class="btn" style="margin-left: 20px;">Выполнено</button>
+                        </form:form>
+                        <form:form action="/T_school_war_exploded/event/${e.id}/cancel" cssClass="form" method="get">
+                            <input type="text" class="form-s" name="comment" style="float: left"
+                                   placeholder="Причина отмены"/>
+                            <button type="submit" class="btn" style="margin-left: 20px;">Отменено</button>
+                        </form:form>
+                            <%--                        <button class="btn">--%>
+                            <%--                            <a href="${pageContext.request.contextPath}/event/${e.id}/cancel" style="color: #efffe9">Отменено</a>--%>
+                            <%--                        </button>--%>
+                            <%--                        <input name="comment" type="text" Class="form-s" placeholder="Причина отмены">--%>
+                    </td>
+
                 </tr>
             </c:forEach>
             </tbody>
