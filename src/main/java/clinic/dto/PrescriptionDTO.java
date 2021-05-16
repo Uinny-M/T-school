@@ -1,13 +1,8 @@
 package clinic.dto;
 
-import clinic.entities.Case;
-import clinic.entities.Manipulation;
-import clinic.entities.Patient;
-import clinic.entities.enums.Times;
 import clinic.entities.enums.Weekday;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -35,7 +30,7 @@ public class PrescriptionDTO {
     private Set<Weekday> weekdays;
 
     //select time for manipulation
-    @DateTimeFormat(pattern="HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm:ss")
     private Set<String> times;
 
     // manipulation's schedule

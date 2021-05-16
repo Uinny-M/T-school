@@ -46,22 +46,22 @@
                 <b class="col-xs-3">Длительность, дней</b>
                 <form:input cssClass="form-s" type="number" path="duration"/>
             </div>
-<%--            <div class="form-group-create row">--%>
-<%--                <b class="col-xs-3">Дни недели</b>--%>
-<%--                <select name="weekdays" size="7" Class="form-s" multiple="multiple">--%>
-<%--                    <c:forEach var="weekday" items="${week}">--%>
-<%--                        <option value="${weekday}">${weekday}</option>--%>
-<%--                    </c:forEach>--%>
-<%--                </select>--%>
-<%--            </div>--%>
-<%--            <div class="form-group-create row">--%>
-<%--                <b class="col-xs-3">Время пприема</b>--%>
-<%--                <select name="week" size="7" Class="form-s" multiple="multiple">--%>
-<%--                    <c:forEach var="time" items="${times}">--%>
-<%--                        <option value="${time}">${time}</option>--%>
-<%--                    </c:forEach>--%>
-<%--                </select>--%>
-<%--            </div>--%>
+            <div class="form-group-create row">
+                <b class="col-xs-3">Дни недели</b>
+                <select name="weekdays" size="7" Class="form-s" multiple="multiple">
+                    <c:forEach var="weekday" items="${week}">
+                        <option value="${weekday}">${weekday}</option>
+                    </c:forEach>
+                </select>
+            </div>
+            <div class="form-group-create row">
+                <b class="col-xs-3">Время пприема</b>
+                <select name="week" size="7" Class="form-s" multiple="multiple">
+                    <c:forEach var="time" items="${times}">
+                        <option value="${time}">${time}</option>
+                    </c:forEach>
+                </select>
+            </div>
             <br><br>
             <button type="submit" class="btn">Сохранить изменения</button>
         </form:form>
