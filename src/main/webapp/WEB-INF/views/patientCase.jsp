@@ -20,11 +20,11 @@
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
         <h3>Подробности страхового случая</h3>
-        <form:form action="/T_school_war_exploded/cases/update/" method="POST" modelAttribute="case"
+        <form:form action="/T_school_war_exploded/cases/${patientId}/update" method="POST" modelAttribute="case"
                    cssClass="form">
             <div class="form-group-create row">
                 <b class="col-xs-3">Пациент</b>
-                <form:input cssClass="form-s" path="patient.secondName"/>
+                <form:input cssClass="form-s" disabled="true" path="patient.secondName"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Диагноз</b>
@@ -32,15 +32,15 @@
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Начало</b>
-                <form:input cssClass="form-s" readonly="true" type="data" path="startDate"/>
+                <form:input cssClass="form-s" disabled="true" readonly="true" type="data" path="startDate"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Окончание</b>
-                <form:input cssClass="form-s" readonly="true" type="data" path="endDate"/>
+                <form:input cssClass="form-s" disabled="true" readonly="true" type="data" path="endDate"/>
             </div>
             <div class="form-group row">
                 <b class="col-xs-3">Врач</b>
-                <form:input cssClass="form-s" path="doctor.secondName"/>
+                <form:input cssClass="form-s" disabled="true" path="doctor.login"/>
             </div>
             <br>
             <sec:authorize access="hasRole('ROLE_DOCTOR')">
@@ -50,16 +50,16 @@
         <br>
         <br>
         <button class="btn" style="margin: 10px">
-            <a href="${pageContext.request.contextPath}/cases/${prescription.get(0).patient.id}" style="color: #efffe9">
+            <a href="${pageContext.request.contextPath}/cases/${patientId}" style="color: #efffe9">
                 Карточка пациента</a>
         </button>
         <sec:authorize access="hasRole('ROLE_DOCTOR')">
             <button type="button" class="btn">
-                <a href="${pageContext.request.contextPath}/cases/close/${prescription.get(0).patientCase.id}"
+                <a href="${pageContext.request.contextPath}/cases/close/${caseId}"
                    style="color: #efffe9">Закрыть больничный</a></button>
 
             <button class="btn">
-                <a href="${pageContext.request.contextPath}/prescription/case/${prescription.get(0).patientCase.id}/add"
+                <a href="${pageContext.request.contextPath}/prescription/case/${caseId}/add"
                    style="color: #efffe9">Новое назначение</a>
             </button>
         </sec:authorize>
@@ -80,7 +80,10 @@
             <tbody>
             <c:forEach items="${prescription}" var="p">
                 <tr>
-                    <td>${p.manipulation.title}</td>
+                    <td>
+                        <a href="${pageContext.request.contextPath}/prescription/case/${caseId}/update">
+                                ${p.manipulation.title}</a>
+                    </td>
                     <td>${p.duration} дн.</td>
                     <td>${p.startDate}</td>
                     <td>${p.drug}</td>

@@ -1,9 +1,13 @@
 package clinic.controller;
 
+import clinic.dto.EmployeeDTO;
+import clinic.dto.PatientDTO;
 import clinic.dto.PrescriptionDTO;
 import clinic.service.api.ManipulationService;
 import clinic.service.api.PrescriptionService;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,7 +40,9 @@ public class PrescriptionController {
     @GetMapping(value = "/case/{caseId}")
     public ModelAndView getAllPrescriptionsByCaseId(@PathVariable Long caseId) {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("caseId", caseId);
         modelAndView.addObject("prescriptions", prescriptionService.getAllByCaseId(caseId));
+        modelAndView.addObject("patientId", caseService.getAllByCaseId(caseId).get(0).getPatient().getId());
         modelAndView.setViewName("prescriptions");
         return modelAndView;
     }
@@ -50,7 +56,7 @@ public class PrescriptionController {
 //        modelAndView.addObject("caseId", caseId);
 //        modelAndView.setViewName("prescription");
         prescriptionService.createPrescription(prescriptionDTO, caseId);
-        return new RedirectView("/T_school_war_exploded/patient/");
+        return new RedirectView("/T_school_war_exploded/prescription/case/{caseId}/add");
     }
 
     //Return Patient by ID
@@ -70,11 +76,18 @@ public class PrescriptionController {
         String[] week = new String[]{"Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"};
         String[] times = new String[]{"09:00", "10:00", "11:00", "12:00"};
         PrescriptionDTO prescriptionDTO = new PrescriptionDTO();
+        modelAndView.addObject("patientId", caseService.getAllByCaseId(caseId).get(0).getPatient().getId());
         modelAndView.addObject("prescription", prescriptionDTO);
         modelAndView.addObject("week", week);
         modelAndView.addObject("times", times);
         modelAndView.addObject("manipulations", manipulationService.getAll());
         modelAndView.setViewName("prescription");
         return modelAndView; //todo
+    }
+
+    private EmployeeDTO getCurrentUser (Authentication authentication) {
+        authentication = SecurityContextHolder.getContext().getAuthentication();
+        EmployeeDTO user = (EmployeeDTO) authentication.getPrincipal();
+        return user;
     }
 }

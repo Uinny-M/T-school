@@ -12,4 +12,5 @@ import java.util.List;
  * CRUD for employee from AbstractService
  */
 public interface EmployeeService extends AbstractService<Employee, EmployeeDTO> {
+    EmployeeDTO getEmployeeByUsername(String username);
 }

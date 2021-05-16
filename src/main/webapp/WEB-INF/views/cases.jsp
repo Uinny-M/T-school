@@ -26,7 +26,7 @@
         <h3>Карточка пациента</h3>
         <sec:authorize access="hasRole('ROLE_DOCTOR')">
             <button class="btn">
-                <a href="${pageContext.request.contextPath}/cases/update" style="color: #efffe9">Новый страховой случай</a>
+                <a href="${pageContext.request.contextPath}/cases/${patientId}/update" style="color: #efffe9">Новый страховой случай</a>
             </button>
         </sec:authorize>
 
@@ -49,7 +49,7 @@
         <c:forEach items="${cases}" var="c">
             <tr>
                 <td>
-                    <a href="${pageContext.request.contextPath}/cases/update/${c.id}">${c.patient.secondName} ${c.patient.firstName} ${c.patient.middleName}</a>
+                    <a href="${pageContext.request.contextPath}/cases/${c.patient.id}/update/${c.id}">${c.patient.secondName} ${c.patient.firstName} ${c.patient.middleName}</a>
 
                 </td>
                 <td>${c.doctor.secondName} ${c.doctor.firstName}</td>

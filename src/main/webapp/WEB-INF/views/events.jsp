@@ -58,20 +58,17 @@
                         <td>${e.status} ${e.comment}</td>
                     </sec:authorize>
                     <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')">
-
-<%--                        <c:if test="${e.status eq 'Запланировано'}">--%>
-
-<%--                        </c:if>--%>
                         <c:choose>
                             <c:when test="${e.status eq 'Запланировано'}">
                                 <td>
                                     <form:form action="/T_school_war_exploded/event/${e.id}/done" cssClass="form" method="get">
                                         <button type="submit" class="btn" style="margin-left: 20px;">Выполнено</button>
                                     </form:form>
+                                    <hr>
                                     <form:form action="/T_school_war_exploded/event/${e.id}/cancel" cssClass="form" method="get">
-                                        <input type="text" class="form-s" name="comment" style="float: left"
+                                        <button type="submit" class="btn" style="margin-left: 20px;"> Отменено </button>
+                                        <input type="text" class="form-s" style="margin-top: 5px;" name="comment" style="float: left"
                                                placeholder="Причина отмены"/>
-                                        <button type="submit" class="btn" style="margin-left: 20px;">Отменено</button>
                                     </form:form>
                                 </td>
                             </c:when>
@@ -79,11 +76,6 @@
                                 <td>${e.status} ${e.comment}</td>
                             </c:otherwise>
                         </c:choose>
-
-<%--                        <c:if test="${e.status eq 'Запланировано'}">--%>
-<%--                            <td>${e.status} ${e.comment}</td>--%>
-<%--                        </c:if>--%>
-
                     </sec:authorize>
                 </tr>
             </c:forEach>

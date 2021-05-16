@@ -1,12 +1,20 @@
 package clinic.service.core;
 
 import clinic.dao.api.AbstractDao;
+import clinic.dto.EmployeeDTO;
 import clinic.mappers.AbstractMapper;
 import clinic.service.api.AbstractService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NoResultException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.stream.Collectors;
 
