@@ -33,11 +33,11 @@ public interface AbstractService <T, DTO>{
      */
     DTO update(DTO dto);
 
-    /**
-     * Create or update the DTO by DTO's data
-     * @param dto DTO's data
-     */
-    DTO createOrUpdate(DTO dto);
+//    /**
+//     * Create or update the DTO by DTO's data
+//     * @param dto DTO's data
+//     */
+//    DTO createOrUpdate(DTO dto);
 
     /**
      * Delete the DTO by DTO's data

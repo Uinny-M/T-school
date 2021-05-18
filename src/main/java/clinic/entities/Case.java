@@ -30,7 +30,7 @@ public class Case {
     private Patient patient;
 
     //patient's diagnosis
-    @Column(name = "diagnosis")
+    @Column(name = "diagnosis", columnDefinition = "не установлен")
     private String diagnosis;
 
     //doctor in charge of the case

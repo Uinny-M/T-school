@@ -57,15 +57,15 @@ public abstract class AbstractServiceImpl<T, DTO, Dao extends AbstractDao, Mappe
         return mapToDTO((T) dao.update(mapToEntity(dto)));
     }
 
-    @Transactional
-    @Override
-    public DTO createOrUpdate(DTO dto) {
-        if (getAll().contains(dto)) {
-            update(dto);
-        }
-        else create(dto);
-        return dto;
-    }
+//    @Transactional
+//    @Override
+//    public DTO createOrUpdate(DTO dto) {
+//        if (getAll().contains(dto)) {
+//            update(dto);
+//        }
+//        else create(dto);
+//        return dto;
+//    }
 
     @Override
     @Transactional

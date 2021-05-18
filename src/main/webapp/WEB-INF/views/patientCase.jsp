@@ -20,7 +20,7 @@
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
         <h3>Подробности страхового случая</h3>
-        <form:form action="/T_school_war_exploded/cases/${patientId}/update" method="POST" modelAttribute="case"
+        <form:form action="/T_school_war_exploded/cases/${patientId}/update/${caseId}" method="POST" modelAttribute="case"
                    cssClass="form">
             <div class="form-group-create row">
                 <b class="col-xs-3">Пациент</b>

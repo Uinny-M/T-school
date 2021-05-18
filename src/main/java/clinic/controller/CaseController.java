@@ -30,19 +30,20 @@ public class CaseController {
         this.patientService = patientService;
     }
 
-
-
     //Return all cases by PatientId
-    @GetMapping(value = "/{patientId}")
+    @RequestMapping(value = "/{patientId}", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView getAllCases(@PathVariable Integer patientId) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("patientId", patientId);
+        CaseDTO caseDTO = new CaseDTO();
+        modelAndView.addObject("newCase", caseDTO);
         modelAndView.addObject("cases", caseService.getCasesByPatientId(patientId));
         modelAndView.setViewName("cases");
         return modelAndView;
     }
-    //Return Patient by ID
-    @RequestMapping(value = "/{patientId}/update/{caseId}", method = {RequestMethod.GET, RequestMethod.POST})
+
+    //Return all prescriptions by CaseID
+    @RequestMapping(value = "/{patientId}/update/{caseId}", method = RequestMethod.GET)
     public ModelAndView getCaseById(@PathVariable("caseId") Long caseId,
                                     @PathVariable("patientId") Integer patientId) {
         ModelAndView modelAndView = new ModelAndView();
@@ -53,33 +54,13 @@ public class CaseController {
         return modelAndView;
     }
 
-    //Return Case by ID
-    @RequestMapping(value = "/{patientId}/update", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView getCaseById(@PathVariable ("patientId") Integer patientId) {
-        ModelAndView modelAndView = new ModelAndView();
-        CaseDTO caseDTO = new CaseDTO();
-        caseDTO.setStartDate(LocalDate.now());
-        caseDTO.setDoctor(getCurrentUser());
-        caseDTO.setPatient(patientService.getOneById(patientId));
-        modelAndView.addObject("patientId", patientId);
-//        caseDTO.setDoctor(Authentication.class);
-        modelAndView.addObject("case", caseDTO);
-        modelAndView.setViewName("patientCase");
-        return modelAndView;
+    //Add new case
+    @PostMapping(value = "/{patientId}/add")
+    public RedirectView addCase(@ModelAttribute CaseDTO caseDTO,
+                                       @PathVariable("patientId") Integer patientId) {
+        caseService.createCase(caseDTO.getDiagnosis(), patientId);
+        return new RedirectView("/T_school_war_exploded/cases/"+patientId);
     }
-    private EmployeeDTO getCurrentUser () {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        return employeeService.getEmployeeByUsername(username);
-    }
-
-
-//    //Add new case
-//    @PostMapping(value = "/update")
-//    public RedirectView addPatientCase(@ModelAttribute CaseDTO caseDTO) {
-//        caseService.createOrUpdate(caseDTO);
-//        return new RedirectView("/T_school_war_exploded/cases/");
-//    }
 
    // Close case by Case's id
     @PostMapping(value = "/close/{caseId}")
@@ -88,6 +69,39 @@ public class CaseController {
         ModelAndView modelAndView = new ModelAndView(new RedirectView());
         return modelAndView;
     }
+
+    //Add new case
+    @PostMapping(value = "/{patientId}/update/{caseId}")
+    public RedirectView updateCase(@ModelAttribute CaseDTO caseDTO,
+                                @PathVariable("patientId") Integer patientId,
+                                   @PathVariable("caseId") Long caseId) {
+        caseService.updateCase(caseDTO.getDiagnosis(), caseId);
+        return new RedirectView("/T_school_war_exploded/cases/"+patientId+"/update/"+caseId);
+    }
+
+
+//    //Return Case by ID
+//    @RequestMapping(value = "/{patientId}/update", method = RequestMethod.GET)
+//    public ModelAndView getCaseById(@PathVariable ("patientId") Integer patientId) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        CaseDTO caseDTO = new CaseDTO();
+//        modelAndView.addObject("patientId", patientId);
+//        modelAndView.addObject("case", caseDTO);
+//        modelAndView.setViewName("patientCase");
+//        return modelAndView;
+//    }
+
+//    //Add new case
+//    @PostMapping(value = "/{patientId}/update")
+//    public RedirectView addPatientCase(@ModelAttribute CaseDTO caseDTO,
+//                                       @PathVariable("patientId") Integer patientId) {
+//        //caseDTO.setDoctor(getCurrentUser());
+//        caseDTO.setDoctor(employeeService.getOneById(4));
+//        caseDTO.setPatient(patientService.getOneById(patientId));
+//        caseDTO.setStartDate(LocalDate.now());
+//        caseService.createOrUpdate(caseDTO);
+//        return new RedirectView("/T_school_war_exploded/cases/"+patientId);
+//    }
 
 
 }

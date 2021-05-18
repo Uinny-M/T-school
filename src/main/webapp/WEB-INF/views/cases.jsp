@@ -25,9 +25,10 @@
     <div class="content">
         <h3>Карточка пациента</h3>
         <sec:authorize access="hasRole('ROLE_DOCTOR')">
-            <button class="btn">
-                <a href="${pageContext.request.contextPath}/cases/${patientId}/update" style="color: #efffe9">Новый страховой случай</a>
-            </button>
+            <form:form action="${pageContext.request.contextPath}/cases/${patientId}/add" cssClass="form" method="post">
+                <input type="text" class="form-s" name="diagnosis" style="float: left" placeholder="Диагноз" value="${diagnosis}"/>
+                <button type="submit" class="btn" style="margin-left: 20px;">Новый страховой случай</button>
+            </form:form>
         </sec:authorize>
 
         <br><br>

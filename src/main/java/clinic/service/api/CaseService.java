@@ -24,4 +24,14 @@ public interface CaseService extends AbstractService<Case, CaseDTO>{
      * @param caseId case's id
      */
     void closeCase(Long caseId);
+
+//    /**
+//     * create new case or update existing
+//     * @param caseDTO case's data
+//     */
+//    CaseDTO createOrUpdate(CaseDTO caseDTO);
+
+    CaseDTO createCase(String diagnosis, Integer patientId);
+
+    CaseDTO updateCase(String diagnosis, Long caseId);
 }
