@@ -23,7 +23,7 @@
     <div class="content">
         <h3>Список процедур</h3>
         <button class="btn">
-            <a href="${pageContext.request.contextPath}/event/" style="color: #efffe9">На ближайший день</a>
+            <a href="${pageContext.request.contextPath}/event/today" style="color: #efffe9">На ближайший день</a>
         </button>
         <button class="btn">
             <a href="${pageContext.request.contextPath}/event/now" style="color: #efffe9">На ближайший час</a>

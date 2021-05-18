@@ -38,6 +38,7 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
     public PrescriptionDTO createPrescription(PrescriptionDTO prescriptionDTO, Long caseId){
         prescriptionDTO.setPatientCase(caseService.getOneById(caseId));
         prescriptionDTO.setPatient(caseService.getOneById(caseId).getPatient());
+//        prescriptionDTO.setManipulation();
         dao.save(mapToEntity(prescriptionDTO));
         return prescriptionDTO;
     }

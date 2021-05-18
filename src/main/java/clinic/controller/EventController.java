@@ -28,10 +28,9 @@ public class EventController {
 
     //Return all Events for today
     @GetMapping(value = "/")
-    public ModelAndView getEventsForToday() {
+    public ModelAndView getEvents() {
         ModelAndView modelAndView = new ModelAndView();
-        // modelAndView.addObject("events", eventService.getAllEventsToday());
-        modelAndView.addObject("events", eventService.getAllEventsToday());
+        modelAndView.addObject("events", eventService.getAll());
         modelAndView.addObject("comment", new String());
         modelAndView.setViewName("events");
         return modelAndView;
@@ -41,8 +40,16 @@ public class EventController {
     @GetMapping(value = "/now")
     public ModelAndView getEventsForOur() {
         ModelAndView modelAndView = new ModelAndView();
-        //modelAndView.addObject("events", eventService.getAllEventsNow());
         modelAndView.addObject("events", eventService.getAllEventsNow());
+        modelAndView.setViewName("events");
+        return modelAndView;
+    }
+    //Return all Events for 1 our
+    @GetMapping(value = "/today")
+    public ModelAndView getEventsForToday() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("events", eventService.getAllEventsToday());
+        modelAndView.addObject("comment", new String());
         modelAndView.setViewName("events");
         return modelAndView;
     }

@@ -19,15 +19,14 @@ public class PrescriptionDTO {
     //type of the manipulation
     private ManipulationDTO manipulation;
 
-    //start day of prescription
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate startDate;
+    //title of the manipulation's type
+    private String manipulationTitle;
 
     //duration of manipulation (number of days)
     private byte duration;
 
     //select weekdays for manipulation
-    private Set<Weekday> weekdays;
+    private Set<String> weekdays;
 
     //select time for manipulation
     @DateTimeFormat(pattern = "HH:mm:ss")
@@ -80,11 +79,11 @@ public class PrescriptionDTO {
         this.manipulation = manipulation;
     }
 
-    public Set<Weekday> getWeekdays() {
+    public Set<String> getWeekdays() {
         return weekdays;
     }
 
-    public void setWeekdays(Set<Weekday> weekdays) {
+    public void setWeekdays(Set<String> weekdays) {
         this.weekdays = weekdays;
     }
 
@@ -94,14 +93,6 @@ public class PrescriptionDTO {
 
     public void setTimes(Set<String> times) {
         this.times = times;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
     }
 
     public byte getDuration() {
@@ -150,5 +141,21 @@ public class PrescriptionDTO {
 
     public void setDeleted(boolean deleted) {
         isClosed = deleted;
+    }
+
+    public String getManipulationTitle() {
+        return manipulationTitle;
+    }
+
+    public void setManipulationTitle(String manipulationTitle) {
+        this.manipulationTitle = manipulationTitle;
+    }
+
+    public boolean isClosed() {
+        return isClosed;
+    }
+
+    public void setClosed(boolean closed) {
+        isClosed = closed;
     }
 }

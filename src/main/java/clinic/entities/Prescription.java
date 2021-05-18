@@ -39,9 +39,6 @@ public class Prescription {
     @JoinColumn(name = "manipulation_id", nullable = false)
     private Manipulation manipulation;
 
-    //start day of prescription
-    @Column(name = "start_date", nullable = false)
-    private LocalDate startDate;
 
     //duration of manipulation (number of days)
     @Column(name = "duration", nullable = false)
@@ -104,14 +101,6 @@ public class Prescription {
 
     public void setManipulation(Manipulation manipulation) {
         this.manipulation = manipulation;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
     }
 
     public byte getDuration() {

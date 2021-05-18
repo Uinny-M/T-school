@@ -73,8 +73,8 @@
             <tr>
                 <th width="25%">Тип манипуляции</th>
                 <th width="25%">Продолжительность</th>
-                <th width="25%">Дата начала</th>
-                <th width="25%">Подробности</th>
+                <th width="25%">Лекарство</th>
+                <th width="25%">Диагноз</th>
             </tr>
             </thead>
             <tbody>
@@ -85,8 +85,8 @@
                                 ${p.manipulation.title}</a>
                     </td>
                     <td>${p.duration} дн.</td>
-                    <td>${p.startDate}</td>
-                    <td>${p.drug}</td>
+                    <td>${p.dosage} ${p.drug}</td>
+                    <td>${p.patientCase.diagnosis}</td>
                 </tr>
             </c:forEach>
             </tbody>

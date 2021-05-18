@@ -22,13 +22,34 @@
         <h3>Подробное назначение</h3>
         <form:form action="${pageContext.request.contextPath}/prescription/case/${caseId}/add" method="post"
                    modelAttribute="prescription" cssClass="form">
+<%--            <div class="form-group-create row">--%>
+<%--                <b class="col-xs-3">Вид манипуляции</b>--%>
+<%--                <select name="manipulation" size="${manipulations.size()}" Class="form-s">--%>
+<%--                    <c:forEach var="manipName" items="${manipulations}">--%>
+<%--                        <option value="${manipName}">${manipulation}</option>--%>
+<%--                    </c:forEach>--%>
+<%--                </select>--%>
+<%--            </div>--%>
             <div class="form-group-create row">
                 <b class="col-xs-3">Вид манипуляции</b>
-                <select name="manipulation" size="${manipulations.size()}" Class="form-s">
+<%--                <form:select path="manipulation">--%>
+<%--                    <c:forEach var="manipName" items="${manipulations}">--%>
+<%--                        <option value="${manipulations}">${manipulations}</option>--%>
+<%--                    </c:forEach>--%>
+
+<%--                </form:select>--%>
+
+<%--                    <form:select path="manipulationTitle">--%>
+<%--                        <form:option   value="Выбрать"/>--%>
+<%--                        <form:options items="${manipulations}"></form:options>--%>
+<%--                    </form:select>--%>
+                <form:select path="manipulation" cssClass="form-select-lg">
                     <c:forEach var="manipulation" items="${manipulations}">
-                        <option value="${manipulation}">${manipulation.title}</option>
+                        <form:option value="${manipulation.title}"/>
                     </c:forEach>
-                </select>
+                </form:select>
+<%--                <form:errors path="cityLoading"/>--%>
+
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Лекарство</b>
@@ -39,28 +60,34 @@
                 <form:input cssClass="form-s" path="dosage"/>
             </div>
             <div class="form-group-create row">
-                <b class="col-xs-3">Начало</b>
-                <form:input cssClass="form-s" type="date" path="startDate"/>
-            </div>
-            <div class="form-group-create row">
                 <b class="col-xs-3">Длительность, дней</b>
                 <form:input cssClass="form-s" type="number" path="duration"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Дни недели</b>
-                <select name="weekdays" size="7" Class="form-s" multiple="multiple">
-                    <c:forEach var="weekday" items="${week}">
-                        <option value="${weekday}">${weekday}</option>
+<%--                <select name="weekdays" size="7" Class="form-s" multiple="multiple">--%>
+<%--                    <c:forEach var="weekday" items="${week}">--%>
+<%--                        <option value="${weekday}">${weekday}</option>--%>
+<%--                    </c:forEach>--%>
+<%--                </select>--%>
+                <form:select path="weekdays" cssClass="form-select-lg" multiple="multiple">
+                    <c:forEach var="day" items="${days}">
+                        <form:option value="${day}"/>
                     </c:forEach>
-                </select>
+                </form:select>
             </div>
             <div class="form-group-create row">
-                <b class="col-xs-3">Время пприема</b>
-                <select name="week" size="7" Class="form-s" multiple="multiple">
+                <b class="col-xs-3">Время приема</b>
+<%--                <select name="week" size="4" Class="form-s" multiple="multiple">--%>
+<%--                    <c:forEach var="time" items="${times}">--%>
+<%--                        <option value="${time}">${time}</option>--%>
+<%--                    </c:forEach>--%>
+<%--                </select>--%>
+                <form:select path="times" cssClass="form-select-lg" multiple="multiple">
                     <c:forEach var="time" items="${times}">
-                        <option value="${time}">${time}</option>
+                        <form:option value="${time}"/>
                     </c:forEach>
-                </select>
+                </form:select>
             </div>
             <br><br>
             <button type="submit" class="btn">Сохранить изменения</button>
