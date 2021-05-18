@@ -21,7 +21,7 @@ public class EventDTO {
     private LocalDate date;
 
     //time of the event
-    @DateTimeFormat(pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime time;
 
     //type of the manipulation

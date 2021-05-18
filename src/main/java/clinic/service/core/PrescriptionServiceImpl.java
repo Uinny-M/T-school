@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, PrescriptionDTO,
         PrescriptionDao, PrescriptionMapper> implements PrescriptionService {
-    @Autowired
+
     private final CaseService caseService;
     @Autowired
     public PrescriptionServiceImpl(PrescriptionDao dao, PrescriptionMapper mapper, CaseService caseService) {

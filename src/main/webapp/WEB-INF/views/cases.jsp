@@ -26,7 +26,8 @@
         <h3>Карточка пациента</h3>
         <sec:authorize access="hasRole('ROLE_DOCTOR')">
             <form:form action="${pageContext.request.contextPath}/cases/${patientId}/add" cssClass="form" method="post">
-                <input type="text" class="form-s" name="diagnosis" style="float: left" placeholder="Диагноз" value="${diagnosis}"/>
+                <input type="text" class="form-s" name="diagnosis" style="float: left" placeholder="Диагноз"
+                       value="${diagnosis}"/>
                 <button type="submit" class="btn" style="margin-left: 20px;">Новый страховой случай</button>
             </form:form>
         </sec:authorize>
@@ -34,33 +35,32 @@
         <br><br>
 
         <table class="table table-striped table-bordered">
-        <thead>
-        <tr>
-            <th colspan="5">Список страховых случаев</th>
-        </tr>
-        <tr>
-            <th width="30%">ФИО пациента</th>
-            <th width="25%">Фамилия врача</th>
-            <th width="25%">Диагноз</th>
-            <th width="10%">Дата начала</th>
-            <th width="10%">Дата окончания</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${cases}" var="c">
+            <thead>
             <tr>
-                <td>
-                    <a href="${pageContext.request.contextPath}/cases/${c.patient.id}/update/${c.id}">${c.patient.secondName} ${c.patient.firstName} ${c.patient.middleName}</a>
-
-                </td>
-                <td>${c.doctor.secondName} ${c.doctor.firstName}</td>
-                <td>${c.diagnosis}</td>
-                <td>${c.startDate}</td>
-                <td>${c.endDate}</td>
+                <th colspan="5">Список страховых случаев</th>
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+            <tr>
+                <th width="30%">ФИО пациента</th>
+                <th width="25%">Врач</th>
+                <th width="25%">Диагноз</th>
+                <th width="10%">Дата начала</th>
+                <th width="10%">Дата окончания</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${cases}" var="c">
+                <tr>
+                    <td>
+                        <a href="${pageContext.request.contextPath}/cases/${c.patient.id}/update/${c.id}">${c.patient.secondName} ${c.patient.firstName} ${c.patient.middleName}</a>
+                    </td>
+                    <td>${c.doctor.secondName} ${c.doctor.firstName}</td>
+                    <td>${c.diagnosis}</td>
+                    <td>${c.startDate}</td>
+                    <td>${c.endDate}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </div><!--/.content-->
 </div><!-- /.container -->
 <jsp:include page="help/footer.jsp"></jsp:include>
@@ -73,6 +73,7 @@
         background-color: #28a347;
         color: #efffe9;
     }
+
     /*Content*/
     .content {
         background-color: #fff;

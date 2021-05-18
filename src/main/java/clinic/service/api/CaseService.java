@@ -11,6 +11,8 @@ import java.util.List;
  * CRUD for case from AbstractService
  * Get list of cases by patient
  * Close the case
+ * create a new case
+ * update the existing case
  */
 public interface CaseService extends AbstractService<Case, CaseDTO>{
     /**
@@ -25,13 +27,17 @@ public interface CaseService extends AbstractService<Case, CaseDTO>{
      */
     void closeCase(Long caseId);
 
-//    /**
-//     * create new case or update existing
-//     * @param caseDTO case's data
-//     */
-//    CaseDTO createOrUpdate(CaseDTO caseDTO);
-
+    /**
+     * create a new case
+     * @param diagnosis patient's diagnosis
+     * @param patientId patient's id
+     */
     CaseDTO createCase(String diagnosis, Integer patientId);
 
+    /**
+     * update the existing case
+     * @param diagnosis patient's diagnosis
+     * @param caseId case's id
+     */
     CaseDTO updateCase(String diagnosis, Long caseId);
 }
