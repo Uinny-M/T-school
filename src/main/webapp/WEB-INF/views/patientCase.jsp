@@ -84,7 +84,7 @@
             <c:forEach items="${prescription}" var="p">
                 <tr>
                     <td>
-                        <a href="${pageContext.request.contextPath}/prescription/case/${caseId}/update">
+                        <a href="${pageContext.request.contextPath}/prescription/case/${caseId}/add">
                                 ${p.manipulation.title}</a>
                     </td>
                     <td>${p.duration} дн.</td>

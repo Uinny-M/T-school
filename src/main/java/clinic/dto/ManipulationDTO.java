@@ -15,7 +15,7 @@ public class ManipulationDTO {
     private String title;
 
     //type of manipulation
-    private String type;
+    private ManipulationType type;
 
     //is the manipulation deleted
     private boolean isDeleted;
@@ -36,11 +36,11 @@ public class ManipulationDTO {
         this.title = title;
     }
 
-    public String getType() {
+    public ManipulationType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ManipulationType type) {
         this.type = type;
     }
 

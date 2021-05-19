@@ -10,4 +10,9 @@ import java.util.List;
  * CRUD for manipulation from AbstractService
  */
 public interface ManipulationService extends AbstractService<Manipulation, ManipulationDTO> {
+    /**
+     * Get Manipulation by title
+     * @param title manipulation's title
+     */
+    ManipulationDTO getOneByTitle(String title);
 }

@@ -3,6 +3,7 @@ package clinic.service.core;
 import clinic.dao.api.ManipulationDao;
 import clinic.dto.ManipulationDTO;
 import clinic.entities.Manipulation;
+import clinic.entities.enums.ManipulationType;
 import clinic.mappers.ManipulationMapper;
 import clinic.service.api.ManipulationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,5 +15,10 @@ public class ManipulationServiceImpl extends AbstractServiceImpl<Manipulation, M
     @Autowired
     public ManipulationServiceImpl(ManipulationDao dao, ManipulationMapper mapper) {
         super(dao, mapper);
+    }
+
+    @Override
+    public ManipulationDTO getOneByTitle(String title) {
+        return mapToDTO(dao.findById(Byte.parseByte(title)));
     }
 }

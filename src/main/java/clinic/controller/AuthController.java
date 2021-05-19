@@ -16,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class AuthController {
     @RequestMapping(value = "/login", method = {RequestMethod.POST, RequestMethod.GET})
-    public String login(@RequestParam(value = "error", required = false)String error,
+    public String login(@RequestParam(value = "error", required = false) String error,
                         Model model) {
         String errorMessage = null;
-        if(error != null) {
+        if (error != null) {
             errorMessage = "Неверный логин или пароль";
         }
         model.addAttribute("errorMessage", errorMessage);

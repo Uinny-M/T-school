@@ -3,6 +3,7 @@ package clinic.dto;
 import clinic.entities.enums.Weekday;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -26,7 +27,7 @@ public class PrescriptionDTO {
     private byte duration;
 
     //select weekdays for manipulation
-    private Set<String> weekdays;
+    private Set<DayOfWeek> weekdays;
 
     //select time for manipulation
     @DateTimeFormat(pattern = "HH:mm:ss")
@@ -79,11 +80,27 @@ public class PrescriptionDTO {
         this.manipulation = manipulation;
     }
 
-    public Set<String> getWeekdays() {
+    public String getManipulationTitle() {
+        return manipulationTitle;
+    }
+
+    public void setManipulationTitle(String manipulationTitle) {
+        this.manipulationTitle = manipulationTitle;
+    }
+
+    public byte getDuration() {
+        return duration;
+    }
+
+    public void setDuration(byte duration) {
+        this.duration = duration;
+    }
+
+    public Set<DayOfWeek> getWeekdays() {
         return weekdays;
     }
 
-    public void setWeekdays(Set<String> weekdays) {
+    public void setWeekdays(Set<DayOfWeek> weekdays) {
         this.weekdays = weekdays;
     }
 
@@ -93,14 +110,6 @@ public class PrescriptionDTO {
 
     public void setTimes(Set<String> times) {
         this.times = times;
-    }
-
-    public byte getDuration() {
-        return duration;
-    }
-
-    public void setDuration(byte duration) {
-        this.duration = duration;
     }
 
     public String getSchedule() {
@@ -133,22 +142,6 @@ public class PrescriptionDTO {
 
     public void setDosage(String dosage) {
         this.dosage = dosage;
-    }
-
-    public boolean isDeleted() {
-        return isClosed;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isClosed = deleted;
-    }
-
-    public String getManipulationTitle() {
-        return manipulationTitle;
-    }
-
-    public void setManipulationTitle(String manipulationTitle) {
-        this.manipulationTitle = manipulationTitle;
     }
 
     public boolean isClosed() {

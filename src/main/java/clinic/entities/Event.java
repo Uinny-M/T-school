@@ -50,7 +50,7 @@ public class Event {
     private Prescription prescription;
 
     //status of event (planned/completed/canceled/failed)
-    @Column(name = "status", columnDefinition = "planned")
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private EventStatus status;
 
