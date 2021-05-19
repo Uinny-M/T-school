@@ -77,6 +77,21 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
         return prescriptionDTO;
     }
 
+    @Transactional
+    @Override
+    public void prescriptionCancel(Long prescriptionId) {
+        PrescriptionDTO prescription = getOneById(prescriptionId);
+        prescription.setClosed(true);
+        dao.update(mapToEntity(prescription));
+
+        eventService.getAllByPrescriptionId(prescriptionId).forEach(eventDTO -> {
+            LocalDate now = LocalDate.now();
+            if (eventDTO.getDate().isAfter(now.minusDays(1))) {
+                eventService.eventCancel(eventDTO.getId(), "по решению врача");
+            }
+        });
+    }
+
     private List<LocalDate> dayPattern(Set<DayOfWeek> days, byte duration) {
         List<LocalDate> dayPattern = new ArrayList<>();
         LocalDate date = LocalDate.now().plusDays(1);
@@ -100,6 +115,4 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
         times.forEach(t -> timePattern.add(LocalTime.parse(t, formatter)));
         return timePattern;
     }
-
-
 }

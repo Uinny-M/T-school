@@ -92,6 +92,14 @@
                     <td>
                         <c:if test="${p.closed}">Завершено</c:if>
                         <c:if test="${not p.closed}">Выполняется</c:if>
+                        <sec:authorize access="hasRole('ROLE_DOCTOR')">
+                            <c:if test="${not p.closed}">
+                                <button class="btn">
+                                    <a href="${pageContext.request.contextPath}/prescription/cancel/${p.id}"
+                                       style="color: #efffe9">Отменить</a>
+                                </button>
+                            </c:if>
+                        </sec:authorize>
                     </td>
                 </tr>
             </c:forEach>

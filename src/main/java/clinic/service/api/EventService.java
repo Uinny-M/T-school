@@ -48,6 +48,13 @@ public interface EventService extends AbstractService<Event, EventDTO> {
     List<EventDTO> getAllByCaseId(Long caseId);
 
     /**
+     * Get list of events by prescription's Id
+     *
+     * @param prescriptionId case's id
+     */
+    List<EventDTO> getAllByPrescriptionId(Long prescriptionId);
+
+    /**
      * Get list of planned events by case's id
      *
      * @param caseId case's id

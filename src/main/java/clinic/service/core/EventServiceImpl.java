@@ -59,6 +59,11 @@ public class EventServiceImpl extends AbstractServiceImpl<Event, EventDTO, Event
     }
 
     @Transactional
+    public List<EventDTO> getAllByPrescriptionId(Long prescriptionId) {
+        return mapToDTO(dao.findAllByPrescriptionId(prescriptionId));
+    }
+
+    @Transactional
     public List<EventDTO> getEventsPlannedByCaseId(Long caseId) {
         return getAllByCaseId(caseId).stream()
                 .filter(eventDTO -> eventDTO.getStatus().equals("planned"))

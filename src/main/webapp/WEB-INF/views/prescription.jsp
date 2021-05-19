@@ -62,7 +62,7 @@
 <%--                        <option value="${time}">${time}</option>--%>
 <%--                    </c:forEach>--%>
 <%--                </select>--%>
-                <form:select path="times" cssClass="form-select-lg" multiple="multiple">
+                <form:select path="times" cssClass="form-select-lg" multiple="multiple" size="10">
                     <c:forEach var="time" items="${times}">
                         <form:option value="${time}"/>
                     </c:forEach>

@@ -57,7 +57,7 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
 
         prescriptionDao.findAllByCaseId(caseId).forEach(prescription -> {
                     if (!prescription.isClosed()) {
-                        prescription.setDeleted(true);
+                        prescription.setClosed(true);
                         prescriptionDao.update(prescription);
                     }
                 }

@@ -51,4 +51,12 @@ public class EventDaoImpl extends AbstractHibernateDao<Event> implements EventDa
                 .setParameter("caseId", caseId)
                 .getResultList();
     }
+
+    @Override
+    public List<Event> findAllByPrescriptionId(Long prescriptionId) {
+        return em.createQuery(
+                "SELECT e FROM Event e WHERE e.prescription.id = :prescriptionId ORDER BY e.time desc ")
+                .setParameter("prescriptionId", prescriptionId)
+                .getResultList();
+    }
 }

@@ -42,4 +42,10 @@ public interface EventDao extends AbstractDao<Event> {
      * @param caseId case's id
      */
     List<Event> findAllByCaseId(Long caseId);
+
+    /**
+     * Get list of events by prescription's Id
+     * @param prescriptionId prescription's Id
+     */
+    List<Event> findAllByPrescriptionId(Long prescriptionId);
 }

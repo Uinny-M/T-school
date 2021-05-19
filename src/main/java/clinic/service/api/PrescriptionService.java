@@ -26,8 +26,14 @@ public interface PrescriptionService extends AbstractService<Prescription, Presc
 
     /**
      * Create new prescription
-     * @param prescriptionDTO prescription's data //todo
+     * @param prescriptionDTO prescription's data
      * @param caseId case's id
      */
     PrescriptionDTO createPrescription(PrescriptionDTO prescriptionDTO, Long caseId);
+
+    /**
+     * Cancel the prescription by prescriptionId
+     * @param prescriptionId prescription's idd
+     */
+    void prescriptionCancel(Long prescriptionId);
 }
