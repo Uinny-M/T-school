@@ -67,7 +67,6 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
             LocalDate now = LocalDate.now();
                 if (eventDTO.getDate().isAfter(now.minusDays(1))) {
                 eventService.eventCancel(eventDTO.getId(), "по решению врача");
-                eventService.update(eventDTO);
             }
         });
     }

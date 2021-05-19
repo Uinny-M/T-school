@@ -57,10 +57,13 @@
             <button type="button" class="btn">
                 <a href="${pageContext.request.contextPath}/cases/close/${caseId}"
                    style="color: #efffe9">Закрыть больничный</a></button>
-
             <button class="btn">
                 <a href="${pageContext.request.contextPath}/prescription/case/${caseId}/add"
                    style="color: #efffe9">Новое назначение</a>
+            </button>
+            <button class="btn">
+                <a href="http://localhost:8080/T_school_war_exploded/event/${patientId}"
+                   style="color: #efffe9">Процедурный лист</a>
             </button>
         </sec:authorize>
 
