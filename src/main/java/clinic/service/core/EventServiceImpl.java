@@ -24,8 +24,18 @@ public class EventServiceImpl extends AbstractServiceImpl<Event, EventDTO, Event
     }
 
     @Transactional
+    public List<EventDTO> getAllEvents() {
+        List<EventDTO> events = mapToDTO(dao.findAll());
+        checkEventFailed(events);
+        return events;
+    }
+
+
+    @Transactional
     public List<EventDTO> getAllByPatientId(Integer patientId) {
-        return mapToDTO(dao.findAllByPatientId(patientId));
+        List<EventDTO> events = mapToDTO(dao.findAllByPatientId(patientId));
+        checkEventFailed(events);
+        return events;
     }
 
     @Transactional
@@ -43,7 +53,9 @@ public class EventServiceImpl extends AbstractServiceImpl<Event, EventDTO, Event
 
     @Transactional
     public List<EventDTO> getAllByCaseId(Long caseId) {
-        return mapToDTO(dao.findAllByCaseId(caseId));
+        List<EventDTO> events = mapToDTO(dao.findAllByCaseId(caseId));
+        checkEventFailed(events);
+        return events;
     }
 
     @Transactional
@@ -66,5 +78,15 @@ public class EventServiceImpl extends AbstractServiceImpl<Event, EventDTO, Event
         eventDTO.setStatus(EventStatus.CANCELED.getDescription());
         eventDTO.setComment(comment);
         dao.update(mapToEntity(eventDTO));
+    }
+
+    private void checkEventFailed(List<EventDTO> events) {
+        events.forEach(eventDTO -> {
+            if (eventDTO.getStatus().equals(EventStatus.PLANNED.getDescription())
+                    && eventDTO.getDate().isBefore(LocalDate.now().minusDays(1))) {
+                eventDTO.setStatus(EventStatus.FAILED.getDescription());
+                dao.update(mapToEntity(eventDTO));
+            }
+        });
     }
 }

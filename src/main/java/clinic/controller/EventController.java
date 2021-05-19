@@ -30,7 +30,7 @@ public class EventController {
     @GetMapping(value = "/")
     public ModelAndView getEvents() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("events", eventService.getAll());
+        modelAndView.addObject("events", eventService.getAllEvents());
         modelAndView.addObject("comment", new String());
         modelAndView.setViewName("events");
         return modelAndView;

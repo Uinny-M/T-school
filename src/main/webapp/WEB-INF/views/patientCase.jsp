@@ -77,7 +77,7 @@
                 <th width="25%">Тип манипуляции</th>
                 <th width="25%">Продолжительность</th>
                 <th width="25%">Лекарство</th>
-                <th width="25%">Диагноз</th>
+                <th width="25%">Статус назначения</th>
             </tr>
             </thead>
             <tbody>
@@ -89,7 +89,10 @@
                     </td>
                     <td>${p.duration} дн.</td>
                     <td>${p.dosage} ${p.drug}</td>
-                    <td>${p.patientCase.diagnosis}</td>
+                    <td>
+                        <c:if test="${p.closed}">Завершено</c:if>
+                        <c:if test="${not p.closed}">Выполняется</c:if>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

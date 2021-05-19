@@ -25,6 +25,12 @@ public interface EventService extends AbstractService<Event, EventDTO> {
     List<EventDTO> getAllByPatientId(Integer patientId);
 
     /**
+     * Get list of all events with check failed events
+     *
+     */
+    List<EventDTO> getAllEvents();
+
+    /**
      * Get list of events for today
      */
     List<EventDTO> getAllEventsToday();
