@@ -32,7 +32,7 @@
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Начало</b>
-                <form:input cssClass="form-s" disabled="true" readonly="true" type="data" path="startDate"/>
+                <form:input cssClass="form-s"  disabled="true" readonly="true" type="data" path="startDate"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Окончание</b>
@@ -83,10 +83,7 @@
             <tbody>
             <c:forEach items="${prescription}" var="p">
                 <tr>
-                    <td>
-                        <a href="${pageContext.request.contextPath}/prescription/case/${caseId}/add">
-                                ${p.manipulation.title}</a>
-                    </td>
+                    <td>${p.manipulation.title}</td>
                     <td>${p.duration} дн.</td>
                     <td>${p.dosage} ${p.drug}</td>
                     <td>
@@ -118,6 +115,9 @@
         color: #efffe9;
     }
 
+    .fix {
+        background: #efffe9;
+    }
     /*Content*/
     .content {
         background-color: #fff;
