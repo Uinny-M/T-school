@@ -10,7 +10,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta/>
-    <link href="css/t.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/assets/css/t.css" rel="stylesheet" type="text/css">
     <title>Пациенты</title>
 </head>
 <body>
@@ -46,7 +46,7 @@
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">№ страховки</b>
-                <form:input cssClass="form-s" path="insurance"/>
+                <form:input cssClass="form-s form-notactiv" disabled="true" path="insurance"/>
             </div>
             <br>
             <sec:authorize access="hasRole('ROLE_DOCTOR')">
@@ -54,14 +54,16 @@
             </sec:authorize>
         </form:form>
         <br>
-        <botton class="btn" style="margin: 10px">
-            <a href="http://localhost:8080/T_school_war_exploded/cases/${patient.id}" style="color: #efffe9">Карточка пациента</a>
-        </botton>
-        <botton class="btn">
-            <a href="http://localhost:8080/T_school_war_exploded/event/${patient.id}" style="color: #efffe9">Процедурный лист</a>
-        </botton>
-
-
+        <c:if test="${not empty patient.id}">
+            <botton class="btn" style="margin: 10px">
+                <a href="http://localhost:8080/T_school_war_exploded/cases/${patient.id}" style="color: #efffe9">Карточка
+                    пациента</a>
+            </botton>
+            <botton class="btn">
+                <a href="http://localhost:8080/T_school_war_exploded/event/${patient.id}" style="color: #efffe9">Процедурный
+                    лист</a>
+            </botton>
+        </c:if>
     </div>
 </div>
 <jsp:include page="help/footer.jsp"></jsp:include>
@@ -70,71 +72,8 @@
 
 <style>
     /*Menu*/
-  .vertical-menu a.menu-patient{
-      background-color: #28a347;
-      color: #efffe9;
-  }
-    /*Content*/
-    .content {
-        background-color: #fff;
-        height: auto;
-        width: auto;
-        right: 0;
-        display: block;
-        /*margin: 0px;*/
-        padding: 20px;
-        list-style: none;
-        position: absolute;
-        left: 200px;
-        bottom: 55px;
-        top: 165px;
-        overflow-y: scroll;
-    }
-    /*Form-search*/
-    .content .btn {
-        font-size: 14px;
-        height: 30px;
-        color: #fff;
-        background: #28a347;
-        border-radius: 15px;
-        padding: 5px 25px;
-        border: none;
-        text-transform: capitalize;
-        transition: all 0.5s ease 0s;
-    }
-    .form {
-        width: 100%;
-        height: auto;
-        display: block;
-        margin: 10px;
-        text-transform: capitalize;
-    }
-
-
-    .form-group-search {
-        float: left;
-        margin-left: 10px;
-        margin-top: 10px;
-        display: inline;
-    }
-    .row {
-        margin-top: 20px;
-    }
-    .form-s {
-        background-color: #f9e9ff;
-        width: 300px;
-        border: 1px solid #28a347;
-    }
-    .form b {
-        font-size: 17px;
-        color: #28a347;
-        transition: all 0.5s ease 0s;
-    }
-    /*Table*/
-    .table {
-        background-color: #efffe9;
-    }
-    .table :active {
-        background-color: #efffe9;
+    .vertical-menu a.menu-patient {
+        background-color: #28a347;
+        color: #efffe9;
     }
 </style>

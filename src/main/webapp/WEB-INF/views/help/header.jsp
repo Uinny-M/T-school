@@ -45,61 +45,7 @@
                         <a href="${pageContext.request.contextPath}/logout" class="menu-index">
                             Выход</a>
                     </sec:authorize>
-
             </button>
-
         </div>
-
     </div>
 </header>
-
-
-<style>
-    .header {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 165px;
-        line-height: 25px;
-        background-color: #efffe9;
-        border-bottom: 3px solid #28a347;
-    }
-
-    .row-logo {
-        display: flex;
-        flex: 1;
-        height: 16.5rem;
-        line-height: 50px;
-        color: #28a347;
-    }
-
-    .col-lg-1 {
-        min-width: 200px;
-        max-width: 200px;
-    }
-
-    .col-lg-2 {
-        text-align: center;
-        height: 16.5rem;
-        flex: 1;
-        min-width: 300px;
-        overflow: hidden;
-    }
-
-    .col-lg-3 {
-        text-align: center;
-        min-width: 200px;
-        max-width: 200px;
-    }
-
-    .col-lg-3 .btn {
-        font-size: 14px;
-        color: #fff;
-        background: #28a347;
-        border-radius: 30px;
-        border: none;
-        text-transform: capitalize;
-        transition: all 0.5s ease 0s;
-        margin-top: -30px;
-    }
-</style>
