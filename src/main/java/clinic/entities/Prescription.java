@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 /**
  * Entity prescription
@@ -43,16 +42,6 @@ public class Prescription {
     //duration of manipulation (number of days)
     @Column(name = "duration", nullable = false)
     private byte duration;
-
-//    //select weekdays for manipulation
-//    @Column(name = "weekday")
-//    @Enumerated(EnumType.ORDINAL)
-//    private Weekday weekday;
-//
-//    //select time for manipulation
-//    @Column(name = "time")
-//    @Enumerated(EnumType.ORDINAL)
-//    private Times times;
 
     //how many times a day
     @Column(name = "daily_chart", nullable = false)
@@ -135,11 +124,11 @@ public class Prescription {
         this.dosage = dosage;
     }
 
-    public boolean isDeleted() {
+    public boolean isClosed() {
         return isClosed;
     }
 
-    public void setDeleted(boolean deleted) {
-        isClosed = deleted;
+    public void setClosed(boolean closed) {
+        isClosed = closed;
     }
 }

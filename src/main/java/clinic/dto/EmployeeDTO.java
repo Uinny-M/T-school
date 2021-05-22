@@ -88,14 +88,6 @@ public class EmployeeDTO {
         this.password = password;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
-
     public String getRole() {
         return role;
     }

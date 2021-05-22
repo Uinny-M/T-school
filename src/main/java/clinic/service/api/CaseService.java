@@ -32,7 +32,7 @@ public interface CaseService extends AbstractService<Case, CaseDTO>{
      * @param diagnosis patient's diagnosis
      * @param patientId patient's id
      */
-    CaseDTO createCase(String diagnosis, Integer patientId);
+    void createCase(String diagnosis, Integer patientId);
 
     /**
      * update the existing case

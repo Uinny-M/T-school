@@ -2,8 +2,8 @@ package clinic.dao.core;
 
 import clinic.dao.api.EventDao;
 import clinic.entities.Event;
+import clinic.entities.enums.EventStatus;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,7 +18,8 @@ public class EventDaoImpl extends AbstractHibernateDao<Event> implements EventDa
     @Override
     public List<Event> findAllByDate(LocalDate date) {
         return em.createQuery(
-                "SELECT e FROM Event e WHERE e.date = :date AND e.status = 1 ")
+                "SELECT e FROM Event e WHERE e.date = :date AND e.status = :status ")
+                .setParameter("status", EventStatus.PLANNED)
                 .setParameter("date", date)
                 .getResultList();
     }
@@ -36,9 +37,10 @@ public class EventDaoImpl extends AbstractHibernateDao<Event> implements EventDa
     public List<Event> findAllByDateTime(LocalDate date, LocalTime starttime, LocalTime endtime) {
         return em.createQuery(
                 "SELECT e FROM Event e WHERE e.date = :date " +
-                        " AND e.time < :endtime AND e.time > :starttime AND e.status = 1 " +
+                        " AND e.time < :endtime AND e.time > :starttime AND e.status = :status " +
                         " ORDER BY e.time DESC ")
                 .setParameter("date", date)
+                .setParameter("status", EventStatus.PLANNED)
                 .setParameter("starttime", starttime)
                 .setParameter("endtime", endtime)
                 .getResultList();

@@ -1,26 +1,16 @@
 package clinic.service.core;
 
 import clinic.dao.api.AbstractDao;
-import clinic.dto.EmployeeDTO;
 import clinic.mappers.AbstractMapper;
 import clinic.service.api.AbstractService;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.NoResultException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
 public abstract class AbstractServiceImpl<T, DTO, Dao extends AbstractDao, Mapper extends AbstractMapper>
-        implements AbstractService<T,DTO> {
+        implements AbstractService<T, DTO> {
 
 
     protected final Dao dao;
@@ -57,16 +47,6 @@ public abstract class AbstractServiceImpl<T, DTO, Dao extends AbstractDao, Mappe
         return mapToDTO((T) dao.update(mapToEntity(dto)));
     }
 
-//    @Transactional
-//    @Override
-//    public DTO createOrUpdate(DTO dto) {
-//        if (getAll().contains(dto)) {
-//            update(dto);
-//        }
-//        else create(dto);
-//        return dto;
-//    }
-
     @Override
     @Transactional
     public void delete(DTO dto) {
@@ -80,9 +60,9 @@ public abstract class AbstractServiceImpl<T, DTO, Dao extends AbstractDao, Mappe
     }
 
     @Override
-    public DTO mapToDTO(T entity){
+    public DTO mapToDTO(T entity) {
 
-    return (DTO) mapper.mapEntityToDto(entity);
+        return (DTO) mapper.mapEntityToDto(entity);
     }
 
     @Override
@@ -91,8 +71,8 @@ public abstract class AbstractServiceImpl<T, DTO, Dao extends AbstractDao, Mappe
     }
 
     @Override
-    public T mapToEntity(DTO dto){
-       return (T) mapper.mapDtoToEntity(dto);
+    public T mapToEntity(DTO dto) {
+        return (T) mapper.mapDtoToEntity(dto);
     }
 
     @Override

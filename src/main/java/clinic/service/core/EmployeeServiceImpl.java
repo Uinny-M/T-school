@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 public class EmployeeServiceImpl extends AbstractServiceImpl<Employee, EmployeeDTO, EmployeeDao, EmployeeMapper> implements EmployeeService {
     @Autowired
@@ -19,7 +17,7 @@ public class EmployeeServiceImpl extends AbstractServiceImpl<Employee, EmployeeD
     }
 
     @Transactional
-    public EmployeeDTO getEmployeeByUsername(String username){
+    public EmployeeDTO getEmployeeByUsername(String username) {
         return mapToDTO(dao.findByUsername(username).get(0));
     }
 }

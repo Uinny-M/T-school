@@ -1,10 +1,8 @@
 package clinic.dto;
 
-import clinic.entities.enums.Weekday;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.Set;
 
 public class PrescriptionDTO {
@@ -30,11 +28,7 @@ public class PrescriptionDTO {
     private Set<DayOfWeek> weekdays;
 
     //select time for manipulation
-    @DateTimeFormat(pattern = "HH:mm:ss")
     private Set<String> times;
-
-    // manipulation's schedule
-    private String schedule;
 
     //how many times a day
     private byte dailyChart;
@@ -84,10 +78,6 @@ public class PrescriptionDTO {
         return manipulationTitle;
     }
 
-    public void setManipulationTitle(String manipulationTitle) {
-        this.manipulationTitle = manipulationTitle;
-    }
-
     public byte getDuration() {
         return duration;
     }
@@ -100,24 +90,8 @@ public class PrescriptionDTO {
         return weekdays;
     }
 
-    public void setWeekdays(Set<DayOfWeek> weekdays) {
-        this.weekdays = weekdays;
-    }
-
     public Set<String> getTimes() {
         return times;
-    }
-
-    public void setTimes(Set<String> times) {
-        this.times = times;
-    }
-
-    public String getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(String schedule) {
-        this.schedule = schedule;
     }
 
     public byte getDailyChart() {

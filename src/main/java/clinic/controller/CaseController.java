@@ -2,8 +2,6 @@ package clinic.controller;
 
 import clinic.dto.CaseDTO;
 import clinic.service.api.CaseService;
-import clinic.service.api.EmployeeService;
-import clinic.service.api.PatientService;
 import clinic.service.api.PrescriptionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +13,11 @@ import org.springframework.web.servlet.view.RedirectView;
 public class CaseController {
     private final CaseService caseService;
     private final PrescriptionService prescriptionService;
-    private final EmployeeService employeeService;
-    private final PatientService patientService;
 
-    public CaseController(CaseService caseService, PrescriptionService prescriptionService, EmployeeService employeeService, PatientService patientService) {
+
+    public CaseController(CaseService caseService, PrescriptionService prescriptionService) {
         this.caseService = caseService;
         this.prescriptionService = prescriptionService;
-        this.employeeService = employeeService;
-        this.patientService = patientService;
     }
 
     //Return all cases by PatientId
@@ -59,7 +54,7 @@ public class CaseController {
 
     // Close the case by Case's id
     @RequestMapping(value = "/close/{caseId}", method = {RequestMethod.GET, RequestMethod.POST})
-        public RedirectView closeCase(@PathVariable Long caseId) {
+    public RedirectView closeCase(@PathVariable Long caseId) {
         caseService.closeCase(caseId);
         String url = "/T_school_war_exploded/cases/"
                 + caseService.getOneById(caseId).getPatient().getId();

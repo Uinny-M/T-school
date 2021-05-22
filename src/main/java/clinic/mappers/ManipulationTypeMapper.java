@@ -4,7 +4,7 @@ import clinic.entities.enums.ManipulationType;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-@Mapper (componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ManipulationTypeMapper {
     default String mapEnumToString(ManipulationType entity) {
         if (entity != null) {

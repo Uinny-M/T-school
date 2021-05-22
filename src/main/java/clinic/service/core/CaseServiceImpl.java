@@ -5,7 +5,6 @@ import clinic.dao.api.PrescriptionDao;
 import clinic.dto.CaseDTO;
 import clinic.dto.EmployeeDTO;
 import clinic.entities.Case;
-import clinic.entities.enums.EventStatus;
 import clinic.mappers.CaseMapper;
 import clinic.service.api.CaseService;
 import clinic.service.api.EmployeeService;
@@ -65,14 +64,14 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
 
         eventService.getAllByCaseId(caseId).forEach(eventDTO -> {
             LocalDate now = LocalDate.now();
-                if (eventDTO.getDate().isAfter(now.minusDays(1))) {
+            if (eventDTO.getDate().isAfter(now.minusDays(1))) {
                 eventService.eventCancel(eventDTO.getId(), "по решению врача");
             }
         });
     }
 
     @Transactional
-    public CaseDTO createCase(String diagnosis, Integer patientId) {
+    public void createCase(String diagnosis, Integer patientId) {
         CaseDTO caseDTO = new CaseDTO();
         caseDTO.setDoctor(getCurrentUser());
         caseDTO.setPatient(patientService.getOneById(patientId));
@@ -83,7 +82,6 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
             caseDTO.setDiagnosis("Не установлен");
         }
         dao.save(mapToEntity(caseDTO));
-        return caseDTO;
     }
 
     @Transactional

@@ -1,8 +1,6 @@
 package clinic.controller;
 
 import clinic.dto.PatientDTO;
-import clinic.service.api.CaseService;
-import clinic.service.api.EmployeeService;
 import clinic.service.api.PatientService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +24,11 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping(value = "/patient")
 public class PatientController {
     private final PatientService patientService;
-    private final CaseService caseService;
-    private final EmployeeService employeeService;
+
 
     @Autowired
-    public PatientController(PatientService patientService, CaseService caseService, EmployeeService employeeService) {
+    public PatientController(PatientService patientService) {
         this.patientService = patientService;
-        this.caseService = caseService;
-        this.employeeService = employeeService;
     }
 
     //Return Patient by ID

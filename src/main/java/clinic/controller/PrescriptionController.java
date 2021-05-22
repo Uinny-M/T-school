@@ -1,17 +1,10 @@
 package clinic.controller;
 
-import clinic.dto.EventDTO;
-import clinic.dto.ManipulationDTO;
 import clinic.dto.PrescriptionDTO;
-import clinic.entities.enums.EventStatus;
-import clinic.entities.enums.Weekday;
 import clinic.service.api.CaseService;
 import clinic.service.api.ManipulationService;
 import clinic.service.api.PrescriptionService;
-
-import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -20,7 +13,6 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 
 @Controller
@@ -35,7 +27,8 @@ public class PrescriptionController {
         this.caseService = caseService;
         this.manipulationService = manipulationService;
     }
-    private static Logger log = Logger.getLogger(PrescriptionController.class.getName());
+
+    private static final Logger log = Logger.getLogger(PrescriptionController.class.getName());
 
     //Return all prescriptions by PatientId
     @GetMapping(value = "/{patientId}")
@@ -59,11 +52,9 @@ public class PrescriptionController {
 
     //Return Prescription by ID
     @GetMapping(value = "/case/{caseId}/add/{prescriptionId}")
-    public ModelAndView getPrescription(@PathVariable("caseId") Long caseId,
-                                        @PathVariable("prescriptionId") Long prescriptionId) {
+    public ModelAndView getPrescriptionById(@PathVariable("prescriptionId") Long prescriptionId) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("prescription", prescriptionService.getOneById(prescriptionId));
-        // modelAndView.addObject("cases", caseService.getAll());
         modelAndView.setViewName("prescription");
         return modelAndView;
     }
@@ -72,7 +63,7 @@ public class PrescriptionController {
     @RequestMapping(value = "/cancel/{prescriptionId}", method = {RequestMethod.GET, RequestMethod.POST})
     public RedirectView prescriptionCancel(@PathVariable("prescriptionId") Long prescriptionId) {
         prescriptionService.prescriptionCancel(prescriptionId);
-        PrescriptionDTO prescriptionDTO =prescriptionService.getOneById(prescriptionId);
+        PrescriptionDTO prescriptionDTO = prescriptionService.getOneById(prescriptionId);
         String url = "/T_school_war_exploded/cases/" + prescriptionDTO.getPatient().getId()
                 + "/update/" + prescriptionDTO.getPatientCase().getId();
         return new RedirectView(url);
@@ -91,7 +82,7 @@ public class PrescriptionController {
     public ModelAndView getPrescription(@PathVariable("caseId") Long caseId) {
         log.info("method getPrescription is started");
         ModelAndView modelAndView = new ModelAndView();
-        List<DayOfWeek>days = new ArrayList<>();
+        List<DayOfWeek> days = new ArrayList<>();
         days.add(DayOfWeek.MONDAY);
         days.add(DayOfWeek.TUESDAY);
         days.add(DayOfWeek.WEDNESDAY);
