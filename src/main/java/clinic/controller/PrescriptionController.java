@@ -4,6 +4,7 @@ import clinic.dto.PrescriptionDTO;
 import clinic.service.api.CaseService;
 import clinic.service.api.ManipulationService;
 import clinic.service.api.PrescriptionService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +22,7 @@ public class PrescriptionController {
     private final PrescriptionService prescriptionService;
     private final CaseService caseService;
     private final ManipulationService manipulationService;
+    private final String ROLE_DOCTOR = "ROLE_DOCTOR";
 
     public PrescriptionController(PrescriptionService prescriptionService, CaseService caseService, ManipulationService manipulationService) {
         this.prescriptionService = prescriptionService;
@@ -35,7 +37,7 @@ public class PrescriptionController {
     public ModelAndView getAllPrescriptionsByPatientId(@PathVariable Integer patientId) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("prescriptions", prescriptionService.getAllByPatientId(patientId));
-        modelAndView.setViewName("prescriptions");
+        modelAndView.setViewName("prescription");
         return modelAndView;
     }
 
@@ -46,7 +48,7 @@ public class PrescriptionController {
         modelAndView.addObject("caseId", caseId);
         modelAndView.addObject("prescriptions", prescriptionService.getAllByCaseId(caseId));
         modelAndView.addObject("patientId", caseService.getOneById(caseId).getPatient().getId());
-        modelAndView.setViewName("prescriptions");
+        modelAndView.setViewName("prescription");
         return modelAndView;
     }
 
@@ -70,6 +72,7 @@ public class PrescriptionController {
     }
 
     //Add new prescription
+    @Secured(value = ROLE_DOCTOR)
     @RequestMapping(value = "/case/{caseId}/add", method = RequestMethod.POST)
     public RedirectView addPrescription(@ModelAttribute PrescriptionDTO prescriptionDTO,
                                         @PathVariable Long caseId) {

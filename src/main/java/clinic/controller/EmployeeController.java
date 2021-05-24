@@ -2,6 +2,7 @@ package clinic.controller;
 
 import clinic.service.api.EmployeeService;
 import clinic.service.api.ManipulationService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class EmployeeController {
     private final EmployeeService employeeService;
     private final ManipulationService manipulationService;
+    private final String ROLE_DOCTOR = "ROLE_DOCTOR";
 
     public EmployeeController(EmployeeService employeeService, ManipulationService manipulationService) {
         this.employeeService = employeeService;
@@ -28,6 +30,7 @@ public class EmployeeController {
     }
 
     //Return all manipulations
+    @Secured(ROLE_DOCTOR)
     @GetMapping(value = "/manipulation")
     public ModelAndView getAllManipulation() {
         ModelAndView modelAndView = new ModelAndView();

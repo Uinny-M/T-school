@@ -4,6 +4,7 @@ import clinic.dto.PatientDTO;
 import clinic.service.api.PatientService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +25,8 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping(value = "/patient")
 public class PatientController {
     private final PatientService patientService;
+    private final String ROLE_DOCTOR = "ROLE_DOCTOR";
+    private final String ROLE_ADMIN = "ROLE_ADMIN";
 
 
     @Autowired
@@ -62,6 +65,7 @@ public class PatientController {
     }
 
     //Add new patient
+    @Secured(value = {ROLE_DOCTOR, ROLE_ADMIN})
     @PostMapping(value = "/add")
     public RedirectView addPatient(@ModelAttribute PatientDTO patientDto) {
         patientService.createOrUpdatePatient(patientDto);

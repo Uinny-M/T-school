@@ -3,6 +3,7 @@ package clinic.controller;
 import clinic.dto.CaseDTO;
 import clinic.service.api.CaseService;
 import clinic.service.api.PrescriptionService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,6 +14,8 @@ import org.springframework.web.servlet.view.RedirectView;
 public class CaseController {
     private final CaseService caseService;
     private final PrescriptionService prescriptionService;
+    private final String ROLE_DOCTOR = "ROLE_DOCTOR";
+
 
 
     public CaseController(CaseService caseService, PrescriptionService prescriptionService) {
@@ -45,6 +48,7 @@ public class CaseController {
     }
 
     //Add a new case
+    @Secured(value = ROLE_DOCTOR)
     @PostMapping(value = "/{patientId}/add")
     public RedirectView addCase(@ModelAttribute CaseDTO caseDTO,
                                 @PathVariable("patientId") Integer patientId) {
@@ -53,6 +57,7 @@ public class CaseController {
     }
 
     // Close the case by Case's id
+    @Secured(value = ROLE_DOCTOR)
     @RequestMapping(value = "/close/{caseId}", method = {RequestMethod.GET, RequestMethod.POST})
     public RedirectView closeCase(@PathVariable Long caseId) {
         caseService.closeCase(caseId);
@@ -62,6 +67,7 @@ public class CaseController {
     }
 
     //update the existing case
+    @Secured(value = ROLE_DOCTOR)
     @PostMapping(value = "/{patientId}/update/{caseId}")
     public RedirectView updateCase(@ModelAttribute CaseDTO caseDTO,
                                    @PathVariable("patientId") Integer patientId,

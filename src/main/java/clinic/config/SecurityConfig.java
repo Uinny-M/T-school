@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 @Configuration
@@ -34,12 +35,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         + " FROM employee WHERE username = ?")
                 .passwordEncoder(passwordEncoder());
     }
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth)
-//            throws Exception {
-//        auth.inMemoryAuthentication().passwordEncoder(passwordEncoder()).withUser("user")
-//                .password(passwordEncoder().encode("123456")).roles("ADMIN");
-//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -63,7 +58,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID")
                 .and().csrf()
-                .and().exceptionHandling().accessDeniedPage("/403");
+                .and().exceptionHandling().accessDeniedPage("/error/403")
+                .authenticationEntryPoint(((request, response, authException) -> {
+                    response.sendError(HttpServletResponse.SC_FORBIDDEN);
+                }))
+        ;
     }
 
     @Bean
