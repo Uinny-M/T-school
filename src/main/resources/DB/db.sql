@@ -7,8 +7,8 @@ create table employee
     middle_name varchar(20)                            null,
     position    varchar(255)                           not null,
     username    varchar(20)                            not null,
-    password    varchar(50) default 'password'         not null,
-    enabled     tinyint(1)  default 0                  not null,
+    password    varchar(255) default 'password'         not null,
+    enabled     tinyint(1)  default 1                  not null,
     role        enum ('ADMIN', 'DOCTOR', 'NURSE') not null
 );
 

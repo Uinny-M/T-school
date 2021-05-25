@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public enum ManipulationType {
     PROCEDURE("Процедура"),
     MEDICAMENT("Лекарство");
@@ -12,5 +12,9 @@ public enum ManipulationType {
 
     public String getDescription() {
         return description;
+    }
+
+    ManipulationType(String description) {
+        this.description = description;
     }
 }

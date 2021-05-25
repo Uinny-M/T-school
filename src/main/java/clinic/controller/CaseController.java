@@ -1,10 +1,12 @@
 package clinic.controller;
 
 import clinic.dto.CaseDTO;
+import clinic.exception.BusinessException;
 import clinic.service.api.CaseService;
 import clinic.service.api.PrescriptionService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -59,8 +61,16 @@ public class CaseController {
     // Close the case by Case's id
     @Secured(value = ROLE_DOCTOR)
     @RequestMapping(value = "/close/{caseId}", method = {RequestMethod.GET, RequestMethod.POST})
-    public RedirectView closeCase(@PathVariable Long caseId) {
-        caseService.closeCase(caseId);
+    public RedirectView closeCase(@PathVariable Long caseId,
+                                  @ModelAttribute(value = "error") String errorMessage) {
+
+        try {
+            caseService.closeCase(caseId);
+        } catch (BusinessException e) {
+            errorMessage = e.getMessage();
+            //todo
+        }
+
         String url = "/T_school_war_exploded/cases/"
                 + caseService.getOneById(caseId).getPatient().getId();
         return new RedirectView(url);

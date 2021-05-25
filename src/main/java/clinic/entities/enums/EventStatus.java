@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public enum EventStatus {
     PLANNED ("Запланировано"),
     COMPLETED("Выполнено"),
@@ -13,5 +13,9 @@ public enum EventStatus {
     private final String description;
     public String getDescription() {
         return description;
+    }
+
+    EventStatus(String description) {
+        this.description = description;
     }
 }
