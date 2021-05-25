@@ -37,5 +37,7 @@ public class RootWebAppInitializer implements WebApplicationInitializer {
         root.register(SecurityConfig.class);
         servletContext.addListener(new ContextLoaderListener(root));
 
+        DispatcherServlet dispatcherServlet = new DispatcherServlet(root);
+        dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
     }
 }
