@@ -13,12 +13,13 @@ public class ExceptionController {
 //        return "error/404";
 //    }
 
-        @RequestMapping("/404")
-        @ResponseStatus(HttpStatus.NOT_FOUND)
+    @GetMapping("/notFound")
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public String notFound() {
         return "/error/404";
     }
-    @RequestMapping("/403")
+
+    @RequestMapping("/forbidden")
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public String forbidden() {
         return "/error/403";
