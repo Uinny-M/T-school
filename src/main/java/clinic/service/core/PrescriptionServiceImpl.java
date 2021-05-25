@@ -68,6 +68,7 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
                 eventDTO.setPatient(prescriptionDTO.getPatient());
                 eventDTO.setPrescription(mapToDTO(prescription));
                 eventDTO.setManipulation(prescriptionDTO.getManipulation());
+                //todo добавить проверку и запуск pop-up
                 eventDTO.setDate(dayPattern.get(i));
                 eventDTO.setTime(timePattern.get(j));
                 eventDTO.setStatus(EventStatus.PLANNED.getDescription());

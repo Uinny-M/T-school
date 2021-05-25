@@ -17,7 +17,7 @@ public class EmployeeDTO {
     //patient's middle name
     private String middleName;
 
-    //type of medical employee (doctor/nurse)
+    //type of medical employee (doctor/nurse/admin)
     private String position;
 
     //login for auth
@@ -26,8 +26,8 @@ public class EmployeeDTO {
     //password for auth
     private String password;
 
-    //is the employee deleted
-    private boolean isDeleted;
+    //is the employee enabled
+    private boolean isEnable;
 
     //employee's role
     private String role;
@@ -94,5 +94,13 @@ public class EmployeeDTO {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isEnable() {
+        return isEnable;
+    }
+
+    public void setEnable(boolean enable) {
+        isEnable = enable;
     }
 }

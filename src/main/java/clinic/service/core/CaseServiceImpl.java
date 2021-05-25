@@ -1,10 +1,12 @@
 package clinic.service.core;
 
+import clinic.controller.PrescriptionController;
 import clinic.dao.api.CaseDao;
 import clinic.dao.api.PrescriptionDao;
 import clinic.dto.CaseDTO;
 import clinic.dto.EmployeeDTO;
 import clinic.entities.Case;
+import clinic.exception.BusinessException;
 import clinic.mappers.CaseMapper;
 import clinic.service.api.CaseService;
 import clinic.service.api.EmployeeService;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,6 +40,8 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
         this.prescriptionDao = prescriptionDao;
     }
 
+    private static final Logger log = Logger.getLogger(PrescriptionController.class.getName());
+
     @Transactional
     public List<CaseDTO> getCasesByPatientId(Integer patientId) {
         return mapToDTO(dao.findCasesByPatientId(patientId));
@@ -50,6 +55,9 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
     @Transactional
     public void closeCase(Long caseId) {
         CaseDTO caseDTO = getOneById(caseId);
+        if (!caseDTO.isOpenCase()){
+            throw new BusinessException("Выбранный страховой случай уже закрыт");//todo проверить
+        }
         caseDTO.setOpenCase(false);
         caseDTO.setEndDate(LocalDate.now());
         dao.update(mapToEntity(caseDTO));

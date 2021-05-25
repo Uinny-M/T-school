@@ -53,6 +53,7 @@ public class EventServiceImpl extends AbstractServiceImpl<Event, EventDTO, Event
 
     @Transactional
     public List<EventDTO> getAllByCaseId(Long caseId) {
+
         List<EventDTO> events = mapToDTO(dao.findAllByCaseId(caseId));
         checkEventFailed(events);
         return events;
