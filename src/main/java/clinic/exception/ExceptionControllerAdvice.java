@@ -10,12 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 
 @ControllerAdvice
 public class ExceptionControllerAdvice {
-    @ExceptionHandler(NoHandlerFoundException.class)
-    public ModelAndView handlerError404(HttpServletRequest request, Exception e) {
-        ModelAndView modelAndView = new ModelAndView("/error/404");
-        modelAndView.addObject("errorcode", "404");
-        return modelAndView;
-    }
+
+
+
+
+//    @ExceptionHandler(NoHandlerFoundException.class)
+//    public ModelAndView handlerError404(HttpServletRequest request, Exception e) {
+//        ModelAndView modelAndView = new ModelAndView("/error/404");
+////        modelAndView.addObject("errorcode", "404");
+//        return modelAndView;
+//    }
 
 //    @ExceptionHandler(NoHandlerFoundException.class)
 //    public ModelAndView handlerError403(HttpServletRequest request, Exception e) {

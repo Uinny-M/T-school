@@ -57,7 +57,7 @@
                     <sec:authorize access="hasRole('ROLE_DOCTOR')">
                         <td>${e.status} ${e.comment}</td>
                     </sec:authorize>
-                    <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')">
+                    <sec:authorize access="hasAnyRole('ROLE_NURSE')">
                         <c:choose>
                             <c:when test="${e.status eq 'Запланировано'}">
                                 <td>

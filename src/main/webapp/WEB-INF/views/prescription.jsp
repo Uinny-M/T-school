@@ -44,11 +44,6 @@
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Дни недели</b>
-<%--                <select name="weekdays" size="7" Class="form-s" multiple="multiple">--%>
-<%--                    <c:forEach var="weekday" items="${week}">--%>
-<%--                        <option value="${weekday}">${weekday}</option>--%>
-<%--                    </c:forEach>--%>
-<%--                </select>--%>
                 <form:select path="weekdays" cssClass="form-select-lg" multiple="multiple" size="7">
                     <c:forEach var="day" items="${days}">
                         <form:option value="${day.name()}"/>

@@ -12,7 +12,7 @@ public enum Weekday {
     THURSDAY,
     FRIDAY,
     SATURDAY,
-    SUNDAY
+    SUNDAY;
 //    MONDAY ("Понедельник"),
 //    TUESDAY ("Вторник"),
 //    WEDNESDAY ("Среда"),
@@ -21,4 +21,7 @@ public enum Weekday {
 //    SATURDAY ("Суббота"),
 //    SUNDAY ("Воскресенье");
 //    private final String description;
+
+
+
 }

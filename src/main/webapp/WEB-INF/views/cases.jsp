@@ -28,11 +28,12 @@
         <sec:authorize access="hasRole('ROLE_DOCTOR')">
             <a href="#demo" class="btn btn-info" data-toggle="collapse">Создать новый страховой случай</a>
             <div id="demo" class="collapse">
-            <form:form action="${pageContext.request.contextPath}/cases/${patientId}/add" cssClass="form" method="post">
-                <input type="text" class="form-s" name="diagnosis" style="float: left" placeholder="Диагноз"
-                       value="${diagnosis}"/>
-                <button type="submit" class="btn" style="margin-left: 20px;">Новый страховой случай</button>
-            </form:form>
+                <form:form action="${pageContext.request.contextPath}/cases/${patientId}/add" cssClass="form"
+                           method="post">
+                    <input type="text" class="form-s" name="diagnosis" style="float: left" placeholder="Диагноз"
+                           value="${diagnosis}"/>
+                    <button type="submit" class="btn" style="margin-left: 20px;">Новый страховой случай</button>
+                </form:form>
             </div>
         </sec:authorize>
 
@@ -44,23 +45,26 @@
                 <th colspan="5">Список страховых случаев</th>
             </tr>
             <tr>
-                <th width="30%">ФИО пациента</th>
-                <th width="25%">Врач</th>
+                <th width="20%">№ страхового случая</th>
+                <th width="15%">Дата начала</th>
+                <th width="15%">Дата окончания</th>
                 <th width="25%">Диагноз</th>
-                <th width="10%">Дата начала</th>
-                <th width="10%">Дата окончания</th>
+                <th width="25%">Врач</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${cases}" var="c">
                 <tr>
                     <td>
-                        <a href="${pageContext.request.contextPath}/cases/${c.patient.id}/update/${c.id}">${c.patient.secondName} ${c.patient.firstName} ${c.patient.middleName}</a>
+                        <a href="${pageContext.request.contextPath}/cases/${c.patient.id}/update/${c.id}">Страховой
+                            случай №${c.id}</a>
                     </td>
-                    <td>${c.doctor.secondName} ${c.doctor.firstName}</td>
-                    <td>${c.diagnosis}</td>
                     <td>${c.startDate}</td>
                     <td>${c.endDate}</td>
+                    <td>${c.diagnosis}</td>
+                    <td>${c.doctor.secondName} ${c.doctor.firstName}</td>
+
+
                 </tr>
             </c:forEach>
             </tbody>

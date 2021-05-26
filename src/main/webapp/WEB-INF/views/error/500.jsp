@@ -19,10 +19,12 @@
 <jsp:include page="../help/header.jsp"></jsp:include>
 <div class="container http-error-container">
     <div class="content-exception">
-        <h1>404</h1>
-        <h2>Страница не найдена</h2>
+
+        <h1>500</h1>
+        <h2>Неведомая бедулька случилась с приложением</h2>
+
         <button type="button" class="btn" style="margin-top: 1px">
-            <a href="${pageContext.request.contextPath}/">
+            <a href="${pageContext.request.contextPath}/" class="menu-index">
                 Вернуться на главную страницу</a>
         </button>
     </div>
@@ -32,8 +34,19 @@
 </html>
 
 <style>
-    .vertical-menu a.menu-index {
-        background-color: #28a347;
-        color: #efffe9;
+    .content-exception {
+        background-color: #fff;
+        height: auto;
+        width: auto;
+        /*right: 0;*/
+        display: block;
+        padding: 20px;
+        list-style: none;
+        position: absolute;
+        /*left: 200px;*/
+        bottom: 55px;
+        top: 165px;
+        overflow-y: auto;
+        text-align: center;
     }
 </style>

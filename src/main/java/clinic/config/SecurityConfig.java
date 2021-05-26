@@ -58,11 +58,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID")
                 .and().csrf()
-                .and().exceptionHandling().accessDeniedPage("/error/403")
-                .authenticationEntryPoint(((request, response, authException) -> {
-                    response.sendError(HttpServletResponse.SC_FORBIDDEN);
-                }))
-        ;
+                .and().exceptionHandling().accessDeniedPage("/error/403");
+//                .authenticationEntryPoint(((request, response, authException) -> {
+//                    response.sendError(HttpServletResponse.SC_FORBIDDEN);
+//                }))
+ //       ;
     }
 
     @Bean

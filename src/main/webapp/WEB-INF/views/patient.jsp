@@ -46,7 +46,7 @@
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">№ страховки</b>
-                <form:input cssClass="form-s form-notactiv" disabled="true" path="insurance"/>
+                    <form:input cssClass="form-s"  path="insurance"/>
             </div>
             <br>
             <sec:authorize access="hasRole('ROLE_DOCTOR')">

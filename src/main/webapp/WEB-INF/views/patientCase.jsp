@@ -45,11 +45,11 @@
                 <form:input cssClass="form-s form-notactiv" disabled="true" path="doctor.login"/>
             </div>
             <br>
-            <c:if test="${empty case.endDate}">
+<%--            <c:if test="${empty case.endDate}">--%>
                 <sec:authorize access="hasRole('ROLE_DOCTOR')">
                     <button type="submit" class="btn">Сохранить изменения</button>
                 </sec:authorize>
-            </c:if>
+<%--            </c:if>--%>
         </form:form>
         <br>
         <br>
@@ -63,7 +63,6 @@
         </button>
 
             <sec:authorize access="hasRole('ROLE_DOCTOR')">
-                <c:if test="${empty case.endDate}">
                 <button type="button" class="btn">
                     <a href="${pageContext.request.contextPath}/cases/close/${caseId}"
                        style="color: #efffe9">Закрыть больничный</a></button>
@@ -71,9 +70,8 @@
                     <a href="${pageContext.request.contextPath}/prescription/case/${caseId}/add"
                        style="color: #efffe9">Новое назначение</a>
                 </button>
-                </c:if>
-                <c:if test="${not empty case.endDate}">
-                </c:if>
+<%--                <c:if test="${not empty case.endDate}">--%>
+<%--                </c:if>--%>
             </sec:authorize>
 
 

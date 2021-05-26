@@ -23,8 +23,8 @@
         <a href="http://localhost:8080/T_school_war_exploded/employee/add" style="color: #efffe9">Новый сотрудник</a>
       </button>
     </sec:authorize>
-
-      <table class="table table-striped table-bordered table-hover">
+    <br>
+      <table class="table table-striped table-bordered table-hover" style="margin-top: 10px">
         <thead>
         <tr>
           <th colspan="3">Список сотрудников</th>
