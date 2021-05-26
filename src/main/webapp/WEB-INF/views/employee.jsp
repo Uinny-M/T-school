@@ -49,9 +49,9 @@
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Уровень доступа</b>
-                Администратор <form:radiobutton cssClass="form-s" value="ROLE_ADMIN" path="role"/><br>
-                Врач <form:radiobutton cssClass="form-s" value="ROLE_DOCTOR" path="role"/>
-                Мл.медперсонал <form:radiobutton cssClass="form-s" value="ROLE_NURSE" path="role"/>
+                Администратор <form:radiobutton cssClass="form-s" value="ADMIN" path="role"/><br>
+                Врач <form:radiobutton cssClass="form-s" value="DOCTOR" path="role"/> <br>
+                Мл.медперсонал <form:radiobutton cssClass="form-s" value="NURSE" path="role"/>
             </div>
             <br>
             <sec:authorize access="hasRole('ROLE_ADMIN')">

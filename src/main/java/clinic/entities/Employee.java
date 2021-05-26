@@ -49,7 +49,7 @@ public class Employee {
     private String password;
 
     //is the employee deleted
-    @Column(name = "enabled", nullable = false, columnDefinition = "true")
+    @Column(name = "enabled", columnDefinition = "boolean default true")
     private boolean enabled;
 
     //employee's role
