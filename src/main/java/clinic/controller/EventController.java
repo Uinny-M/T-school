@@ -2,6 +2,7 @@ package clinic.controller;
 
 import clinic.service.api.EventService;
 import lombok.extern.java.Log;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping(value = "/event")
 public class EventController {
     private final EventService eventService;
+    private final String ROLE_NURSE = "ROLE_NURSE";
 
     public EventController(EventService eventService) {
         this.eventService = eventService;
@@ -54,6 +56,7 @@ public class EventController {
     }
 
     //change eventStatus to Done
+    @Secured(ROLE_NURSE)
     @RequestMapping(value = "/{eventId}/done", method = {RequestMethod.GET, RequestMethod.POST})
     public RedirectView eventDone(@PathVariable("eventId") Long eventId) {
         eventService.eventDone(eventId);
@@ -61,6 +64,7 @@ public class EventController {
     }
 
     //change eventStatus to Cancel
+    @Secured(ROLE_NURSE)
     @RequestMapping(value = "/{eventId}/cancel", method = {RequestMethod.GET, RequestMethod.POST})
     public RedirectView eventCancel(@PathVariable("eventId") Long eventId,
                                     @RequestParam(required = false, value = "comment") String comment) {

@@ -62,6 +62,7 @@ public class PrescriptionController {
     }
 
     //cancel thr prescription
+    @Secured(ROLE_DOCTOR)
     @RequestMapping(value = "/cancel/{prescriptionId}", method = {RequestMethod.GET, RequestMethod.POST})
     public RedirectView prescriptionCancel(@PathVariable("prescriptionId") Long prescriptionId) {
         prescriptionService.prescriptionCancel(prescriptionId);

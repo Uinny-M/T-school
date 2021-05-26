@@ -27,9 +27,17 @@ public class ExceptionController {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(Exception.class)
     public ModelAndView redirect400(){
-        ModelAndView modelAndView = new ModelAndView("error/400");
-        modelAndView.setViewName("error/400");
-        modelAndView.addObject("message", "ай");
+        ModelAndView modelAndView = new ModelAndView("/error/400");
+        modelAndView.setViewName("/error/400");
+//        modelAndView.addObject("message", "ай");
+        return modelAndView;
+    }
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(Exception.class)
+    public ModelAndView redirect404(){
+        ModelAndView modelAndView = new ModelAndView("/error/404");
+        modelAndView.setViewName("/error/404");
+//        modelAndView.addObject("message", "ай");
         return modelAndView;
     }
 

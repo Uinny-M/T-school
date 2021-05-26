@@ -20,7 +20,7 @@
 <div class="container http-error-container">
     <div class="content-exception">
 
-<h1>403</h1>
+<h1>ОШИБКА 403</h1>
     <h2>Доступ запрещен</h2>
     <sec:authorize access="!isAuthenticated()">
     <h3>Пожалуйста, авторизируйтесь</h3>
@@ -30,7 +30,7 @@
     <sec:authorize access="isAuthenticated()">
         <h3>Ваш аккаунт не поддержвает доступ к запрашиваемому ресурсу</h3>
     </sec:authorize>
-        <button type="button" class="btn" style="margin-top: 1px">
+        <button type="button" class="btn" style="margin-top: 1px; background: #28a347">
             <a href="${pageContext.request.contextPath}/">
                 Вернуться на главную страницу</a>
         </button>
@@ -46,12 +46,9 @@
         color: #d5272b;
         height: auto;
         width: auto;
-        display: block;
-        padding: 20px;
-        list-style: none;
         position: absolute;
-        bottom: 55px;
-        top: 165px;
+        bottom: 155px;
+        top: 200px;
         overflow-y: auto;
         text-align: center;
     }

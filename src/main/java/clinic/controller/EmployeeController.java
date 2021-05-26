@@ -17,6 +17,7 @@ public class EmployeeController {
     private final ManipulationService manipulationService;
     private final BCryptPasswordEncoder encoder;
     private final String ROLE_DOCTOR = "ROLE_DOCTOR";
+    private final String ROLE_ADMIN = "ROLE_ADMIN";
 
     public EmployeeController(EmployeeService employeeService, ManipulationService manipulationService, BCryptPasswordEncoder encoder) {
         this.employeeService = employeeService;
@@ -44,6 +45,7 @@ public class EmployeeController {
     }
 
     //Return Employee by ID
+    @Secured(value = ROLE_ADMIN)
     @GetMapping(value = "/add")
     public ModelAndView getEmployeeById() {
         ModelAndView modelAndView = new ModelAndView();
@@ -53,6 +55,7 @@ public class EmployeeController {
     }
 
     //Add new employee
+    @Secured(value = ROLE_ADMIN)
     @RequestMapping (value = "/add", method = { RequestMethod.POST})
     public RedirectView addEmployee(@ModelAttribute EmployeeDTO employeeDTO) {
         employeeDTO.setPassword(encoder.encode(employeeDTO.getPassword()));

@@ -27,10 +27,11 @@ public class EmployeeDTO {
     private String password;
 
     //is the employee enabled
-    private boolean enable;
+    private boolean enabled;
 
     //employee's role
     private String role;
+
 
     public Integer getId() {
         return id;
@@ -97,10 +98,10 @@ public class EmployeeDTO {
     }
 
     public boolean isEnable() {
-        return enable;
+        return enabled;
     }
 
     public void setEnable(boolean enable) {
-        this.enable = enable;
+        this.enabled = enable;
     }
 }

@@ -37,7 +37,7 @@
             </div>
             <div class="form-group row">
                 <b class="col-xs-3">Дата рождения</b>
-                <form:input cssClass="form-s" type="date" path="birthdate"/>
+                <form:input cssClass="form-s" max="" type="date" path="birthdate"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Пол</b>

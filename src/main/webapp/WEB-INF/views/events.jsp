@@ -54,10 +54,10 @@
                     <td>${e.manipulation.title}</td>
                     <td>${e.prescription.dosage} ${e.prescription.drug}</td>
 
-                    <sec:authorize access="hasRole('ROLE_DOCTOR')">
+                    <sec:authorize access="hasAnyRole('ROLE_DOCTOR', 'ROLE_ADMIN')">
                         <td>${e.status} ${e.comment}</td>
                     </sec:authorize>
-                    <sec:authorize access="hasAnyRole('ROLE_NURSE')">
+                    <sec:authorize access="hasRole('ROLE_NURSE')">
                         <c:choose>
                             <c:when test="${e.status eq 'Запланировано'}">
                                 <td>
