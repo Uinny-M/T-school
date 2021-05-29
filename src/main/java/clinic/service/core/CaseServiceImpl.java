@@ -1,5 +1,6 @@
 package clinic.service.core;
 
+import clinic.controller.PrescriptionController;
 import clinic.dao.api.CaseDao;
 import clinic.dao.api.PrescriptionDao;
 import clinic.dto.CaseDTO;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,6 +40,8 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
         this.prescriptionDao = prescriptionDao;
     }
 
+    private static final Logger log = Logger.getLogger(PrescriptionController.class.getName());
+
     @Transactional
     public List<CaseDTO> getCasesByPatientId(Integer patientId) {
         return mapToDTO(dao.findCasesByPatientId(patientId));
@@ -51,6 +55,9 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
     @Transactional
     public void closeCase(Long caseId) {
         CaseDTO caseDTO = getOneById(caseId);
+//        if (!caseDTO.isOpenCase()){
+//            throw new BusinessException("Выбранный страховой случай уже закрыт");//todo проверить
+//        }
         caseDTO.setOpenCase(false);
         caseDTO.setEndDate(LocalDate.now());
         dao.update(mapToEntity(caseDTO));
@@ -65,14 +72,14 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
 
         eventService.getAllByCaseId(caseId).forEach(eventDTO -> {
             LocalDate now = LocalDate.now();
-                if (eventDTO.getDate().isAfter(now.minusDays(1))) {
-                eventService.eventCancel(eventDTO.getId(), "по решению врача");
+            if (eventDTO.getDate().isAfter(now.minusDays(1))) {
+                eventService.eventCancel(eventDTO.getId(), "by doctor");
             }
         });
     }
 
     @Transactional
-    public CaseDTO createCase(String diagnosis, Integer patientId) {
+    public void createCase(String diagnosis, Integer patientId) {
         CaseDTO caseDTO = new CaseDTO();
         caseDTO.setDoctor(getCurrentUser());
         caseDTO.setPatient(patientService.getOneById(patientId));
@@ -80,10 +87,9 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
         if (!diagnosis.isEmpty()) {
             caseDTO.setDiagnosis(diagnosis);
         } else {
-            caseDTO.setDiagnosis("Не установлен");
+            caseDTO.setDiagnosis("is not diagnosed");
         }
         dao.save(mapToEntity(caseDTO));
-        return caseDTO;
     }
 
     @Transactional

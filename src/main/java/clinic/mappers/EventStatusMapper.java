@@ -17,16 +17,16 @@ public interface EventStatusMapper {
     default EventStatus mapStringToEnum(String string) {
         EventStatus entity;
         switch (string) {
-            case "Запланировано":
+            case "Planned":
                 entity = EventStatus.PLANNED;
                 break;
-            case "Выполнено":
+            case "Completed":
                 entity = EventStatus.COMPLETED;
                 break;
-            case "Отменено":
+            case "Canceled":
                 entity = EventStatus.CANCELED;
                 break;
-            case "Пропущено":
+            case "Failed":
                 entity = EventStatus.FAILED;
                 break;
             default:

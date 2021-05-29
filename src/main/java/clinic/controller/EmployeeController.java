@@ -1,10 +1,9 @@
 package clinic.controller;
 
-import clinic.config.SecurityConfig;
 import clinic.dto.EmployeeDTO;
-import clinic.dto.PatientDTO;
 import clinic.service.api.EmployeeService;
 import clinic.service.api.ManipulationService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +15,14 @@ import org.springframework.web.servlet.view.RedirectView;
 public class EmployeeController {
     private final EmployeeService employeeService;
     private final ManipulationService manipulationService;
+    private final BCryptPasswordEncoder encoder;
+    private final String ROLE_DOCTOR = "ROLE_DOCTOR";
+    private final String ROLE_ADMIN = "ROLE_ADMIN";
 
-    public EmployeeController(EmployeeService employeeService, ManipulationService manipulationService) {
+    public EmployeeController(EmployeeService employeeService, ManipulationService manipulationService, BCryptPasswordEncoder encoder) {
         this.employeeService = employeeService;
         this.manipulationService = manipulationService;
+        this.encoder = encoder;
     }
 
     //Return all employees
@@ -50,13 +53,11 @@ public class EmployeeController {
     }
 
     //Add new employee
+    @Secured(value = ROLE_ADMIN)
     @RequestMapping (value = "/add", method = { RequestMethod.POST})
     public RedirectView addEmployee(@ModelAttribute EmployeeDTO employeeDTO) {
-        String oldpassword = employeeDTO.getPassword();
-        String pas = new BCryptPasswordEncoder(12).encode(oldpassword);
-        employeeDTO.setPassword(pas);
-//        employeeDTO.setPassword("");
-
+        employeeDTO.setPassword(encoder.encode(employeeDTO.getPassword()));
+        employeeDTO.setEnable(true);
         employeeService.create(employeeDTO);
         return new RedirectView("/T_school_war_exploded/employee/");
     }

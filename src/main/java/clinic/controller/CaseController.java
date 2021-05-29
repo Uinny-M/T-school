@@ -5,6 +5,7 @@ import clinic.service.api.CaseService;
 import clinic.service.api.EmployeeService;
 import clinic.service.api.PatientService;
 import clinic.service.api.PrescriptionService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,14 +16,11 @@ import org.springframework.web.servlet.view.RedirectView;
 public class CaseController {
     private final CaseService caseService;
     private final PrescriptionService prescriptionService;
-    private final EmployeeService employeeService;
-    private final PatientService patientService;
+    private final String ROLE_DOCTOR = "ROLE_DOCTOR";
 
-    public CaseController(CaseService caseService, PrescriptionService prescriptionService, EmployeeService employeeService, PatientService patientService) {
+    public CaseController(CaseService caseService, PrescriptionService prescriptionService) {
         this.caseService = caseService;
         this.prescriptionService = prescriptionService;
-        this.employeeService = employeeService;
-        this.patientService = patientService;
     }
 
     //Return all cases by PatientId
@@ -50,6 +48,7 @@ public class CaseController {
     }
 
     //Add a new case
+    @Secured(value = ROLE_DOCTOR)
     @PostMapping(value = "/{patientId}/add")
     public RedirectView addCase(@ModelAttribute CaseDTO caseDTO,
                                 @PathVariable("patientId") Integer patientId) {
@@ -58,8 +57,17 @@ public class CaseController {
     }
 
     // Close the case by Case's id
+    @Secured(value = ROLE_DOCTOR)
     @RequestMapping(value = "/close/{caseId}", method = {RequestMethod.GET, RequestMethod.POST})
-        public RedirectView closeCase(@PathVariable Long caseId) {
+    public RedirectView closeCase(@PathVariable Long caseId,
+                                  @ModelAttribute(value = "error") String errorMessage) {
+
+//        try {
+//            caseService.closeCase(caseId);
+//        } catch (BusinessException e) {
+//            errorMessage = e.getMessage();
+//            //todo
+//        }
         caseService.closeCase(caseId);
         String url = "/T_school_war_exploded/cases/"
                 + caseService.getOneById(caseId).getPatient().getId();
@@ -67,6 +75,7 @@ public class CaseController {
     }
 
     //update the existing case
+    @Secured(value = ROLE_DOCTOR)
     @PostMapping(value = "/{patientId}/update/{caseId}")
     public RedirectView updateCase(@ModelAttribute CaseDTO caseDTO,
                                    @PathVariable("patientId") Integer patientId,

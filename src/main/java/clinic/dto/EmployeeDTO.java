@@ -17,7 +17,7 @@ public class EmployeeDTO {
     //patient's middle name
     private String middleName;
 
-    //type of medical employee (doctor/nurse)
+    //type of medical employee (doctor/nurse/admin)
     private String position;
 
     //login for auth
@@ -26,11 +26,12 @@ public class EmployeeDTO {
     //password for auth
     private String password;
 
-    //is the employee deleted
-    private boolean isDeleted;
+    //is the employee enabled
+    private boolean enabled;
 
     //employee's role
     private String role;
+
 
     public Integer getId() {
         return id;
@@ -88,19 +89,19 @@ public class EmployeeDTO {
         this.password = password;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
-
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isEnable() {
+        return enabled;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enabled = enable;
     }
 }

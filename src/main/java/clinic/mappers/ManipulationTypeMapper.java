@@ -17,10 +17,10 @@ public interface ManipulationTypeMapper {
     default ManipulationType mapStringToEnum(String string) {
         ManipulationType entity;
         switch (string) {
-            case "Лекарство":
+            case "Medicament":
                 entity = ManipulationType.MEDICAMENT;
                 break;
-            case "Процедура":
+            case "Procedure":
                 entity = ManipulationType.PROCEDURE;
                 break;
             default:

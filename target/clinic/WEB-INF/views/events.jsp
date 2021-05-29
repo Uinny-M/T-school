@@ -59,14 +59,14 @@
                     </sec:authorize>
                     <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')">
                         <c:choose>
-                            <c:when test="${e.status eq 'Запланировано'}">
+                            <c:when test="${e.status eq 'Planned'}">
                                 <td>
                                     <form:form action="/T_school_war_exploded/event/${e.id}/done" cssClass="form" method="get">
-                                        <button type="submit" class="btn" style="margin-left: 20px;">Выполнено</button>
+                                        <button type="submit" class="btn" style="margin-left: 20px;">Completed</button>
                                     </form:form>
                                     <hr>
                                     <form:form action="/T_school_war_exploded/event/${e.id}/cancel" cssClass="form" method="get">
-                                        <button type="submit" class="btn" style="margin-left: 20px;"> Отменено </button>
+                                        <button type="submit" class="btn" style="margin-left: 20px;"> Canceled </button>
                                         <input type="text" class="form-s" style="margin-top: 5px;" name="comment" style="float: left"
                                                placeholder="Причина отмены"/>
                                     </form:form>

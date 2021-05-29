@@ -17,13 +17,13 @@ public interface RoleMapper {
     default Role mapStringToEnum(String string) {
         Role entity;
         switch (string) {
-            case "Администратор":
+            case "ADMIN":
                 entity = Role.ROLE_ADMIN;
                 break;
-            case "Доктор":
+            case "DOCTOR":
                 entity = Role.ROLE_DOCTOR;
                 break;
-            case "Медсестра":
+            case "NURSE":
                 entity = Role.ROLE_NURSE;
                 break;
             default:

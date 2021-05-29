@@ -87,13 +87,13 @@
                     <td>${p.duration} дн.</td>
                     <td>${p.dosage} ${p.drug}</td>
                     <td>
-                        <c:if test="${p.closed}">Завершено</c:if>
-                        <c:if test="${not p.closed}">Выполняется</c:if>
+                        <c:if test="${p.closed}">Completed</c:if>
+                        <c:if test="${not p.closed}">In progress</c:if>
                         <sec:authorize access="hasRole('ROLE_DOCTOR')">
                             <c:if test="${not p.closed}">
                                 <button class="btn">
                                     <a href="${pageContext.request.contextPath}/prescription/cancel/${p.id}"
-                                       style="color: #efffe9">Отменить</a>
+                                       style="color: #efffe9">Cancel</a>
                                 </button>
                             </c:if>
                         </sec:authorize>
