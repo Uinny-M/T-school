@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.appointment</OriginalElement>
+  <nodes>
+    <node x="541.2100798403194" y="198.96407185628743">82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.event</node>
+    <node x="900.0" y="-134.63073852295412">82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.employee</node>
+    <node x="608.6207584830338" y="47.40518962075856">82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.manipulation</node>
+    <node x="900.0" y="19.213572854291385">82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.employee_role</node>
+    <node x="113.0" y="-134.6307385229541">82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.patient</node>
+    <node x="18.420159680638676" y="26.64271457085829">82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.appointment</node>
+    <node x="608.6207584830338" y="-134.6307385229541">82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.case</node>
+    <node x="900.0" y="151.0578842315369">82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.role</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.appointment" target="82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.patient" relationship="REFERENCES">
+      <point x="122.5" y="-116.5" />
+      <point x="385.9201596806387" y="45.41117764471056" />
+      <point x="303.99401197604794" y="45.41117764471056" />
+      <point x="303.99401197604794" y="-3.36926147704591" />
+      <point x="176.0" y="-3.36926147704591" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.appointment" target="82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.manipulation" relationship="REFERENCES">
+      <point x="-122.5" y="-116.5" />
+      <point x="140.92015968063868" y="121.0" />
+      <point x="728.1207584830338" y="121.0" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.event" target="82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.patient" relationship="REFERENCES">
+      <point x="81.5" y="-83.5" />
+      <point x="785.7100798403194" y="303.5548902195609" />
+      <point x="4.393213572854307" y="303.5548902195609" />
+      <point x="4.393213572854307" y="8.007984031936132" />
+      <point x="176.0" y="8.007984031936132" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.employee_role" target="82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.employee" relationship="REFERENCES">
+      <point x="-33.5" y="-39.5" />
+      <point x="933.5" y="-101.8932135728543" />
+      <point x="972.5" y="-101.8932135728543" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.case" target="82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.patient" relationship="REFERENCES">
+      <point x="-37.75" y="-72.5" />
+      <point x="646.3707584830338" y="-104.12974051896208" />
+      <point x="176.0" y="-104.12974051896208" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.event" target="82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.manipulation" relationship="REFERENCES">
+      <point x="-81.5" y="-83.5" />
+      <point x="622.7100798403194" y="244.08582834331338" />
+      <point x="736.4221556886228" y="244.08582834331338" />
+      <point x="736.4221556886228" y="142.5" />
+      <point x="728.1207584830338" y="142.5" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.case" target="82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.employee" relationship="REFERENCES">
+      <point x="37.75" y="-72.5" />
+      <point x="721.8707584830338" y="-99.2315369261477" />
+      <point x="972.5" y="-99.2315369261477" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.employee_role" target="82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.role" relationship="REFERENCES">
+      <point x="33.5" y="-39.5" />
+      <point x="1000.5" y="252.0578842315369" />
+      <point x="0.0" y="50.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0547368421052632" showDependencies="false" x="597.1117764471057" y="130.313373253493" />
+  <SelectedNodes>
+    <node>82df52c0-9ced-42b1-b60f-bad075bf95d5.TABLE:clinic.event</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Columns</Category>
+    <Category>Key columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+
