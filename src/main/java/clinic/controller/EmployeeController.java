@@ -16,7 +16,6 @@ public class EmployeeController {
     private final EmployeeService employeeService;
     private final ManipulationService manipulationService;
     private final BCryptPasswordEncoder encoder;
-    private final String ROLE_DOCTOR = "ROLE_DOCTOR";
     private final String ROLE_ADMIN = "ROLE_ADMIN";
 
     public EmployeeController(EmployeeService employeeService, ManipulationService manipulationService, BCryptPasswordEncoder encoder) {
@@ -44,6 +43,7 @@ public class EmployeeController {
     }
 
     //Return Employee by ID
+    @Secured(value = ROLE_ADMIN)
     @GetMapping(value = "/add")
     public ModelAndView getEmployeeById() {
         ModelAndView modelAndView = new ModelAndView();

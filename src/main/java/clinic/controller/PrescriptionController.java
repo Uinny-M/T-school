@@ -4,6 +4,7 @@ import clinic.dto.PrescriptionDTO;
 import clinic.service.api.CaseService;
 import clinic.service.api.ManipulationService;
 import clinic.service.api.PrescriptionService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +22,7 @@ public class PrescriptionController {
     private final PrescriptionService prescriptionService;
     private final CaseService caseService;
     private final ManipulationService manipulationService;
+    private final String ROLE_DOCTOR = "ROLE_DOCTOR";
 
     public PrescriptionController(PrescriptionService prescriptionService, CaseService caseService, ManipulationService manipulationService) {
         this.prescriptionService = prescriptionService;
@@ -55,12 +57,12 @@ public class PrescriptionController {
                                         @PathVariable("prescriptionId") Long prescriptionId) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("prescription", prescriptionService.getOneById(prescriptionId));
-        // modelAndView.addObject("cases", caseService.getAll());
         modelAndView.setViewName("prescription");
         return modelAndView;
     }
 
     //cancel thr prescription
+    @Secured(ROLE_DOCTOR)
     @RequestMapping(value = "/cancel/{prescriptionId}", method = {RequestMethod.GET, RequestMethod.POST})
     public RedirectView prescriptionCancel(@PathVariable("prescriptionId") Long prescriptionId) {
         prescriptionService.prescriptionCancel(prescriptionId);
@@ -71,6 +73,7 @@ public class PrescriptionController {
     }
 
     //Add new prescription
+    @Secured(ROLE_DOCTOR)
     @RequestMapping(value = "/case/{caseId}/add", method = RequestMethod.POST)
     public RedirectView addPrescription(@ModelAttribute PrescriptionDTO prescriptionDTO,
                                         @PathVariable Long caseId) {

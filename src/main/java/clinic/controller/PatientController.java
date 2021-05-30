@@ -26,14 +26,12 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping(value = "/patient")
 public class PatientController {
     private final PatientService patientService;
-    private final CaseService caseService;
-    private final EmployeeService employeeService;
+    private final String ROLE_DOCTOR = "ROLE_DOCTOR";
+    private final String ROLE_ADMIN = "ROLE_ADMIN";
 
     @Autowired
-    public PatientController(PatientService patientService, CaseService caseService, EmployeeService employeeService) {
+    public PatientController(PatientService patientService) {
         this.patientService = patientService;
-        this.caseService = caseService;
-        this.employeeService = employeeService;
     }
 
     //Return Patient by ID
@@ -41,7 +39,6 @@ public class PatientController {
     public ModelAndView getPatientById(@PathVariable("patientId") Integer patientId) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("patient", patientService.getOneById(patientId));
-        // modelAndView.addObject("cases", caseService.getAll());
         modelAndView.setViewName("patient");
         return modelAndView;
     }

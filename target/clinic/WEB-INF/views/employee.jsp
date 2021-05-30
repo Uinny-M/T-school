@@ -5,7 +5,6 @@
 <%@ include file="help/footer.jsp" %>
 <%@include file="help/menu.jsp" %>
 
-
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -50,9 +49,9 @@
             <div class="form-group-create row">
                 <b class="col-xs-3">Access level</b>
                 <div class="form-check">
-                Admin <form:radiobutton cssClass="form-check-input" value="ADMIN" path="role"/>
-                Doctor <form:radiobutton cssClass="form-check-input" value="DOCTOR" path="role"/>
-                Nurse <form:radiobutton cssClass="form-check-input" value="NURSE" path="role"/>
+                    Admin <form:radiobutton cssClass="form-check-input" value="ADMIN" path="role"/>
+                    Doctor <form:radiobutton cssClass="form-check-input" value="DOCTOR" path="role"/>
+                    Nurse <form:radiobutton cssClass="form-check-input" value="NURSE" path="role"/>
                 </div>
             </div>
             <br>
@@ -66,74 +65,10 @@
 <jsp:include page="help/footer.jsp"></jsp:include>
 </body>
 </html>
-
 <style>
     /*Menu*/
-    .vertical-menu a.menu-employees{
+    .vertical-menu a.menu-employees {
         background-color: #28a347;
         color: #efffe9;
     }
-    /*!*Content*!*/
-    /*.content {*/
-    /*    background-color: #fff;*/
-    /*    height: auto;*/
-    /*    width: auto;*/
-    /*    right: 0;*/
-    /*    display: block;*/
-    /*    !*margin: 0px;*!*/
-    /*    padding: 20px;*/
-    /*    list-style: none;*/
-    /*    position: absolute;*/
-    /*    left: 200px;*/
-    /*    bottom: 55px;*/
-    /*    top: 165px;*/
-    /*    overflow-y: scroll;*/
-    /*}*/
-    /*!*Form-search*!*/
-    /*.content .btn {*/
-    /*    font-size: 14px;*/
-    /*    height: 30px;*/
-    /*    color: #fff;*/
-    /*    background: #28a347;*/
-    /*    border-radius: 15px;*/
-    /*    padding: 5px 25px;*/
-    /*    border: none;*/
-    /*    text-transform: capitalize;*/
-    /*    transition: all 0.5s ease 0s;*/
-    /*}*/
-    /*.form {*/
-    /*    width: 100%;*/
-    /*    height: auto;*/
-    /*    display: block;*/
-    /*    margin: 10px;*/
-    /*    text-transform: capitalize;*/
-    /*}*/
-
-
-    /*.form-group-search {*/
-    /*    float: left;*/
-    /*    margin-left: 10px;*/
-    /*    margin-top: 10px;*/
-    /*    display: inline;*/
-    /*}*/
-    /*.row {*/
-    /*    margin-top: 20px;*/
-    /*}*/
-    /*.form-s {*/
-    /*    background-color: #f9e9ff;*/
-    /*    width: 300px;*/
-    /*    border: 1px solid #28a347;*/
-    /*}*/
-    /*.form b {*/
-    /*    font-size: 17px;*/
-    /*    color: #28a347;*/
-    /*    transition: all 0.5s ease 0s;*/
-    /*}*/
-    /*!*Table*!*/
-    /*.table {*/
-    /*    background-color: #efffe9;*/
-    /*}*/
-    /*.table :active {*/
-    /*    background-color: #efffe9;*/
-    /*}*/
 </style>

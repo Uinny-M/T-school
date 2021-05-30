@@ -20,7 +20,7 @@ public class AuthController {
                         Model model) {
         String errorMessage = null;
         if (error != null) {
-            errorMessage = "Неверный логин или пароль";
+            errorMessage = "Wrong login or password";
         }
         model.addAttribute("errorMessage", errorMessage);
         return "login";

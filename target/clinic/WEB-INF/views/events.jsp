@@ -12,7 +12,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta/>
-    <link href="css/t.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/assets/css/t.css" rel="stylesheet" type="text/css">
     <title>Procedures</title>
 </head>
 <body>
@@ -20,8 +20,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <jsp:include page="help/header.jsp"></jsp:include>
 <div class="container">
-    <c:set var="now" value="<%=new java.util.Date()%>" />
-    <fmt:formatDate pattern="yyyy-MM-dd" value="${now}" />
+    <c:set var="now" value="<%=new java.util.Date()%>"/>
+    <fmt:formatDate pattern="yyyy-MM-dd" value="${now}"/>
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
         <h3>List of procedures</h3>
@@ -64,15 +64,18 @@
 
                         <c:choose>
                             <c:when test="${e.status eq 'Planned'}">
-<%--                                todo && ${e.date eq parsedDatetime}--%>
+                                <%--                                todo && ${e.date eq parsedDatetime}--%>
                                 <td>
-                                    <form:form action="${pageContext.request.contextPath}/event/${e.id}/done" cssClass="form" method="get">
+                                    <form:form action="${pageContext.request.contextPath}/event/${e.id}/done"
+                                               cssClass="form" method="get">
                                         <button type="submit" class="btn" style="margin-left: 20px;">Completed</button>
                                     </form:form>
                                     <hr>
-                                    <form:form action="${pageContext.request.contextPath}/event/${e.id}/cancel" cssClass="form" method="get">
-                                        <button type="submit" class="btn" style="margin-left: 20px;"> Canceled </button>
-                                        <input type="text" class="form-s" style="margin-top: 5px;" name="comment" style="float: left"
+                                    <form:form action="${pageContext.request.contextPath}/event/${e.id}/cancel"
+                                               cssClass="form" method="get">
+                                        <button type="submit" class="btn" style="margin-left: 20px;"> Canceled</button>
+                                        <input type="text" class="form-s" style="margin-top: 5px;" name="comment"
+                                               style="float: left"
                                                placeholder="reason for canceling"/>
                                     </form:form>
                                 </td>
@@ -92,80 +95,10 @@
 <jsp:include page="help/footer.jsp"></jsp:include>
 </body>
 </html>
-
 <style>
     /*Menu*/
     .vertical-menu a.menu-events {
         background-color: #28a347;
         color: #efffe9;
-    }
-
-    /*Content*/
-    .content {
-        background-color: #fff;
-        height: auto;
-        width: auto;
-        right: 0;
-        display: block;
-        /*margin: 0px;*/
-        padding: 20px;
-        list-style: none;
-        position: absolute;
-        left: 200px;
-        bottom: 55px;
-        top: 165px;
-        overflow-y: scroll;
-    }
-
-    /*Form-search*/
-    .content .btn {
-        font-size: 14px;
-        height: 30px;
-        color: #fff;
-        background: #28a347;
-        border-radius: 15px;
-        padding: 5px 25px;
-        border: none;
-        text-transform: capitalize;
-        transition: all 0.5s ease 0s;
-    }
-
-    .form {
-        width: 100%;
-        height: auto;
-        display: block;
-        margin: 10px;
-    }
-
-    .form-group-search {
-        float: left;
-        margin-left: 10px;
-        margin-top: 10px;
-        display: inline;
-    }
-
-    .row {
-        margin-top: 20px;
-    }
-
-    .form-s {
-        background-color: #f9e9ff;
-        width: 300px;
-        border: 1px solid #28a347;
-    }
-
-    .form b {
-        font-size: 17px;
-        color: #28a347;
-        transition: all 0.5s ease 0s;
-    }
-
-    /*Table*/
-    .table {
-        background-color: #efffe9;
-    }
-
-    .table :active {
-        background-color: #efffe9;
     }
 </style>
