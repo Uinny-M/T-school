@@ -1,10 +1,8 @@
 package clinic.dto;
 
-import clinic.entities.enums.Weekday;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.Set;
 
 public class PrescriptionDTO {

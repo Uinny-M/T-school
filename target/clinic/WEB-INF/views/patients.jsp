@@ -12,7 +12,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta/>
     <link href="css/t.css" rel="stylesheet" type="text/css">
-    <title>Пациенты</title>
+    <title>Patients</title>
 </head>
 <body>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -21,14 +21,14 @@
 <div class="container">
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
-        <h3>Список пациентов</h3>
+        <h3>List of patients</h3>
         <form:form action="/T_school_war_exploded/patient/" cssClass="form" method="get">
-            <input type="text" class="form-s" name="name" style="float: left" placeholder="Фамилия" value="${search}"/>
-            <button type="submit" class="btn" style="margin-left: 20px;">Найти</button>
+            <input type="text" class="form-s" name="name" style="float: left" placeholder="Secondname" value="${search}"/>
+            <button type="submit" class="btn" style="margin-left: 20px;">Find by secondname</button>
         </form:form>
         <sec:authorize access="hasAnyRole('ROLE_DOCTOR', 'ROLE_DOCTOR')">
         <button class="btn">
-            <a href="http://localhost:8080/T_school_war_exploded/patient/add" style="color: #efffe9">Новый пациент</a>
+            <a href="http://localhost:8080/T_school_war_exploded/patient/add" style="color: #efffe9">New patient</a>
         </button>
         </sec:authorize>
         <br>
@@ -36,12 +36,12 @@
         <table class="table table-striped table-bordered table-hover" style="margin-top: 20px;">
             <thead>
             <tr>
-                <th colspan="3">Список пациентов</th>
+                <th colspan="3">List of patients</th>
             </tr>
             <tr>
-                <th width="50%">ФИО</th>
-                <th width="25%">Дата рождения</th>
-                <th width="25%">Номер страховки</th>
+                <th width="50%">Full name</th>
+                <th width="25%">Birthdate</th>
+                <th width="25%">Insurance</th>
             </tr>
             </thead>
             <tbody>

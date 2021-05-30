@@ -87,7 +87,7 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
         eventService.getAllByPrescriptionId(prescriptionId).forEach(eventDTO -> {
             LocalDate now = LocalDate.now();
             if (eventDTO.getDate().isAfter(now.minusDays(1))) {
-                eventService.eventCancel(eventDTO.getId(), "по решению врача");
+                eventService.eventCancel(eventDTO.getId(), "by doctor");
             }
         });
     }

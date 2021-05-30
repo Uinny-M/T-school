@@ -1,17 +1,10 @@
 package clinic.controller;
 
-import clinic.dto.EventDTO;
-import clinic.dto.ManipulationDTO;
 import clinic.dto.PrescriptionDTO;
-import clinic.entities.enums.EventStatus;
-import clinic.entities.enums.Weekday;
 import clinic.service.api.CaseService;
 import clinic.service.api.ManipulationService;
 import clinic.service.api.PrescriptionService;
-
-import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -20,7 +13,6 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 
 @Controller

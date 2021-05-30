@@ -10,7 +10,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta/>
     <link href="css/t.css" rel="stylesheet" type="text/css">
-    <title>CLINIC</title>
+    <title>Patients</title>
 </head>
 <body>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -19,65 +19,65 @@
 <div class="container">
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
-        <h3>Подробности страхового случая</h3>
+        <h3>Case report</h3>
         <form:form action="/T_school_war_exploded/cases/${patientId}/update/${caseId}" method="POST" modelAttribute="case"
                    cssClass="form">
             <div class="form-group-create row">
-                <b class="col-xs-3">Пациент</b>
+                <b class="col-xs-3">Patient</b>
                 <form:input cssClass="form-s" disabled="true" path="patient.secondName"/>
             </div>
             <div class="form-group-create row">
-                <b class="col-xs-3">Диагноз</b>
+                <b class="col-xs-3">Diagnosis</b>
                 <form:input cssClass="form-s" path="diagnosis"/>
             </div>
             <div class="form-group-create row">
-                <b class="col-xs-3">Начало</b>
+                <b class="col-xs-3">Start date</b>
                 <form:input cssClass="form-s"  disabled="true" readonly="true" type="data" path="startDate"/>
             </div>
             <div class="form-group-create row">
-                <b class="col-xs-3">Окончание</b>
+                <b class="col-xs-3">End date</b>
                 <form:input cssClass="form-s" disabled="true" readonly="true" type="data" path="endDate"/>
             </div>
             <div class="form-group row">
-                <b class="col-xs-3">Врач</b>
+                <b class="col-xs-3">Doctor</b>
                 <form:input cssClass="form-s" disabled="true" path="doctor.login"/>
             </div>
             <br>
             <sec:authorize access="hasRole('ROLE_DOCTOR')">
-            <button type="submit" class="btn">Сохранить изменения</button>
+            <button type="submit" class="btn">Save changes</button>
             </sec:authorize>
         </form:form>
         <br>
         <br>
         <button class="btn" style="margin: 10px">
             <a href="${pageContext.request.contextPath}/cases/${patientId}" style="color: #efffe9">
-                Карточка пациента</a>
+                Patient's card record</a>
         </button>
         <sec:authorize access="hasRole('ROLE_DOCTOR')">
             <button type="button" class="btn">
                 <a href="${pageContext.request.contextPath}/cases/close/${caseId}"
-                   style="color: #efffe9">Закрыть больничный</a></button>
+                   style="color: #efffe9">Close the case</a></button>
             <button class="btn">
                 <a href="${pageContext.request.contextPath}/prescription/case/${caseId}/add"
-                   style="color: #efffe9">Новое назначение</a>
+                   style="color: #efffe9">Add new prescription</a>
             </button>
             <button class="btn">
                 <a href="http://localhost:8080/T_school_war_exploded/event/${patientId}"
-                   style="color: #efffe9">Процедурный лист</a>
+                   style="color: #efffe9">List of procedures</a>
             </button>
         </sec:authorize>
 
-        <h3>Назначения в страховом случае</h3>
+        <h3>Prescriptions in the case</h3>
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
-                <th colspan="4">Список назначений</th>
+                <th colspan="4">List of prescriptions</th>
             </tr>
             <tr>
-                <th width="25%">Тип манипуляции</th>
-                <th width="25%">Продолжительность</th>
-                <th width="25%">Лекарство</th>
-                <th width="25%">Статус назначения</th>
+                <th width="25%">Type of manipulation</th>
+                <th width="25%">Duration</th>
+                <th width="25%">Medicament</th>
+                <th width="25%">Status</th>
             </tr>
             </thead>
             <tbody>

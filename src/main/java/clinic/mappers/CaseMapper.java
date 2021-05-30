@@ -7,7 +7,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        uses ={EmployeeMapper.class})
 public interface CaseMapper extends AbstractMapper<Case, CaseDTO> {
     @Mappings({
             @Mapping(target = "startDate", source = "entity.startDate", dateFormat = "yyyy-MM-dd"),

@@ -1,25 +1,26 @@
 package clinic.mappers;
 
 import clinic.dto.CaseDTO;
-import clinic.dto.EmployeeDTO;
 import clinic.dto.PatientDTO;
 import clinic.entities.Case;
-import clinic.entities.Employee;
 import clinic.entities.Patient;
 import clinic.entities.enums.Gender;
-import clinic.entities.enums.Role;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-05-29T22:30:56+0300",
+    date = "2021-05-30T11:31:33+0300",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 13.0.2 (AdoptOpenJDK)"
 )
 @Component
 public class CaseMapperImpl implements CaseMapper {
+
+    @Autowired
+    private EmployeeMapper employeeMapper;
 
     @Override
     public List<Case> mapDtoToEntity(List<CaseDTO> dto) {
@@ -62,7 +63,7 @@ public class CaseMapperImpl implements CaseMapper {
         caseDTO.setId( entity.getId() );
         caseDTO.setPatient( patientToPatientDTO( entity.getPatient() ) );
         caseDTO.setDiagnosis( entity.getDiagnosis() );
-        caseDTO.setDoctor( employeeToEmployeeDTO( entity.getDoctor() ) );
+        caseDTO.setDoctor( employeeMapper.mapEntityToDto( entity.getDoctor() ) );
         caseDTO.setOpenCase( entity.isOpenCase() );
 
         return caseDTO;
@@ -79,7 +80,7 @@ public class CaseMapperImpl implements CaseMapper {
         case1.setId( dto.getId() );
         case1.setPatient( patientDTOToPatient( dto.getPatient() ) );
         case1.setDiagnosis( dto.getDiagnosis() );
-        case1.setDoctor( employeeDTOToEmployee( dto.getDoctor() ) );
+        case1.setDoctor( employeeMapper.mapDtoToEntity( dto.getDoctor() ) );
         case1.setStartDate( dto.getStartDate() );
         case1.setEndDate( dto.getEndDate() );
         case1.setOpenCase( dto.isOpenCase() );
@@ -107,28 +108,6 @@ public class CaseMapperImpl implements CaseMapper {
         return patientDTO;
     }
 
-    protected EmployeeDTO employeeToEmployeeDTO(Employee employee) {
-        if ( employee == null ) {
-            return null;
-        }
-
-        EmployeeDTO employeeDTO = new EmployeeDTO();
-
-        employeeDTO.setId( employee.getId() );
-        employeeDTO.setSecondName( employee.getSecondName() );
-        employeeDTO.setFirstName( employee.getFirstName() );
-        employeeDTO.setMiddleName( employee.getMiddleName() );
-        employeeDTO.setPosition( employee.getPosition() );
-        employeeDTO.setLogin( employee.getLogin() );
-        employeeDTO.setPassword( employee.getPassword() );
-        if ( employee.getRole() != null ) {
-            employeeDTO.setRole( employee.getRole().name() );
-        }
-        employeeDTO.setEnabled( employee.isEnabled() );
-
-        return employeeDTO;
-    }
-
     protected Patient patientDTOToPatient(PatientDTO patientDTO) {
         if ( patientDTO == null ) {
             return null;
@@ -147,27 +126,5 @@ public class CaseMapperImpl implements CaseMapper {
         patient.setInsurance( patientDTO.getInsurance() );
 
         return patient;
-    }
-
-    protected Employee employeeDTOToEmployee(EmployeeDTO employeeDTO) {
-        if ( employeeDTO == null ) {
-            return null;
-        }
-
-        Employee employee = new Employee();
-
-        employee.setId( employeeDTO.getId() );
-        employee.setSecondName( employeeDTO.getSecondName() );
-        employee.setFirstName( employeeDTO.getFirstName() );
-        employee.setMiddleName( employeeDTO.getMiddleName() );
-        employee.setPosition( employeeDTO.getPosition() );
-        employee.setLogin( employeeDTO.getLogin() );
-        employee.setPassword( employeeDTO.getPassword() );
-        employee.setEnabled( employeeDTO.isEnabled() );
-        if ( employeeDTO.getRole() != null ) {
-            employee.setRole( Enum.valueOf( Role.class, employeeDTO.getRole() ) );
-        }
-
-        return employee;
     }
 }

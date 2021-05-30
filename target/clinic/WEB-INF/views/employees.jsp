@@ -7,8 +7,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta/>
-  <link href="css/t.css" rel="stylesheet" type="text/css">
-  <title>Сотрудники</title>
+  <link href="${pageContext.request.contextPath}/assets/css/t.css" rel="stylesheet" type="text/css">
+  <title>Employees</title>
 </head>
 <body>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -20,19 +20,19 @@
 
     <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
       <button class="btn">
-        <a href="http://localhost:8080/T_school_war_exploded/employee/add" style="color: #efffe9">Новый сотрудник</a>
+        <a href="http://localhost:8080/T_school_war_exploded/employee/add" style="color: #efffe9">Add new employee</a>
       </button>
     </sec:authorize>
 
-      <table class="table table-striped table-bordered table-hover">
+      <table class="table table-striped table-bordered table-hover" style="margin-top: 10px">
         <thead>
         <tr>
-          <th colspan="3">Список сотрудников</th>
+          <th colspan="3">Staff list</th>
         </tr>
         <tr>
-          <th width="50%">ФИО</th>
-          <th width="25%">Должность</th>
-          <th width="25%">Роль</th>
+          <th width="50%">Full name</th>
+          <th width="25%">Position</th>
+          <th width="25%">Access level</th>
         </tr>
         </thead>
         <tbody>

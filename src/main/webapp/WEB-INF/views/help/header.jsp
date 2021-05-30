@@ -11,8 +11,8 @@
         </div>
         <div class="col-lg-2">
             <h2>CLINIC</h2>
-            <h4>Адрес клиники: г.Санкт-Петерубрг, наб.Обводного канала, д.9</h4>
-            <h4>Телефон: 8-800-800-80-80</h4>
+            <h4>Clinic address: St. Petersburg, Shepetovskaya st., 14A</h4>
+            <h4>Phone: 8-800-800-80-80</h4>
         </div>
         <div class="col-lg-3">
             <h4>
@@ -20,7 +20,7 @@
                     <sec:authentication property="name"/>
                 </sec:authorize>
                 <sec:authorize access="!isAuthenticated()">
-                    ГОСТЬ
+                    Guest
                 </sec:authorize>
             </h4>
             <sec:authorize access="!isAuthenticated()">
@@ -39,11 +39,11 @@
 
                     <sec:authorize access="!isAuthenticated()">
                         <a href="${pageContext.request.contextPath}/login" class="menu-index">
-                            Вход</a>
+                            Login</a>
                     </sec:authorize>
                     <sec:authorize access="isAuthenticated()">
                         <a href="${pageContext.request.contextPath}/logout" class="menu-index">
-                            Выход</a>
+                            Logout</a>
                     </sec:authorize>
 
             </button>

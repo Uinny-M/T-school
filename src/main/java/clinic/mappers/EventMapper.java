@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE,
-        uses = {EventStatusMapper.class})
+        uses = {EventStatusMapper.class, PrescriptionMapper.class, EmployeeMapper.class})
 public interface EventMapper extends AbstractMapper<Event, EventDTO> {
     EventDTO mapEntityToDto(Event entity);
 

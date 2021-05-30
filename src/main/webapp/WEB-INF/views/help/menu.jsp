@@ -2,11 +2,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="vertical-menu">
-    <a href="${pageContext.request.contextPath}/" class="menu-index">Главная</a>
-    <a href="${pageContext.request.contextPath}/patient/" class="menu-patient">Пациенты</a>
-    <a href="${pageContext.request.contextPath}/event/" class="menu-events">Процедуры</a>
-    <a href="${pageContext.request.contextPath}/employee/" class="menu-employees">Сотрудники</a>
-    <a href="${pageContext.request.contextPath}/employee/manipulation" class="menu-staff">Приемная</a>
+    <a href="${pageContext.request.contextPath}/" class="menu-index">Home page</a>
+    <a href="${pageContext.request.contextPath}/patient/" class="menu-patient">Patients</a>
+    <a href="${pageContext.request.contextPath}/event/" class="menu-events">Procedures</a>
+    <a href="${pageContext.request.contextPath}/employee/" class="menu-employees">Employees</a>
+    <a href="${pageContext.request.contextPath}/employee/manipulation" class="menu-staff">Out-patient clinic</a>
 <%--    <a href="${pageContext.request.contextPath}/auth/" class="menu-staff">Личный кабинет</a>--%>
 </div>
 
@@ -38,6 +38,4 @@
         background-color: #f9e9ff;
         color: #d5272b;
     }
-
-
 </style>

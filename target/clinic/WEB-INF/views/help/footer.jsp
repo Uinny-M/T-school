@@ -4,7 +4,7 @@
 <footer class="footer">
     <div>
         <div class="text-center">
-                <span>Обращайтесь в <a href="https://www.t-systems.com/ru/en">Техподдержку</a>, <br>
+                <span>Contact <a href="https://www.t-systems.com/ru/en">our support team</a>, <br>
                     <a href="tel:+7812 5555555">+7 812 555-55-55</a> </span>
         </div>
     </div>

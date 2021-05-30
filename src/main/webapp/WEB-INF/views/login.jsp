@@ -6,7 +6,7 @@
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Авторизация</title>
+  <title>Authorization</title>
  </head>
  <body>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -23,7 +23,7 @@
 
  <div class="col-md-offset-3 col-md-6">
  <form action="${pageContext.request.contextPath}/login" method="post" class="form-horizontal">
- <span class="heading">АВТОРИЗАЦИЯ</span>
+ <span class="heading">AUTHORIZATION</span>
   <c:if test="${not empty errorMessage}">
   <div style="color: #d5272b">${errorMessage}</div>
   </c:if>
@@ -42,7 +42,7 @@
 <%-- <label for="checkbox1"></label>--%>
 <%-- </div>--%>
 <%-- <span class="text">Запомнить</span>--%>
- <button type="submit" class="btn btn-default" style="right: auto">ВХОД</button>
+ <button type="submit" class="btn btn-default" style="right: auto">Login</button>
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
  </div>

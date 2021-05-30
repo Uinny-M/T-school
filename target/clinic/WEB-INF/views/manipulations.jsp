@@ -8,7 +8,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta/>
   <link href="css/t.css" rel="stylesheet" type="text/css">
-  <title>Приемная</title>
+  <title>Out-patient clinic</title>
 </head>
 <body>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -20,11 +20,11 @@
       <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr>
-          <th colspan="2">Список услуг</th>
+          <th colspan="2">List of services</th>
         </tr>
         <tr>
-          <th width="50%">Наименование</th>
-          <th width="50%">Тип манипуляции</th>
+          <th width="50%">Title of services</th>
+          <th width="50%">Type of manipulation</th>
         </tr>
         </thead>
         <tbody>

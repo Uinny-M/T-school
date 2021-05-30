@@ -6,7 +6,6 @@ import clinic.dao.api.PrescriptionDao;
 import clinic.dto.CaseDTO;
 import clinic.dto.EmployeeDTO;
 import clinic.entities.Case;
-import clinic.entities.enums.EventStatus;
 import clinic.mappers.CaseMapper;
 import clinic.service.api.CaseService;
 import clinic.service.api.EmployeeService;

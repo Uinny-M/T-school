@@ -88,7 +88,7 @@ public class EventServiceImpl extends AbstractServiceImpl<Event, EventDTO, Event
     private void checkEventFailed(List<EventDTO> events) {
         events.forEach(eventDTO -> {
             if (eventDTO.getStatus().equals(EventStatus.PLANNED.getDescription())
-                    && eventDTO.getDate().isBefore(LocalDate.now().minusDays(1))) {
+                    && eventDTO.getDate().isBefore(LocalDate.now())) {
                 eventDTO.setStatus(EventStatus.FAILED.getDescription());
                 dao.update(mapToEntity(eventDTO));
             }

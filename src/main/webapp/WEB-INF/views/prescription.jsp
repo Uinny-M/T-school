@@ -10,7 +10,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta/>
     <link href="css/t.css" rel="stylesheet" type="text/css">
-    <title>Назначение</title>
+    <title>Prescriptions</title>
 </head>
 <body>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -19,11 +19,11 @@
 <div class="container">
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
-        <h3>Подробное назначение</h3>
+        <h3>Prescription's details</h3>
         <form:form action="${pageContext.request.contextPath}/prescription/case/${caseId}/add" method="post"
                    modelAttribute="prescription" cssClass="form">
             <div class="form-group-create row">
-                <b class="col-xs-3">Вид манипуляции</b>
+                <b class="col-xs-3">Type of manipulation</b>
                 <form:select path="manipulationTitle" cssClass="form-select-lg">
                     <c:forEach var="manipulation" items="${manipulations}">
                         <form:option value="${manipulation.id}" label="${manipulation.title}"/>
@@ -31,19 +31,19 @@
                 </form:select>
             </div>
             <div class="form-group-create row">
-                <b class="col-xs-3">Лекарство</b>
+                <b class="col-xs-3">Medicament</b>
                 <form:input cssClass="form-s" path="drug"/>
             </div>
             <div class="form-group-create row">
-                <b class="col-xs-3">Дозировка</b>
+                <b class="col-xs-3">Dosage</b>
                 <form:input cssClass="form-s" path="dosage"/>
             </div>
             <div class="form-group-create row">
-                <b class="col-xs-3">Длительность, дней</b>
+                <b class="col-xs-3">Duration, days</b>
                 <form:input cssClass="form-s" type="number" path="duration"/>
             </div>
             <div class="form-group-create row">
-                <b class="col-xs-3">Дни недели</b>
+                <b class="col-xs-3">Days of week</b>
 <%--                <select name="weekdays" size="7" Class="form-s" multiple="multiple">--%>
 <%--                    <c:forEach var="weekday" items="${week}">--%>
 <%--                        <option value="${weekday}">${weekday}</option>--%>
@@ -56,7 +56,7 @@
                 </form:select>
             </div>
             <div class="form-group-create row">
-                <b class="col-xs-3">Время приема</b>
+                <b class="col-xs-3">Time of day</b>
 <%--                <select name="week" size="4" Class="form-s" multiple="multiple">--%>
 <%--                    <c:forEach var="time" items="${times}">--%>
 <%--                        <option value="${time}">${time}</option>--%>
@@ -69,12 +69,12 @@
                 </form:select>
             </div>
             <br><br>
-            <button type="submit" class="btn">Сохранить изменения</button>
+            <button type="submit" class="btn">Save changes</button>
         </form:form>
         <br>
         <botton class="btn">
         <a href="http://localhost:8080/T_school_war_exploded/cases/${patientId}/update/${caseId}"
-           style="color: #efffe9">Назад</a>
+           style="color: #efffe9">Back</a>
     </botton>
     </div>
 </div>

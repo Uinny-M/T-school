@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link href="css/t.css" rel="stylesheet" type="text/css">
-    <title>Главная</title>
+    <title>Home page</title>
 </head>
 <body>
 
@@ -22,18 +22,18 @@
     <div class="content">
         <div class="navi-block ">
             <a href="${pageContext.request.contextPath}/patient/" class="block">
-                <h2>Пациенты</h2>
+                <h2>Patients</h2>
             </a>
             <a href="${pageContext.request.contextPath}/event/" class="block">
-                <h2>Процедуры</h2>
+                <h2>Procedures</h2>
             </a>
         </div>
         <div class="navi-block">
             <a href="${pageContext.request.contextPath}/employee/" class="block">
-                <h2>Сотрудники</h2>
+                <h2>Employees</h2>
             </a>
             <a href="${pageContext.request.contextPath}/employee/manipulation" class="block">
-                <h2>Приемная</h2>
+                <h2>Out-patient clinic</h2>
             </a>
         </div>
     </div>
