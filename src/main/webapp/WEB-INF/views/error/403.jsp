@@ -20,10 +20,18 @@
 <div class="container http-error-container">
     <div class="content-exception">
 
-        <h1>ERROR 400</h1>
-        <h2>The application does not support the request</h2>
-        <button type="button" class="btn" style="margin-top: 1px">
-            <a href="${pageContext.request.contextPath}/" class="menu-index">
+        <h1>ERROR 403</h1>
+        <h2> Access is denied</h2>
+        <sec:authorize access="!isAuthenticated()">
+            <h3>Please log in</h3>
+            <a href="${pageContext.request.contextPath}/login" class="menu-index">
+                Login</a>
+        </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+            <h3>Your account does not have access to this resource</h3>
+        </sec:authorize>
+        <button type="button" class="btn" style="margin-top: 1px; background: #28a347">
+            <a href="${pageContext.request.contextPath}/">
                 Return to the homepage</a>
         </button>
     </div>
