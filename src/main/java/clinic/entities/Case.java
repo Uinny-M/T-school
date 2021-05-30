@@ -47,7 +47,7 @@ public class Case {
     private LocalDate endDate;
 
     //status of the case (patient's therapy continues?)
-    @Column(name = "open", nullable = false, columnDefinition = "TINYINT(1)")
+    @Column(name = "open", nullable = false, columnDefinition = "true")
     private boolean openCase;
 
     public Long getId() {

@@ -36,15 +36,10 @@
 <style>
     .content-exception {
         background-color: #fff;
-        height: auto;
-        width: auto;
-        display: block;
-        padding: 20px;
-        list-style: none;
-        position: absolute;
-        bottom: 55px;
-        top: 165px;
+        color: #d5272b;
+        margin-top: 200px;
         overflow-y: auto;
         text-align: center;
+        justify-content: center;
     }
 </style>

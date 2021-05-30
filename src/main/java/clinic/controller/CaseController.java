@@ -1,6 +1,7 @@
 package clinic.controller;
 
 import clinic.dto.CaseDTO;
+import clinic.exception.BusinessException;
 import clinic.service.api.CaseService;
 import clinic.service.api.EmployeeService;
 import clinic.service.api.PatientService;
@@ -41,8 +42,14 @@ public class CaseController {
                                     @PathVariable("patientId") Integer patientId) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("patientId", patientId);
-        modelAndView.addObject("case", caseService.getOneById(caseId));
-        modelAndView.addObject("prescription", prescriptionService.getAllByCaseId(caseId));
+        try {
+            modelAndView.addObject("case", caseService.getOneById(caseId));
+            modelAndView.addObject("openCase", caseService.getOneById(caseId).isOpenCase());
+            modelAndView.addObject("prescription", prescriptionService.getAllByCaseId(caseId));
+        } catch (Exception e){
+            throw new BusinessException();
+        }
+
         modelAndView.setViewName("patientCase");
         return modelAndView;
     }
@@ -61,13 +68,12 @@ public class CaseController {
     @RequestMapping(value = "/close/{caseId}", method = {RequestMethod.GET, RequestMethod.POST})
     public RedirectView closeCase(@PathVariable Long caseId,
                                   @ModelAttribute(value = "error") String errorMessage) {
-
-//        try {
-//            caseService.closeCase(caseId);
-//        } catch (BusinessException e) {
-//            errorMessage = e.getMessage();
-//            //todo
-//        }
+        try {
+            caseService.closeCase(caseId);
+        } catch (BusinessException e) {
+            errorMessage = e.getMessage();
+            //todo
+        }
         caseService.closeCase(caseId);
         String url = "/T_school_war_exploded/cases/"
                 + caseService.getOneById(caseId).getPatient().getId();

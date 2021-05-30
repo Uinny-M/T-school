@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.time.LocalDate;
+
 @Log
 @Controller
 @RequestMapping(value = "/event")
@@ -33,6 +35,8 @@ public class EventController {
     public ModelAndView getEvents() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("events", eventService.getAllEvents());
+//        modelAndView.addObject("immutable", true);
+//        modelAndView.addObject("dateNow", LocalDate.now());
         modelAndView.setViewName("events");
         return modelAndView;
     }

@@ -54,7 +54,12 @@
             <a href="${pageContext.request.contextPath}/cases/${patientId}" style="color: #efffe9">
                 Patient's card record</a>
         </button>
+        <button class="btn">
+            <a href="${pageContext.request.contextPath}/event/${patientId}"
+               style="color: #efffe9">List of procedures</a>
+        </button>
         <sec:authorize access="hasRole('ROLE_DOCTOR')">
+            <c:if test="${openCase}">
             <button type="button" class="btn">
                 <a href="${pageContext.request.contextPath}/cases/close/${caseId}"
                    style="color: #efffe9">Close the case</a></button>
@@ -62,10 +67,7 @@
                 <a href="${pageContext.request.contextPath}/prescription/case/${caseId}/add"
                    style="color: #efffe9">Add new prescription</a>
             </button>
-            <button class="btn">
-                <a href="http://localhost:8080/T_school_war_exploded/event/${patientId}"
-                   style="color: #efffe9">List of procedures</a>
-            </button>
+            </c:if>
         </sec:authorize>
 
         <h3>Prescriptions in the case</h3>

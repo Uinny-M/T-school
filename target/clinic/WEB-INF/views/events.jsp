@@ -63,7 +63,7 @@
                     <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')">
 
                         <c:choose>
-                            <c:when test="${e.status eq 'Planned'}">
+                            <c:when test="${e.status eq 'Planned'} and ${not immutable}">
                                 <%--                                todo && ${e.date eq parsedDatetime}--%>
                                 <td>
                                     <form:form action="${pageContext.request.contextPath}/event/${e.id}/done"

@@ -1,15 +1,19 @@
 package clinic.controller;
 
 import clinic.dto.PatientDTO;
+import clinic.exception.BusinessException;
 import clinic.service.api.CaseService;
 import clinic.service.api.EmployeeService;
 import clinic.service.api.PatientService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -27,7 +31,6 @@ import org.springframework.web.servlet.view.RedirectView;
 public class PatientController {
     private final PatientService patientService;
     private final String ROLE_DOCTOR = "ROLE_DOCTOR";
-    private final String ROLE_ADMIN = "ROLE_ADMIN";
 
     @Autowired
     public PatientController(PatientService patientService) {
@@ -38,7 +41,11 @@ public class PatientController {
     @GetMapping(value = "/{patientId}")
     public ModelAndView getPatientById(@PathVariable("patientId") Integer patientId) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("patient", patientService.getOneById(patientId));
+        try {
+            modelAndView.addObject("patient", patientService.getOneById(patientId));
+        } catch (BusinessException e){
+//            response.sendError(HttpServletResponse.SC_NOT_FOUND);//todo
+        }
         modelAndView.setViewName("patient");
         return modelAndView;
     }
@@ -64,6 +71,7 @@ public class PatientController {
     }
 
     //Add new patient
+    @Secured(ROLE_DOCTOR)
     @PostMapping(value = "/add")
     public RedirectView addPatient(@ModelAttribute PatientDTO patientDto) {
         patientService.createOrUpdatePatient(patientDto);
