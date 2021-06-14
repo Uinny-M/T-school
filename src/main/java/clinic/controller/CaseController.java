@@ -60,7 +60,7 @@ public class CaseController {
     public RedirectView addCase(@ModelAttribute CaseDTO caseDTO,
                                 @PathVariable("patientId") Integer patientId) {
         caseService.createCase(caseDTO.getDiagnosis(), patientId);
-        return new RedirectView("/clinic/cases/" + patientId);
+        return new RedirectView("/T_school_war_exploded/cases/" + patientId);
     }
 
     // Close the case by Case's id
@@ -75,7 +75,7 @@ public class CaseController {
             //todo
         }
         caseService.closeCase(caseId);
-        String url = "/clinic/cases/"
+        String url = "/T_school_war_exploded/cases/"
                 + caseService.getOneById(caseId).getPatient().getId();
         return new RedirectView(url);
     }
@@ -87,6 +87,6 @@ public class CaseController {
                                    @PathVariable("patientId") Integer patientId,
                                    @PathVariable("caseId") Long caseId) {
         caseService.updateCase(caseDTO.getDiagnosis(), caseId);
-        return new RedirectView("/clinic/cases/" + patientId + "/update/" + caseId);
+        return new RedirectView("/T_school_war_exploded/cases/" + patientId + "/update/" + caseId);
     }
 }

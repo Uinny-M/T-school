@@ -59,6 +59,6 @@ public class EmployeeController {
         employeeDTO.setPassword(encoder.encode(employeeDTO.getPassword()));
         employeeDTO.setEnable(true);
         employeeService.create(employeeDTO);
-        return new RedirectView("/clinic/employee/");
+        return new RedirectView("/T_school_war_exploded/employee/");
     }
 }

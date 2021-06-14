@@ -77,10 +77,10 @@ public interface EventService extends AbstractService<Event, EventDTO> {
      */
     void eventCancel(Long eventId, String comment);
 
-//    /**
-//     * Update event for 2nd app
-//     *
-//     * @param trackResponse
-//     */
-//    void eventUpdate(TrackResponse trackResponse);
+    /**
+     * Create event for 2nd app
+     *
+     * @param eventDto - event's data
+     */
+    EventDTO eventCreate(EventDTO eventDto);
 }

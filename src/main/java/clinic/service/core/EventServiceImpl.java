@@ -6,8 +6,8 @@ import clinic.dto.EventDTO;
 import clinic.entities.Event;
 import clinic.entities.enums.EventStatus;
 import clinic.mappers.EventMapper;
-import clinic.mymq.Producer;
 import clinic.service.api.EventService;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,9 +20,11 @@ import java.util.stream.Collectors;
 @Service
 public class EventServiceImpl extends AbstractServiceImpl<Event, EventDTO, EventDao, EventMapper>
         implements EventService {
+    private final AmqpTemplate template;
     @Autowired
-    public EventServiceImpl(EventDao dao, EventMapper mapper) {
+    public EventServiceImpl(EventDao dao, EventMapper mapper, AmqpTemplate template) {
         super(dao, mapper);
+        this.template = template;
     }
 
     @Transactional
@@ -76,8 +78,8 @@ public class EventServiceImpl extends AbstractServiceImpl<Event, EventDTO, Event
     public void eventDone(Long eventId) {
         EventDTO eventDTO = getOneById(eventId);
         eventDTO.setStatus(EventStatus.COMPLETED.getDescription());
-
         dao.update(mapToEntity(eventDTO));
+        template.convertAndSend("queue1", "Message to queue - eventDone");
     }
 
     @Transactional
@@ -86,6 +88,15 @@ public class EventServiceImpl extends AbstractServiceImpl<Event, EventDTO, Event
         eventDTO.setStatus(EventStatus.CANCELED.getDescription());
         eventDTO.setComment(comment);
         dao.update(mapToEntity(eventDTO));
+        template.convertAndSend("queue1", "Message to queue - eventCancel");
+    }
+
+    @Override
+    public EventDTO eventCreate(EventDTO eventDto) {
+        if (eventDto.getDate().equals(LocalDate.now())){
+            template.convertAndSend("queue1", "Message to queue - eventCreate");
+        }
+        return mapToDTO(dao.save(mapToEntity(eventDto)));
     }
 
     private void checkEventFailed(List<EventDTO> events) {
@@ -97,9 +108,4 @@ public class EventServiceImpl extends AbstractServiceImpl<Event, EventDTO, Event
             }
         });
     }
-
-
-//    public void eventUpdate(TrackResponse trackResponse) {
-//        //todo
-//    }
 }

@@ -64,7 +64,7 @@ public class EventController {
     @RequestMapping(value = "/{eventId}/done", method = {RequestMethod.GET, RequestMethod.POST})
     public RedirectView eventDone(@PathVariable("eventId") Long eventId) {
         eventService.eventDone(eventId);
-        return new RedirectView("/clinic/event/now");
+        return new RedirectView("/T_school_war_exploded/event/now");
     }
 
     //change eventStatus to Cancel
@@ -73,6 +73,6 @@ public class EventController {
     public RedirectView eventCancel(@PathVariable("eventId") Long eventId,
                                     @RequestParam(required = false, value = "comment") String comment) {
         eventService.eventCancel(eventId, comment);
-        return new RedirectView("/clinic/event/now");
+        return new RedirectView("/T_school_war_exploded/event/now");
     }
 }

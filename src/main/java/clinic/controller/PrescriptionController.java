@@ -67,7 +67,7 @@ public class PrescriptionController {
     public RedirectView prescriptionCancel(@PathVariable("prescriptionId") Long prescriptionId) {
         prescriptionService.prescriptionCancel(prescriptionId);
         PrescriptionDTO prescriptionDTO =prescriptionService.getOneById(prescriptionId);
-        String url = "/clinic/cases/" + prescriptionDTO.getPatient().getId()
+        String url = "/T_school_war_exploded/cases/" + prescriptionDTO.getPatient().getId()
                 + "/update/" + prescriptionDTO.getPatientCase().getId();
         return new RedirectView(url);
     }
@@ -79,7 +79,7 @@ public class PrescriptionController {
                                         @PathVariable Long caseId) {
         log.info("method addPrescription is started");
         prescriptionService.createPrescription(prescriptionDTO, caseId);
-        return new RedirectView("/clinic/prescription/case/{caseId}/add");
+        return new RedirectView("/T_school_war_exploded/prescription/case/{caseId}/add");
     }
 
     @RequestMapping(value = "/case/{caseId}/add", method = RequestMethod.GET)

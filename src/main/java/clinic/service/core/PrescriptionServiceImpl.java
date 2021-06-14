@@ -71,7 +71,7 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
                 eventDTO.setDate(dayPattern.get(i));
                 eventDTO.setTime(timePattern.get(j));
                 eventDTO.setStatus(EventStatus.PLANNED.getDescription());
-                eventService.create(eventDTO);
+                eventService.eventCreate(eventDTO);
             }
         }
         return prescriptionDTO;
