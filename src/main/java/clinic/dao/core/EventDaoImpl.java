@@ -18,7 +18,8 @@ public class EventDaoImpl extends AbstractHibernateDao<Event> implements EventDa
     @Override
     public List<Event> findAllByDate(LocalDate date) {
         return em.createQuery(
-                "SELECT e FROM Event e WHERE e.date = :date AND e.status = 1 ")
+                "SELECT e FROM Event e WHERE e.date = :date AND e.status = 1 " +
+                        " ORDER BY e.time ")
                 .setParameter("date", date)
                 .getResultList();
     }

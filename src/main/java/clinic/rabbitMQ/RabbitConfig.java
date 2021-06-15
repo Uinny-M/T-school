@@ -1,6 +1,7 @@
 package clinic.rabbitMQ;
 
 
+import com.rabbitmq.client.AMQP;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageListener;
@@ -15,16 +16,18 @@ import org.springframework.context.annotation.Configuration;
 
 
 import java.util.logging.Logger;
+
 @Configuration
 public class RabbitConfig {
     Logger log = Logger.getLogger(RabbitConfig.class.getName());
 
     @Bean
-    public ConnectionFactory connectionFactory(){
+    public ConnectionFactory connectionFactory() {
         CachingConnectionFactory connectionFactory =
                 new CachingConnectionFactory("localhost");
         return connectionFactory;
     }
+
     @Bean
     public AmqpAdmin amqpAdmin() {
         return new RabbitAdmin(connectionFactory());

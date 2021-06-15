@@ -2,6 +2,7 @@ package clinic.controller;
 
 
 import clinic.dto.EventDTO;
+import clinic.dto.EventOutDTO;
 import clinic.service.api.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,5 +21,5 @@ public class RestController {
     }
 
     @GetMapping("/events")
-    public List<EventDTO> getEvents(){return eventService.getAllEventsToday();}
+    public List<EventOutDTO> getEvents(){return eventService.getEventsToInfoBoard();}
 }

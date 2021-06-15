@@ -1,10 +1,5 @@
 package clinic.dto;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 public class EventOutDTO {
     private Long id;
 
@@ -12,9 +7,40 @@ public class EventOutDTO {
     private String patient;
 
     //time of the event
-    @DateTimeFormat(pattern = "HH:mm")
-    private LocalTime time;
+    private String time;
 
-//    //type of the manipulation
-//    private String manipulationType;
+    //doctor's name
+    private String doctor;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPatient() {
+        return patient;
+    }
+
+    public void setPatient(String patient) {
+        this.patient = patient;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(String doctor) {
+        this.doctor = doctor;
+    }
 }

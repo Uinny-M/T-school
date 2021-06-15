@@ -2,6 +2,7 @@ package clinic.service.api;
 
 //import clinic.connectConfig.TrackResponse;
 import clinic.dto.EventDTO;
+import clinic.dto.EventOutDTO;
 import clinic.entities.Event;
 
 import java.util.List;
@@ -83,4 +84,9 @@ public interface EventService extends AbstractService<Event, EventDTO> {
      * @param eventDto - event's data
      */
     EventDTO eventCreate(EventDTO eventDto);
+
+    /**
+     * Get list of events for the InfoBoard
+     */
+    List<EventOutDTO> getEventsToInfoBoard();
 }
