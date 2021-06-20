@@ -42,19 +42,4 @@ public class RabbitConfig {
     public Queue myQueue1() {
         return new Queue("queue1");
     }
-
-//    @Bean
-//    public SimpleMessageListenerContainer messageListenerContainer1() {
-//        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-//        container.setConnectionFactory(connectionFactory());
-//        container.setQueueNames("queue1");
-//        container.setMessageListener(new MessageListener() {
-//            //тут ловим сообщения из queue1
-//            public void onMessage(Message message) {
-//                log.info("received from queue1 : " + new String(message.getBody()));
-//            }
-//        });
-//        return container;
-//    }
-
 }

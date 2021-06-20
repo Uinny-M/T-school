@@ -47,7 +47,7 @@ public class PatientController {
             ModelAndView modelAndView1 = new ModelAndView();
             modelAndView1.setViewName("/error/exception");
             modelAndView1.addObject("error", e.getMessage());
-            return modelAndView1;//todo
+            return modelAndView1;
         }
         modelAndView.setViewName("patient");
         return modelAndView;

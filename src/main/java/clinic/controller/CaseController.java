@@ -60,7 +60,7 @@ public class CaseController {
             ModelAndView modelAndView1 = new ModelAndView();
             modelAndView.setViewName("/error/exception");
             modelAndView1.addObject("error", e.getMessage());
-            return modelAndView1;//todo check
+            return modelAndView1;
         }
         modelAndView.setViewName("patientCase");
         return modelAndView;
@@ -91,7 +91,7 @@ public class CaseController {
         } catch (BusinessException e) {
             RedirectView redirectView = new RedirectView("/T_school_war_exploded/error/exception");
             redirectView.addStaticAttribute("error", e.getMessage());
-            return redirectView;//todo
+            return redirectView;
         }
 //        caseService.closeCase(caseId);
         String url = "/T_school_war_exploded/cases/"
