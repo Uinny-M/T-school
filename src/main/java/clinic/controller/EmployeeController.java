@@ -1,14 +1,21 @@
 package clinic.controller;
 
 import clinic.dto.EmployeeDTO;
+import clinic.exception.BusinessException;
 import clinic.service.api.EmployeeService;
 import clinic.service.api.ManipulationService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import javax.validation.Valid;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 @Controller
 @RequestMapping(value = "/employee")
@@ -55,10 +62,24 @@ public class EmployeeController {
     //Add new employee
     @Secured(value = ROLE_ADMIN)
     @RequestMapping (value = "/add", method = { RequestMethod.POST})
-    public RedirectView addEmployee(@ModelAttribute EmployeeDTO employeeDTO) {
+    public RedirectView addEmployee(@ModelAttribute @Valid EmployeeDTO employeeDTO, BindingResult result) {
+        ValidatorFactory v = Validation.buildDefaultValidatorFactory();
+        Validator validator = v.getValidator();
+
+        RedirectView redirect = new RedirectView("/T_school_war_exploded/employee/add");
+        redirect.addStaticAttribute("errors", result.getAllErrors());
+
         employeeDTO.setPassword(encoder.encode(employeeDTO.getPassword()));
         employeeDTO.setEnable(true);
-        employeeService.create(employeeDTO);
+        try {
+            employeeService.create(employeeDTO);
+        } catch (BusinessException e){
+            RedirectView redirectView = new RedirectView("/T_school_war_exploded/error/exception");
+            redirectView.addStaticAttribute("error", e.getMessage());
+            return redirectView;
+        }
+
+
         return new RedirectView("/T_school_war_exploded/employee/");
     }
 }

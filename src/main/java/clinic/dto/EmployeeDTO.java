@@ -2,6 +2,10 @@ package clinic.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
@@ -9,21 +13,27 @@ public class EmployeeDTO {
     private Integer id;
 
     //patient's second name
+    @Length(min = 2)
+    @NotEmpty(message = "Name cannot be empty")
     private String secondName;
 
-    //patient's first name
+    //patient's first
+    @NotBlank(message = "Name cannot be empty")
     private String firstName;
 
     //patient's middle name
+    @NotBlank(message = "Name cannot be empty")
     private String middleName;
 
     //type of medical employee (doctor/nurse/admin)
     private String position;
 
     //login for auth
+    @NotBlank(message = "Login cannot be empty")
     private String login;
 
     //password for auth
+    @NotBlank(message = "Password cannot be empty")
     private String password;
 
     //is the employee enabled

@@ -1,10 +1,7 @@
 package clinic.entities;
 
 import clinic.entities.enums.Role;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -53,6 +50,7 @@ public class Employee {
     private boolean enabled;
 
     //employee's role
+    @NonNull
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;

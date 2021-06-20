@@ -51,7 +51,11 @@ public abstract class AbstractServiceImpl<T, DTO, Dao extends AbstractDao, Mappe
     @Override
     @Transactional
     public DTO create(DTO dto) {
-        return mapToDTO((T) dao.save(mapToEntity(dto)));
+        try {
+            return mapToDTO((T) dao.save(mapToEntity(dto)));
+        } catch (Exception e){
+            throw new BusinessException("Incorrect data entered");
+        }
     }
 
     @Override

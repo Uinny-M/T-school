@@ -24,7 +24,7 @@
                    cssClass="form">
             <div class="form-group-create row">
                 <b class="col-xs-3">Secondname</b>
-                <form:input cssClass="form-s" path="secondName"/>
+                <form:input  cssClass="form-s" path="secondName" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Firstname</b>
