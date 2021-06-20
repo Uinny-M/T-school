@@ -19,10 +19,10 @@
 <jsp:include page="../help/header.jsp"></jsp:include>
 <div class="container http-error-container">
     <div class="content-exception">
-        <h1>ERROR 400</h1>
-        <h2>The application does not support the request</h2>
-        <button type="button" class="btn" style="margin-top: 1px">
-            <a href="${pageContext.request.contextPath}/" class="menu-index">
+        <h1>Business Exception</h1>
+        <h2>${error}</h2>
+        <button type="button" class="btn" style="margin-top: 1px; background: #28a347">
+            <a href="${pageContext.request.contextPath}/">
                 Return to the homepage</a>
         </button>
     </div>
@@ -30,7 +30,6 @@
 <jsp:include page="../help/footer.jsp"></jsp:include>
 </body>
 </html>
-
 <style>
     .content-exception {
         background-color: #fff;

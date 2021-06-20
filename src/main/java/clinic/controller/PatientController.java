@@ -43,8 +43,11 @@ public class PatientController {
         ModelAndView modelAndView = new ModelAndView();
         try {
             modelAndView.addObject("patient", patientService.getOneById(patientId));
-        } catch (BusinessException e){
-//            response.sendError(HttpServletResponse.SC_NOT_FOUND);//todo
+        } catch (BusinessException e) {
+            ModelAndView modelAndView1 = new ModelAndView();
+            modelAndView1.setViewName("/error/exception");
+            modelAndView1.addObject("error", e.getMessage());
+            return modelAndView1;//todo
         }
         modelAndView.setViewName("patient");
         return modelAndView;
@@ -63,7 +66,7 @@ public class PatientController {
 
     //Return Patient by ID
     @GetMapping(value = "/add")
-    public ModelAndView getPatientById() {
+    public ModelAndView getPatient() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("patient", new PatientDTO());
         modelAndView.setViewName("patient");

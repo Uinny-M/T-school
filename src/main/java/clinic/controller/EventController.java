@@ -36,7 +36,7 @@ public class EventController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("events", eventService.getAllEvents());
 //        modelAndView.addObject("immutable", true);
-//        modelAndView.addObject("dateNow", LocalDate.now());
+        modelAndView.addObject("dateNow", LocalDate.now().plusDays(1));
         modelAndView.setViewName("events");
         return modelAndView;
     }
@@ -45,6 +45,7 @@ public class EventController {
     @GetMapping(value = "/now")
     public ModelAndView getEventsForOur() {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("dateNow", LocalDate.now().plusDays(1));
         modelAndView.addObject("events", eventService.getAllEventsNow());
         modelAndView.setViewName("events");
         return modelAndView;
@@ -53,6 +54,7 @@ public class EventController {
     @GetMapping(value = "/today")
     public ModelAndView getEventsForToday() {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("dateNow", LocalDate.now().plusDays(1));
         modelAndView.addObject("events", eventService.getAllEventsToday());
         modelAndView.addObject("comment", new String());
         modelAndView.setViewName("events");

@@ -2,6 +2,7 @@ package clinic.service.core;
 
 import clinic.dao.api.AbstractDao;
 import clinic.dto.EmployeeDTO;
+import clinic.exception.BusinessException;
 import clinic.mappers.AbstractMapper;
 import clinic.service.api.AbstractService;
 import lombok.AllArgsConstructor;
@@ -35,6 +36,9 @@ public abstract class AbstractServiceImpl<T, DTO, Dao extends AbstractDao, Mappe
     @Override
     @Transactional(readOnly = true)
     public DTO getOneById(Number id) {
+        if (dao.findById(id)==null){
+            throw new BusinessException("Object is not found");
+        }
         return mapToDTO((T) dao.findById(id));
     }
 
@@ -42,7 +46,6 @@ public abstract class AbstractServiceImpl<T, DTO, Dao extends AbstractDao, Mappe
     @Transactional(readOnly = true)
     public List<DTO> getAll() {
         return mapToDTO(dao.findAll());
-        //return mapToDTO(dao.findAll());
     }
 
     @Override
@@ -56,16 +59,6 @@ public abstract class AbstractServiceImpl<T, DTO, Dao extends AbstractDao, Mappe
     public DTO update(DTO dto) {
         return mapToDTO((T) dao.update(mapToEntity(dto)));
     }
-
-//    @Transactional
-//    @Override
-//    public DTO createOrUpdate(DTO dto) {
-//        if (getAll().contains(dto)) {
-//            update(dto);
-//        }
-//        else create(dto);
-//        return dto;
-//    }
 
     @Override
     @Transactional

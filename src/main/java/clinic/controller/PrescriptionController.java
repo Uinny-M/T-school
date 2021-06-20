@@ -1,6 +1,7 @@
 package clinic.controller;
 
 import clinic.dto.PrescriptionDTO;
+import clinic.exception.BusinessException;
 import clinic.service.api.CaseService;
 import clinic.service.api.ManipulationService;
 import clinic.service.api.PrescriptionService;
@@ -78,7 +79,13 @@ public class PrescriptionController {
     public RedirectView addPrescription(@ModelAttribute PrescriptionDTO prescriptionDTO,
                                         @PathVariable Long caseId) {
         log.info("method addPrescription is started");
-        prescriptionService.createPrescription(prescriptionDTO, caseId);
+        try {
+            prescriptionService.createPrescription(prescriptionDTO, caseId);
+        } catch (BusinessException e){
+            RedirectView redirectView = new RedirectView("/T_school_war_exploded/error/exception");
+            redirectView.addStaticAttribute("error", e.getMessage());
+            return redirectView;
+        }
         return new RedirectView("/T_school_war_exploded/prescription/case/{caseId}/add");
     }
 

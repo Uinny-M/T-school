@@ -40,10 +40,13 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
         this.prescriptionDao = prescriptionDao;
     }
 
-    private static final Logger log = Logger.getLogger(PrescriptionController.class.getName());
+    private static final Logger log = Logger.getLogger(CaseServiceImpl.class.getName());
 
     @Transactional
     public List<CaseDTO> getCasesByPatientId(Integer patientId) {
+        if(patientService.getOneById(patientId)==null){
+            throw new BusinessException("The patient is not found");
+        }
         return mapToDTO(dao.findCasesByPatientId(patientId));
     }
 
@@ -56,7 +59,7 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
     public void closeCase(Long caseId) {
         CaseDTO caseDTO = getOneById(caseId);
         if (!caseDTO.isOpenCase()){
-            throw new BusinessException("The case is already closed");//todo проверить
+            throw new BusinessException("The case#" + caseId + " is already closed");
         }
         caseDTO.setOpenCase(false);
         caseDTO.setEndDate(LocalDate.now());
@@ -76,13 +79,15 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
                 eventService.eventCancel(eventDTO.getId(), "by doctor");
             }
         });
+        log.info("Case#" + caseId + " closed");
     }
 
     @Transactional
-    public void createCase(String diagnosis, Integer patientId) {
+    public void createCase(String diagnosis, Integer patientId)
+            throws BusinessException {
         CaseDTO caseDTO = new CaseDTO();
         caseDTO.setDoctor(getCurrentUser());
-        caseDTO.setPatient(patientService.getOneById(patientId));
+            caseDTO.setPatient(patientService.getOneById(patientId));
         caseDTO.setStartDate(LocalDate.now());
         caseDTO.setOpenCase(true);
         if (!diagnosis.isEmpty()) {

@@ -73,15 +73,12 @@
                     <a href="${pageContext.request.contextPath}/prescription/case/${caseId}/add"
                        style="color: #efffe9">Add new prescription</a>
                 </button>
-                </div>
             </c:if>
         </sec:authorize>
-
-        <h3>Prescriptions in the case</h3>
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
-                <th colspan="4">List of prescriptions</th>
+                <th colspan="4">List of prescriptions. Patient: ${patient.secondName} ${patient.firstName} ${patient.middleName}</th>
             </tr>
             <tr>
                 <th width="25%">Type of manipulation</th>

@@ -5,6 +5,7 @@ import clinic.dto.EventDTO;
 import clinic.dto.PrescriptionDTO;
 import clinic.entities.Prescription;
 import clinic.entities.enums.EventStatus;
+import clinic.exception.BusinessException;
 import clinic.mappers.PrescriptionMapper;
 import clinic.service.api.CaseService;
 import clinic.service.api.EventService;
@@ -53,6 +54,9 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
     @Transactional
     @Override
     public PrescriptionDTO createPrescription(PrescriptionDTO prescriptionDTO, Long caseId) {
+        if (!caseService.getOneById(caseId).isOpenCase()){
+            throw new BusinessException("The case is already closed");
+        }
         Set<DayOfWeek> days = prescriptionDTO.getWeekdays();
         Set<String> times = prescriptionDTO.getTimes();
         prescriptionDTO.setManipulation(manipulationService.getOneByTitle(prescriptionDTO.getManipulationTitle()));

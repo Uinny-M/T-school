@@ -42,7 +42,7 @@
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
-                <th colspan="5">Cases list</th>
+                <th colspan="5">Cases list. Patient: ${patient.secondName} ${patient.firstName} ${patient.middleName}</th>
             </tr>
             <tr>
                 <th width="20%">Case №</th>
