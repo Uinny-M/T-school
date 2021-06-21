@@ -28,11 +28,11 @@
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Firstname</b>
-                <form:input cssClass="form-s" path="firstName"/>
+                <form:input cssClass="form-s" path="firstName" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Middlename</b>
-                <form:input cssClass="form-s" path="middleName"/>
+                <form:input cssClass="form-s" path="middleName" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Position</b>
@@ -40,11 +40,11 @@
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Login</b>
-                <form:input cssClass="form-s" path="login"/>
+                <form:input cssClass="form-s" path="login" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Password</b>
-                <form:password cssClass="form-s" path="password"/>
+                <form:password cssClass="form-s" path="password" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Access level</b>

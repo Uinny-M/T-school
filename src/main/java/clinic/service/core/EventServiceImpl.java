@@ -7,8 +7,8 @@ import clinic.dto.EventOutDTO;
 import clinic.entities.Event;
 import clinic.entities.enums.EventStatus;
 import clinic.mappers.EventMapper;
-import clinic.service.api.CaseService;
 import clinic.service.api.EventService;
+import org.apache.log4j.Logger;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,7 +30,7 @@ public class EventServiceImpl extends AbstractServiceImpl<Event, EventDTO, Event
         super(dao, mapper);
         this.template = template;
     }
-    private static final Logger log = Logger.getLogger(EventServiceImpl.class.getName());
+    private static final Logger log = Logger.getLogger(EventServiceImpl.class);
     @Transactional
     public List<EventDTO> getAllEvents() {
         List<EventDTO> events = mapToDTO(dao.findAll());

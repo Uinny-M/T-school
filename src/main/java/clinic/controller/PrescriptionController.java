@@ -5,6 +5,7 @@ import clinic.exception.BusinessException;
 import clinic.service.api.CaseService;
 import clinic.service.api.ManipulationService;
 import clinic.service.api.PrescriptionService;
+import org.apache.log4j.Logger;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,6 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 
 @Controller
@@ -30,7 +30,7 @@ public class PrescriptionController {
         this.caseService = caseService;
         this.manipulationService = manipulationService;
     }
-    private static Logger log = Logger.getLogger(PrescriptionController.class.getName());
+    private static Logger log = Logger.getLogger(PrescriptionController.class);
 
     //Return all prescriptions by PatientId
     @GetMapping(value = "/{patientId}")
@@ -78,7 +78,6 @@ public class PrescriptionController {
     @RequestMapping(value = "/case/{caseId}/add", method = RequestMethod.POST)
     public RedirectView addPrescription(@ModelAttribute PrescriptionDTO prescriptionDTO,
                                         @PathVariable Long caseId) {
-        log.info("method addPrescription is started");
         try {
             prescriptionService.createPrescription(prescriptionDTO, caseId);
         } catch (BusinessException e){
@@ -91,7 +90,6 @@ public class PrescriptionController {
 
     @RequestMapping(value = "/case/{caseId}/add", method = RequestMethod.GET)
     public ModelAndView getPrescription(@PathVariable("caseId") Long caseId) {
-        log.info("method getPrescription is started");
         ModelAndView modelAndView = new ModelAndView();
         List<DayOfWeek>days = new ArrayList<>();
         days.add(DayOfWeek.MONDAY);

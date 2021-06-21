@@ -44,7 +44,7 @@
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Days of week</b>
-                <form:select path="weekdays" cssClass="form-select-lg" multiple="multiple" size="7">
+                <form:select path="weekdays" cssClass="form-select-lg" multiple="multiple" size="7" required="required">
                     <c:forEach var="day" items="${days}">
                         <form:option value="${day.name()}"/>
                     </c:forEach>
@@ -52,7 +52,7 @@
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Time of day</b>
-                <form:select path="times" cssClass="form-select-lg" multiple="multiple" size="10">
+                <form:select path="times" cssClass="form-select-lg" multiple="multiple" size="10" required="required">
                     <c:forEach var="time" items="${times}">
                         <form:option value="${time}"/>
                     </c:forEach>

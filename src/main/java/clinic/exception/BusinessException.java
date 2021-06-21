@@ -2,12 +2,12 @@ package clinic.exception;
 
 import clinic.controller.PrescriptionController;
 import lombok.Getter;
+import org.apache.log4j.Logger;
 
-import java.util.logging.Logger;
 
 @Getter
 public class BusinessException extends RuntimeException{
-    private static final Logger log = Logger.getLogger(PrescriptionController.class.getName());
+    private static final Logger log = Logger.getLogger(PrescriptionController.class);
     public BusinessException() {
     }
 

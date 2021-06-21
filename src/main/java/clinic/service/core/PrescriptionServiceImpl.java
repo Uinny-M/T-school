@@ -1,5 +1,6 @@
 package clinic.service.core;
 
+import clinic.controller.PatientController;
 import clinic.dao.api.PrescriptionDao;
 import clinic.dto.EventDTO;
 import clinic.dto.PrescriptionDTO;
@@ -11,6 +12,7 @@ import clinic.service.api.CaseService;
 import clinic.service.api.EventService;
 import clinic.service.api.ManipulationService;
 import clinic.service.api.PrescriptionService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +40,7 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
         this.manipulationService = manipulationService;
         this.eventService = eventService;
     }
+    private static Logger log = Logger.getLogger(PrescriptionServiceImpl.class);
 
     @Transactional
     @Override
@@ -78,6 +81,7 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
                 eventService.eventCreate(eventDTO);
             }
         }
+        log.info("New prescription in case#" + caseId + " created");
         return prescriptionDTO;
     }
 
@@ -94,6 +98,7 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
                 eventService.eventCancel(eventDTO.getId(), "by doctor");
             }
         });
+        log.info("Prescription #" + prescriptionId + " closed");
     }
 
     private List<LocalDate> dayPattern(Set<DayOfWeek> days, byte duration, List<LocalTime> timePattern) {

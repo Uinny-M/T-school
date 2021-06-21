@@ -1,11 +1,9 @@
 
 package clinic.exception;
 
-import clinic.controller.PrescriptionController;
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,11 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.logging.Logger;
+
 
 @Controller
 public class ExceptionController {
-    private static final Logger log = Logger.getLogger(ExceptionController.class.getName());
+    private static final Logger log = Logger.getLogger(ExceptionController.class);
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler(Exception.class)

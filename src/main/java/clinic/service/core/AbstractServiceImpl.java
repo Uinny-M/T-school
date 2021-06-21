@@ -7,6 +7,7 @@ import clinic.mappers.AbstractMapper;
 import clinic.service.api.AbstractService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +32,6 @@ public abstract class AbstractServiceImpl<T, DTO, Dao extends AbstractDao, Mappe
         this.dao = dao;
         this.mapper = mapper;
     }
-
 
     @Override
     @Transactional(readOnly = true)

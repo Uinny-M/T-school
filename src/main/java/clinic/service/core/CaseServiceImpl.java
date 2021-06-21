@@ -12,6 +12,7 @@ import clinic.service.api.CaseService;
 import clinic.service.api.EmployeeService;
 import clinic.service.api.EventService;
 import clinic.service.api.PatientService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,7 +40,7 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
         this.prescriptionDao = prescriptionDao;
     }
 
-    private static final Logger log = Logger.getLogger(CaseServiceImpl.class.getName());
+    private static final Logger log = Logger.getLogger(CaseServiceImpl.class);
 
     @Transactional
     public List<CaseDTO> getCasesByPatientId(Integer patientId) {
@@ -95,6 +95,7 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
         } else {
             caseDTO.setDiagnosis("is not diagnosed");
         }
+        log.info("new Case for " + caseDTO.getPatient().getSecondName() + " created");
         dao.save(mapToEntity(caseDTO));
     }
 

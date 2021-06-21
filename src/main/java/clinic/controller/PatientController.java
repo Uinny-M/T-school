@@ -6,6 +6,8 @@ import clinic.service.api.CaseService;
 import clinic.service.api.EmployeeService;
 import clinic.service.api.PatientService;
 import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  * - getPrescriptionsByPatientId - List(Prescriptions) - список назначений пациента по patientId
  * - getOpenPrescriptionsByPatientId - List(Prescriptions) - список назначений пациента по patientId
  */
-@Log
+
 @Controller
 @RequestMapping(value = "/patient")
 public class PatientController {
@@ -36,6 +38,8 @@ public class PatientController {
     public PatientController(PatientService patientService) {
         this.patientService = patientService;
     }
+
+    private static Logger log = Logger.getLogger(PatientController.class);
 
     //Return Patient by ID
     @GetMapping(value = "/{patientId}")
@@ -77,6 +81,7 @@ public class PatientController {
     @Secured(ROLE_DOCTOR)
     @PostMapping(value = "/add")
     public RedirectView addPatient(@ModelAttribute PatientDTO patientDto) {
+
         patientService.createOrUpdatePatient(patientDto);
         return new RedirectView("/T_school_war_exploded/patient/");
     }

@@ -25,19 +25,19 @@
                    cssClass="form">
             <div class="form-group-create row">
                 <b class="col-xs-3">SecondName</b>
-                <form:input cssClass="form-s" path="secondName"/>
+                <form:input cssClass="form-s" path="secondName" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">FirstName</b>
-                <form:input cssClass="form-s" path="firstName"/>
+                <form:input cssClass="form-s" path="firstName" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">MiddleName</b>
-                <form:input cssClass="form-s" path="middleName"/>
+                <form:input cssClass="form-s" path="middleName" required="required"/>
             </div>
             <div class="form-group row">
                 <b class="col-xs-3">Birthdate</b>
-                <form:input cssClass="form-s" type="date" path="birthdate"/>
+                <form:input cssClass="form-s" type="date" path="birthdate" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Gender</b>
@@ -46,7 +46,7 @@
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Insurance</b>
-                <form:input cssClass="form-s" path="insurance"/>
+                <form:input cssClass="form-s" path="insurance" required="required"/>
             </div>
             <br>
             <sec:authorize access="hasRole('ROLE_DOCTOR')">
