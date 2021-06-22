@@ -20,7 +20,7 @@
 
         <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
             <button class="btn">
-                <a href="http://localhost:8080/T_school_war_exploded/employee/add" style="color: #efffe9">Add new
+                <a href="${pageContext.request.contextPath}/employee/add" style="color: #efffe9">Add new
                     employee</a>
             </button>
         </sec:authorize>

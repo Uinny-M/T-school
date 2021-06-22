@@ -21,7 +21,8 @@
     <div class="content-exception">
         <h1>ERROR 404</h1>
         <h2>Page not found</h2>
-        <button type="button" class="btn" style="margin-top: 1px">
+        <button type="button" class="btn" style="margin-top: 1px; background: #28a347">
+            <h2>${error}</h2>
             <a href="${pageContext.request.contextPath}/">
                 Return to the homepage</a>
         </button>

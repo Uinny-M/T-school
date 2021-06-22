@@ -22,14 +22,14 @@
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
         <h3>List of patients</h3>
-        <form:form action="/T_school_war_exploded/patient/" cssClass="form" method="get">
+        <form:form action="${pageContext.request.contextPath}/patient/" cssClass="form" method="get">
             <input type="text" class="form-s" name="name" style="float: left" placeholder="Secondname"
                    value="${search}"/>
             <button type="submit" class="btn" style="margin-left: 20px;">Find by secondname</button>
         </form:form>
         <sec:authorize access="hasAnyRole('ROLE_DOCTOR', 'ROLE_DOCTOR')">
             <button class="btn">
-                <a href="http://localhost:8080/T_school_war_exploded/patient/add" style="color: #efffe9">New patient</a>
+                <a href="${pageContext.request.contextPath}/patient/add" style="color: #efffe9">New patient</a>
             </button>
         </sec:authorize>
         <br>
@@ -48,7 +48,7 @@
             <c:forEach items="${patients}" var="p">
                 <tr>
                     <td>
-                        <a href="http://localhost:8080/T_school_war_exploded/patient/${p.id}">${p.secondName} ${p.firstName} ${p.middleName}</a>
+                        <a href="${pageContext.request.contextPath}/patient/${p.id}">${p.secondName} ${p.firstName} ${p.middleName}</a>
                     </td>
                     <td>${p.birthdate}</td>
                     <td>${p.insurance}</td>

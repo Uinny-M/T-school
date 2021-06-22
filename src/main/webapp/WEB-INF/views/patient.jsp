@@ -21,23 +21,24 @@
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
         <h3>Patient's data</h3>
-        <form:form action="/T_school_war_exploded/patient/add" method="post" modelAttribute="patient"
+        <h4 style="color: #d5272b">${error}</h4>
+        <form:form action="${pageContext.request.contextPath}/patient/add" method="post" modelAttribute="patient"
                    cssClass="form">
             <div class="form-group-create row">
                 <b class="col-xs-3">SecondName</b>
-                <form:input cssClass="form-s" path="secondName"/>
+                <form:input cssClass="form-s" path="secondName" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">FirstName</b>
-                <form:input cssClass="form-s" path="firstName"/>
+                <form:input cssClass="form-s" path="firstName" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">MiddleName</b>
-                <form:input cssClass="form-s" path="middleName"/>
+                <form:input cssClass="form-s" path="middleName" required="required"/>
             </div>
             <div class="form-group row">
                 <b class="col-xs-3">Birthdate</b>
-                <form:input cssClass="form-s" type="date" path="birthdate"/>
+                <form:input cssClass="form-s" type="date" path="birthdate" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Gender</b>
@@ -46,7 +47,7 @@
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Insurance</b>
-                <form:input cssClass="form-s" path="insurance"/>
+                <form:input cssClass="form-s" path="insurance" required="required"/>
             </div>
             <br>
             <sec:authorize access="hasRole('ROLE_DOCTOR')">
@@ -55,11 +56,11 @@
         </form:form>
         <br>
         <botton class="btn" style="margin: 10px">
-            <a href="http://localhost:8080/T_school_war_exploded/cases/${patient.id}" style="color: #efffe9">Patient's
+            <a href="${pageContext.request.contextPath}/cases/${patient.id}" style="color: #efffe9">Patient's
                 case record</a>
         </botton>
         <botton class="btn">
-            <a href="http://localhost:8080/T_school_war_exploded/event/${patient.id}" style="color: #efffe9">List of
+            <a href="${pageContext.request.contextPath}/event/${patient.id}" style="color: #efffe9">List of
                 procedures</a>
         </botton>
     </div>

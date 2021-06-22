@@ -12,6 +12,7 @@ import clinic.service.api.CaseService;
 import clinic.service.api.EmployeeService;
 import clinic.service.api.EventService;
 import clinic.service.api.PatientService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,10 +40,13 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
         this.prescriptionDao = prescriptionDao;
     }
 
-    private static final Logger log = Logger.getLogger(PrescriptionController.class.getName());
+    private static final Logger log = Logger.getLogger(CaseServiceImpl.class);
 
     @Transactional
     public List<CaseDTO> getCasesByPatientId(Integer patientId) {
+        if(patientService.getOneById(patientId)==null){
+            throw new BusinessException("The patient is not found");
+        }
         return mapToDTO(dao.findCasesByPatientId(patientId));
     }
 
@@ -56,7 +59,7 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
     public void closeCase(Long caseId) {
         CaseDTO caseDTO = getOneById(caseId);
         if (!caseDTO.isOpenCase()){
-            throw new BusinessException("The case is already closed");//todo проверить
+            throw new BusinessException("The case#" + caseId + " is already closed");
         }
         caseDTO.setOpenCase(false);
         caseDTO.setEndDate(LocalDate.now());
@@ -76,13 +79,15 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
                 eventService.eventCancel(eventDTO.getId(), "by doctor");
             }
         });
+        log.info("Case#" + caseId + " closed");
     }
 
     @Transactional
-    public void createCase(String diagnosis, Integer patientId) {
+    public void createCase(String diagnosis, Integer patientId)
+            throws BusinessException {
         CaseDTO caseDTO = new CaseDTO();
         caseDTO.setDoctor(getCurrentUser());
-        caseDTO.setPatient(patientService.getOneById(patientId));
+            caseDTO.setPatient(patientService.getOneById(patientId));
         caseDTO.setStartDate(LocalDate.now());
         caseDTO.setOpenCase(true);
         if (!diagnosis.isEmpty()) {
@@ -90,6 +95,7 @@ public class CaseServiceImpl extends AbstractServiceImpl<Case, CaseDTO, CaseDao,
         } else {
             caseDTO.setDiagnosis("is not diagnosed");
         }
+        log.info("new Case for " + caseDTO.getPatient().getSecondName() + " created");
         dao.save(mapToEntity(caseDTO));
     }
 

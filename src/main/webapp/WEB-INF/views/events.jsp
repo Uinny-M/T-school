@@ -57,14 +57,13 @@
                     <td>${e.manipulation.title}</td>
                     <td>${e.prescription.dosage} ${e.prescription.drug}</td>
 
-                    <sec:authorize access="hasRole('ROLE_DOCTOR')">
+                    <sec:authorize access="hasAnyRole('ROLE_DOCTOR', 'ROLE_ADMIN')">
                         <td>${e.status} ${e.comment}</td>
                     </sec:authorize>
-                    <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_NURSE')">
+                    <sec:authorize access="hasRole('ROLE_NURSE')">
 
                         <c:choose>
-                            <c:when test="${e.status eq 'Planned'}">
-                                <%--                                todo && ${e.date eq parsedDatetime}--%>
+                            <c:when test="${e.status eq 'Planned' and e.date lt dateNow}">
                                 <td>
                                     <form:form action="${pageContext.request.contextPath}/event/${e.id}/done"
                                                cssClass="form" method="get">

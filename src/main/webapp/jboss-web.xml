@@ -1,0 +1,14 @@
+
+<jboss-web>
+    <context-root>/</context-root>
+<!--    <plugin>-->
+<!--        <artifactId>maven-compiler-plugin</artifactId>-->
+<!--        <version>3.8.0</version>-->
+<!--        <configuration>-->
+<!--            <release>12</release>-->
+<!--            <compilerArgs>-->
+<!--                <arg>&#45;&#45;enable-preview</arg>-->
+<!--            </compilerArgs>-->
+<!--        </configuration>-->
+<!--    </plugin>-->
+</jboss-web>

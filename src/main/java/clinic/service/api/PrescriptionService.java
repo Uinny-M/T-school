@@ -33,7 +33,13 @@ public interface PrescriptionService extends AbstractService<Prescription, Presc
 
     /**
      * Cancel the prescription by prescriptionId
-     * @param prescriptionId prescription's idd
+     * @param prescriptionId prescription's id
      */
     void prescriptionCancel(Long prescriptionId);
+
+    /**
+     * check the case (open/close)
+     * @param caseId case's id
+     */
+    void validate(Long caseId);
 }

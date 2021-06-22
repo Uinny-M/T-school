@@ -1,15 +1,18 @@
 package clinic.service.core;
 
+import clinic.controller.PatientController;
 import clinic.dao.api.PrescriptionDao;
 import clinic.dto.EventDTO;
 import clinic.dto.PrescriptionDTO;
 import clinic.entities.Prescription;
 import clinic.entities.enums.EventStatus;
+import clinic.exception.BusinessException;
 import clinic.mappers.PrescriptionMapper;
 import clinic.service.api.CaseService;
 import clinic.service.api.EventService;
 import clinic.service.api.ManipulationService;
 import clinic.service.api.PrescriptionService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +40,7 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
         this.manipulationService = manipulationService;
         this.eventService = eventService;
     }
+    private static Logger log = Logger.getLogger(PrescriptionServiceImpl.class);
 
     @Transactional
     @Override
@@ -53,6 +57,11 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
     @Transactional
     @Override
     public PrescriptionDTO createPrescription(PrescriptionDTO prescriptionDTO, Long caseId) {
+//        if (!caseService.getOneById(caseId).isOpenCase()){
+//            throw new BusinessException("The case is already closed");
+//        }
+
+        validate(prescriptionDTO);
         Set<DayOfWeek> days = prescriptionDTO.getWeekdays();
         Set<String> times = prescriptionDTO.getTimes();
         prescriptionDTO.setManipulation(manipulationService.getOneByTitle(prescriptionDTO.getManipulationTitle()));
@@ -60,8 +69,8 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
         prescriptionDTO.setPatient(caseService.getOneById(caseId).getPatient());
         Prescription prescription = dao.save(mapToEntity(prescriptionDTO));
         //create events
-        List<LocalDate> dayPattern = dayPattern(days, prescriptionDTO.getDuration());
         List<LocalTime> timePattern = timePattern(times);
+        List<LocalDate> dayPattern = dayPattern(days, prescriptionDTO.getDuration(), timePattern);
         for (int i = 0; i < dayPattern.size(); i++) {
             for (int j = 0; j < timePattern.size(); j++) {
                 EventDTO eventDTO = new EventDTO();
@@ -71,9 +80,10 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
                 eventDTO.setDate(dayPattern.get(i));
                 eventDTO.setTime(timePattern.get(j));
                 eventDTO.setStatus(EventStatus.PLANNED.getDescription());
-                eventService.create(eventDTO);
+                eventService.eventCreate(eventDTO);
             }
         }
+        log.info("New prescription in case#" + caseId + " created");
         return prescriptionDTO;
     }
 
@@ -90,11 +100,16 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
                 eventService.eventCancel(eventDTO.getId(), "by doctor");
             }
         });
+        log.info("Prescription #" + prescriptionId + " closed");
     }
 
-    private List<LocalDate> dayPattern(Set<DayOfWeek> days, byte duration) {
+    private List<LocalDate> dayPattern(Set<DayOfWeek> days, byte duration, List<LocalTime> timePattern) {
         List<LocalDate> dayPattern = new ArrayList<>();
-        LocalDate date = LocalDate.now().plusDays(1);
+        LocalTime now = LocalTime.now().plusMinutes(30);
+        LocalDate date = LocalDate.now();
+        if (timePattern.stream().noneMatch(t -> t.isAfter(now))) {
+            date = date.plusDays(1);
+        }
         while (!days.contains(date.getDayOfWeek())) {
             date = date.plusDays(1);
         }
@@ -114,5 +129,26 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         times.forEach(t -> timePattern.add(LocalTime.parse(t, formatter)));
         return timePattern;
+    }
+
+    public void validate(Long caseId){
+        if (!caseService.getOneById(caseId).isOpenCase()){
+            throw new BusinessException("The case is already closed");
+        }
+    }
+    private void validate (PrescriptionDTO prescriptionDTO){
+        StringBuilder msg = new StringBuilder("");
+        if(prescriptionDTO.getDuration() <= 0) {
+            msg.append("duration must be > 0; ");
+        }
+        if (prescriptionDTO.getWeekdays().size()==0){
+            msg.append("Days of week cannot be empty; ");
+        }
+        if (prescriptionDTO.getTimes().size()==0){
+            msg.append("Time of day cannot be empty; ");
+        }
+        if (!msg.isEmpty()){
+            throw new BusinessException("Incorrect data: " + msg.toString());
+        }
     }
 }

@@ -13,4 +13,7 @@ import java.util.List;
  */
 public interface EmployeeService extends AbstractService<Employee, EmployeeDTO> {
     EmployeeDTO getEmployeeByUsername(String username);
+
+    @Override
+    EmployeeDTO create(EmployeeDTO employeeDTO);
 }

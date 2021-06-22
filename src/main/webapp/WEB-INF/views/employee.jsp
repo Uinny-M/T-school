@@ -20,31 +20,32 @@
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
         <h3>Employee's data</h3>
+        <h4 style="color: #d5272b">${error}</h4>
         <form:form action="${pageContext.request.contextPath}/employee/add" method="post" modelAttribute="employee"
                    cssClass="form">
             <div class="form-group-create row">
                 <b class="col-xs-3">Secondname</b>
-                <form:input cssClass="form-s" path="secondName"/>
+                <form:input  cssClass="form-s" path="secondName" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Firstname</b>
-                <form:input cssClass="form-s" path="firstName"/>
+                <form:input cssClass="form-s" path="firstName" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Middlename</b>
-                <form:input cssClass="form-s" path="middleName"/>
+                <form:input cssClass="form-s" path="middleName" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Position</b>
-                <form:input cssClass="form-s" path="position"/>
+                <form:input cssClass="form-s" path="position" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Login</b>
-                <form:input cssClass="form-s" path="login"/>
+                <form:input cssClass="form-s" path="login" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Password</b>
-                <form:password cssClass="form-s" path="password"/>
+                <form:password cssClass="form-s" path="password" required="required"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Access level</b>

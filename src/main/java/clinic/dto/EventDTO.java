@@ -1,9 +1,5 @@
 package clinic.dto;
 
-import clinic.entities.Manipulation;
-import clinic.entities.Patient;
-import clinic.entities.Prescription;
-import clinic.entities.enums.EventStatus;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
