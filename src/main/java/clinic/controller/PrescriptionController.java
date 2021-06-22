@@ -111,15 +111,15 @@ public class PrescriptionController {
         days.add(DayOfWeek.SATURDAY);
         days.add(DayOfWeek.SUNDAY);
         List<String> times = new ArrayList<>();
-        times.add("09:00:00");
-        times.add("10:00:00");
         times.add("11:00:00");
         times.add("12:00:00");
-        times.add("13:00:00");
         times.add("14:00:00");
         times.add("15:00:00");
         times.add("16:00:00");
         times.add("17:00:00");
+        times.add("18:00:00");
+        times.add("19:00:00");
+        times.add("20:00:00");
         times.add("23:00:00");
         PrescriptionDTO prescriptionDTO = new PrescriptionDTO();
         modelAndView.addObject("patientId", caseService.getOneById(caseId).getPatient().getId());

@@ -71,6 +71,7 @@ public class PatientController {
     }
 
     //Return Patient by ID
+    @Secured(ROLE_DOCTOR)
     @GetMapping(value = "/add")
     public ModelAndView getPatient(Model model) {
         ModelAndView modelAndView = new ModelAndView();
