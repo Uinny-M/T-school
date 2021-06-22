@@ -23,8 +23,11 @@ public class RootWebAppInitializer extends AbstractAnnotationConfigDispatcherSer
         AnnotationConfigWebApplicationContext root =
                 new AnnotationConfigWebApplicationContext();
         root.setConfigLocation("clinic.config");
+
+        DispatcherServlet dispatcherServlet = new DispatcherServlet(root);
+        dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
         ServletRegistration.Dynamic appServlet =
-                servletContext.addServlet("mvc", new DispatcherServlet(root));
+                servletContext.addServlet("mvc",dispatcherServlet);
         appServlet.setLoadOnStartup(1);
         appServlet.addMapping("/");
 
@@ -39,8 +42,6 @@ public class RootWebAppInitializer extends AbstractAnnotationConfigDispatcherSer
         root.register(SecurityConfig.class);
         servletContext.addListener(new ContextLoaderListener(root));
 
-        DispatcherServlet dispatcherServlet = new DispatcherServlet(root);
-        dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
     }
 
     @Override

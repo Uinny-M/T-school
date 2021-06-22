@@ -20,6 +20,7 @@
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
         <h3>Prescription's details</h3>
+        <h4 style="color: #d5272b">${error}</h4>
         <form:form action="${pageContext.request.contextPath}/prescription/case/${caseId}/add" method="post"
                    modelAttribute="prescription" cssClass="form">
             <div class="form-group-create row">
@@ -40,11 +41,11 @@
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Duration, days</b>
-                <form:input cssClass="form-s" type="number" path="duration"/>
+                <form:input cssClass="form-s" type="number" path="duration" min="1"/>
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Days of week</b>
-                <form:select path="weekdays" cssClass="form-select-lg" multiple="multiple" size="7" required="required">
+                <form:select path="weekdays" cssClass="form-select-lg"  multiple="multiple" size="7" required="required">
                     <c:forEach var="day" items="${days}">
                         <form:option value="${day.name()}"/>
                     </c:forEach>

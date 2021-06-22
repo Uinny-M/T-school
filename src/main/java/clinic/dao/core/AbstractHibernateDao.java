@@ -13,8 +13,8 @@ public abstract class AbstractHibernateDao<T> implements AbstractDao<T> {
     @PersistenceContext
     protected EntityManager em;
 
-    public AbstractHibernateDao(Class<T> clazzToSet) {
-        this.clazz = clazzToSet;
+    public AbstractHibernateDao(Class<T> tClass) {
+        this.clazz = tClass;
     }
 
 

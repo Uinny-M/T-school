@@ -7,9 +7,11 @@ import clinic.service.api.ManipulationService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
@@ -51,35 +53,31 @@ public class EmployeeController {
 
     //Return Employee by ID
     @Secured(value = ROLE_ADMIN)
-    @GetMapping(value = "/add")
-    public ModelAndView getEmployeeById() {
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public ModelAndView getEmployeeById(Model model) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("employee", new EmployeeDTO());
+        modelAndView.addObject("employee", model.asMap().get("flashEmployee") != null ? model.asMap().get("flashEmployee") : new EmployeeDTO());
+//        modelAndView.addObject("employee", new EmployeeDTO());
         modelAndView.setViewName("employee");
         return modelAndView;
     }
 
     //Add new employee
     @Secured(value = ROLE_ADMIN)
-    @RequestMapping (value = "/add", method = { RequestMethod.POST})
-    public RedirectView addEmployee(@ModelAttribute @Valid EmployeeDTO employeeDTO, BindingResult result) {
-        ValidatorFactory v = Validation.buildDefaultValidatorFactory();
-        Validator validator = v.getValidator();
-
-        RedirectView redirect = new RedirectView("/T_school_war_exploded/employee/add");
-        redirect.addStaticAttribute("errors", result.getAllErrors());
-
+    @RequestMapping (value = "/add", method = RequestMethod.POST)
+    public String addEmployee(@ModelAttribute EmployeeDTO employeeDTO,
+                               RedirectAttributes attributes) {
         employeeDTO.setPassword(encoder.encode(employeeDTO.getPassword()));
         employeeDTO.setEnable(true);
         try {
             employeeService.create(employeeDTO);
         } catch (BusinessException e){
-            RedirectView redirectView = new RedirectView("/T_school_war_exploded/error/exception");
-            redirectView.addStaticAttribute("error", e.getMessage());
-            return redirectView;
+            attributes.addFlashAttribute("flashEmployee", employeeDTO);
+            attributes.addFlashAttribute("error", e.getMessage());
+            String url = "redirect:/employee/add";
+            return url;
         }
-
-
-        return new RedirectView("/T_school_war_exploded/employee/");
+        String url = "redirect:/employee/";
+        return url;
     }
 }

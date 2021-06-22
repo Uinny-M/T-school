@@ -57,9 +57,11 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
     @Transactional
     @Override
     public PrescriptionDTO createPrescription(PrescriptionDTO prescriptionDTO, Long caseId) {
-        if (!caseService.getOneById(caseId).isOpenCase()){
-            throw new BusinessException("The case is already closed");
-        }
+//        if (!caseService.getOneById(caseId).isOpenCase()){
+//            throw new BusinessException("The case is already closed");
+//        }
+
+        validate(prescriptionDTO);
         Set<DayOfWeek> days = prescriptionDTO.getWeekdays();
         Set<String> times = prescriptionDTO.getTimes();
         prescriptionDTO.setManipulation(manipulationService.getOneByTitle(prescriptionDTO.getManipulationTitle()));
@@ -127,5 +129,26 @@ public class PrescriptionServiceImpl extends AbstractServiceImpl<Prescription, P
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         times.forEach(t -> timePattern.add(LocalTime.parse(t, formatter)));
         return timePattern;
+    }
+
+    public void validate(Long caseId){
+        if (!caseService.getOneById(caseId).isOpenCase()){
+            throw new BusinessException("The case is already closed");
+        }
+    }
+    private void validate (PrescriptionDTO prescriptionDTO){
+        StringBuilder msg = new StringBuilder("");
+        if(prescriptionDTO.getDuration() <= 0) {
+            msg.append("duration must be > 0; ");
+        }
+        if (prescriptionDTO.getWeekdays().size()==0){
+            msg.append("Days of week cannot be empty; ");
+        }
+        if (prescriptionDTO.getTimes().size()==0){
+            msg.append("Time of day cannot be empty; ");
+        }
+        if (!msg.isEmpty()){
+            throw new BusinessException("Incorrect data: " + msg.toString());
+        }
     }
 }

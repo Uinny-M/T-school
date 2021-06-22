@@ -6,6 +6,7 @@ import clinic.dto.EventDTO;
 import clinic.dto.EventOutDTO;
 import clinic.entities.Event;
 import clinic.entities.enums.EventStatus;
+import clinic.entities.enums.ManipulationType;
 import clinic.mappers.EventMapper;
 import clinic.service.api.EventService;
 import org.apache.log4j.Logger;
@@ -30,7 +31,9 @@ public class EventServiceImpl extends AbstractServiceImpl<Event, EventDTO, Event
         super(dao, mapper);
         this.template = template;
     }
+
     private static final Logger log = Logger.getLogger(EventServiceImpl.class);
+
     @Transactional
     public List<EventDTO> getAllEvents() {
         List<EventDTO> events = mapToDTO(dao.findAll());
@@ -101,11 +104,31 @@ public class EventServiceImpl extends AbstractServiceImpl<Event, EventDTO, Event
 
     @Override
     public EventDTO eventCreate(EventDTO eventDto) {
+        eventDto = checkTime(eventDto);
         if (eventDto.getDate().equals(LocalDate.now())) {
             template.convertAndSend("queue1", "Message to queue - eventCreate");
             log.info("send message: Message to queue - eventCreate");
         }
         return mapToDTO(dao.save(mapToEntity(eventDto)));
+    }
+
+    private EventDTO checkTime(EventDTO eventDTO) {
+        if (!eventDTO.getManipulation().getType().equals(ManipulationType.PROCEDURE)) {
+            return eventDTO;
+        }
+        while (true) {
+            List<EventDTO> list = getAllByPatientId(eventDTO.getPatient().getId())
+                    .stream().filter(e -> e.getDate().equals(eventDTO.getDate())
+                            && e.getTime().equals(eventDTO.getTime())
+                            && e.getManipulation().getType().equals(ManipulationType.PROCEDURE))
+                    .collect(Collectors.toList());
+            if (list.size() == 0) {
+                break;
+            } else {
+                eventDTO.setTime(eventDTO.getTime().plusHours(1));
+            }
+        }
+        return eventDTO;
     }
 
     @Override

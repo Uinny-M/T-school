@@ -21,19 +21,20 @@
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
         <h3>Patient's data</h3>
+        <h4 style="color: #d5272b">${error}</h4>
         <form:form action="${pageContext.request.contextPath}/patient/add" method="post" modelAttribute="patient"
                    cssClass="form">
             <div class="form-group-create row">
                 <b class="col-xs-3">SecondName</b>
-                <form:input cssClass="form-s" path="secondName" required="required"/>
+                <form:input cssClass="form-s" path="secondName" />
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">FirstName</b>
-                <form:input cssClass="form-s" path="firstName" required="required"/>
+                <form:input cssClass="form-s" path="firstName" />
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">MiddleName</b>
-                <form:input cssClass="form-s" path="middleName" required="required"/>
+                <form:input cssClass="form-s" path="middleName" />
             </div>
             <div class="form-group row">
                 <b class="col-xs-3">Birthdate</b>
@@ -46,7 +47,7 @@
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Insurance</b>
-                <form:input cssClass="form-s" path="insurance" required="required"/>
+                <form:input cssClass="form-s" path="insurance" />
             </div>
             <br>
             <sec:authorize access="hasRole('ROLE_DOCTOR')">

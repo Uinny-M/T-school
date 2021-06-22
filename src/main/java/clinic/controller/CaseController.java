@@ -58,7 +58,7 @@ public class CaseController {
             modelAndView.addObject("prescription", prescriptionService.getAllByCaseId(caseId));
         } catch (BusinessException e){
             ModelAndView modelAndView1 = new ModelAndView();
-            modelAndView.setViewName("/error/exception");
+            modelAndView1.setViewName("/error/exception");
             modelAndView1.addObject("error", e.getMessage());
             return modelAndView1;
         }

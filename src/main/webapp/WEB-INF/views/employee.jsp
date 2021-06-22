@@ -20,19 +20,20 @@
     <jsp:include page="help/menu.jsp"></jsp:include>
     <div class="content">
         <h3>Employee's data</h3>
+        <h4 style="color: #d5272b">${error}</h4>
         <form:form action="${pageContext.request.contextPath}/employee/add" method="post" modelAttribute="employee"
                    cssClass="form">
             <div class="form-group-create row">
                 <b class="col-xs-3">Secondname</b>
-                <form:input  cssClass="form-s" path="secondName" required="required"/>
+                <form:input  cssClass="form-s" path="secondName" />
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Firstname</b>
-                <form:input cssClass="form-s" path="firstName" required="required"/>
+                <form:input cssClass="form-s" path="firstName" />
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Middlename</b>
-                <form:input cssClass="form-s" path="middleName" required="required"/>
+                <form:input cssClass="form-s" path="middleName" />
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Position</b>
@@ -40,11 +41,11 @@
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Login</b>
-                <form:input cssClass="form-s" path="login" required="required"/>
+                <form:input cssClass="form-s" path="login" />
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Password</b>
-                <form:password cssClass="form-s" path="password" required="required"/>
+                <form:password cssClass="form-s" path="password" />
             </div>
             <div class="form-group-create row">
                 <b class="col-xs-3">Access level</b>
