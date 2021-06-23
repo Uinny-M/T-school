@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-06-20T23:45:38+0300",
+    date = "2021-06-22T19:27:06+0300",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 15.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -20,13 +20,13 @@ public class EmployeeMapperImpl implements EmployeeMapper {
     private RoleMapper roleMapper;
 
     @Override
-    public List<Employee> mapDtoToEntity(List<EmployeeDTO> dto) {
-        if ( dto == null ) {
+    public List<Employee> mapDtoToEntity(List<EmployeeDTO> arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
-        List<Employee> list = new ArrayList<Employee>( dto.size() );
-        for ( EmployeeDTO employeeDTO : dto ) {
+        List<Employee> list = new ArrayList<Employee>( arg0.size() );
+        for ( EmployeeDTO employeeDTO : arg0 ) {
             list.add( mapDtoToEntity( employeeDTO ) );
         }
 
@@ -34,13 +34,13 @@ public class EmployeeMapperImpl implements EmployeeMapper {
     }
 
     @Override
-    public List<EmployeeDTO> mapEntityToDto(List<Employee> entity) {
-        if ( entity == null ) {
+    public List<EmployeeDTO> mapEntityToDto(List<Employee> arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
-        List<EmployeeDTO> list = new ArrayList<EmployeeDTO>( entity.size() );
-        for ( Employee employee : entity ) {
+        List<EmployeeDTO> list = new ArrayList<EmployeeDTO>( arg0.size() );
+        for ( Employee employee : arg0 ) {
             list.add( mapEntityToDto( employee ) );
         }
 
